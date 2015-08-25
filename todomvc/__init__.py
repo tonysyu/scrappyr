@@ -1,6 +1,5 @@
-from flask import Flask, render_template
+from flask import Flask
 
-from . import models
 from .extensions import db, migrate, config
 from .views import todomvc
 
@@ -18,5 +17,7 @@ def create_app():
     config.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
+    with app.app_context():
+        db.create_all()
 
     return app

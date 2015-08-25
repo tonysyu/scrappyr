@@ -8,20 +8,25 @@ from .models import Todo
 from .forms import TodoForm
 from .extensions import db
 
+
 todomvc = Blueprint("todomvc", __name__, static_folder="./static")
+
 
 @todomvc.route("/")
 def index():
     return todomvc.send_static_file("index.html")
 
+
 @todomvc.route("/api")
 def api():
     return ""
+
 
 @todomvc.route("/api/todos", methods=["GET"])
 def todos():
     todos = [todo.to_dict() for todo in Todo.query.all()]
     return jsonify(todos=todos)
+
 
 @todomvc.route("/api/todos", methods=["POST"])
 def add_todo():
@@ -37,6 +42,7 @@ def add_todo():
         resp.status_code = 400
         return resp
 
+
 @todomvc.route("/api/todos/<int:id>", methods=["PUT"])
 def update_todo(id):
     todo = Todo.query.get_or_404(id)
@@ -51,19 +57,10 @@ def update_todo(id):
         resp.status_code = 400
         return resp
 
+
 @todomvc.route("/api/todos/<int:id>", methods=["DELETE"])
 def delete_todo(id):
     todo = Todo.query.get_or_404(id)
     db.session.delete(todo)
     db.session.commit()
     return jsonify({"deleted": "true"})
-
-
-
-
-
-
-
-
-
-

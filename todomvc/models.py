@@ -1,5 +1,6 @@
 from .extensions import db
 
+
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(255), nullable=False)
