@@ -5,6 +5,7 @@ from wtforms.validators import DataRequired
 
 
 class APIForm(Form):
+
     def __init__(self, *args, **kwargs):
         default_kwargs = {"formdata": None, "csrf_enabled": False}
         default_kwargs.update(kwargs)
@@ -12,5 +13,6 @@ class APIForm(Form):
 
 
 class TodoForm(APIForm):
+
     title = StringField('Title', validators=[DataRequired()])
     completed = BooleanField('Completed', default=False)

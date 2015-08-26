@@ -45,11 +45,11 @@ Migrations
 
 Whenever a database migration needs to be made, run the following commmand:
 
-        python manage.py db migrate
+    python manage.py db migrate
 
 This will generate a new migration script. Then run:
 
-        python manage.py db upgrade
+    python manage.py db upgrade
 
 to apply the migration.
 
