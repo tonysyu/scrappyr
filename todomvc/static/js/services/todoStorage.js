@@ -2,8 +2,8 @@
 /*jslint nomen:true*/
 
 /**
- * Services that persists and retrieves todos from localStorage or a backend API
- * if available.
+ * Services that persists and retrieves todos from localStorage or a backend
+ * API if available.
  *
  * They both follow the same API, returning promises for all changes to the
  * model.
@@ -12,8 +12,8 @@ angular.module('todomvc')
     .factory('todoStorage', function ($http, $injector) {
         'use strict';
 
-        // Detect if an API backend is present. If so, return the API module, else
-        // hand off the localStorage adapter
+        // Detect if an API backend is present. If so, return the API module,
+        // else hand off the localStorage adapter
         return $http.get('/api')
             .then(function () {
                 return $injector.get('api');
@@ -116,7 +116,6 @@ angular.module('todomvc')
         'use strict';
 
         var STORAGE_ID = 'todos-angularjs';
-
         var store = {
             todos: [],
 

@@ -15,14 +15,6 @@
 
             store = localStorage;
 
-            localStorage.todos = [];
-            localStorage._getFromLocalStorage = function () {
-                return [];
-            };
-            localStorage._saveToLocalStorage = function (todos) {
-                localStorage.todos = todos;
-            };
-
             ctrl = $controller('TodoCtrl', {
                 $scope: scope,
                 store: store
