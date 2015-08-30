@@ -5,7 +5,7 @@
  *
  * @type {angular.Module}
  */
-angular.module('todomvc', ['ngRoute'])
+angular.module('todomvc', ['ngRoute', 'ngSanitize'])
     .config(function ($routeProvider) {
         'use strict';
 

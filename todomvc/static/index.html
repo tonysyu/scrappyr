@@ -5,6 +5,7 @@
     <title>AngularJS • TodoMVC</title>
     <link rel="stylesheet" href="/static/node_modules/todomvc-common/base.css">
     <link rel="stylesheet" href="/static/node_modules/todomvc-app-css/index.css">
+    <link rel="stylesheet" href="/static/index.css">
     <style>[ng-cloak] { display: none; }</style>
   </head>
 
@@ -36,14 +37,26 @@
           <label for="toggle-all">Mark all as complete</label>
 
           <ul id="todo-list">
-            <li ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+            <li
+              ng-repeat="todo in todos track by $index"
+              ng-class="{completed: todo.completed, editing: todo == editedTodo}">
 
               <div class="view">
                 <input class="toggle"
                     type="checkbox"
                     ng-model="todo.completed"
                     ng-change="toggleCompleted(todo)">
-                <label ng-dblclick="editTodo(todo)">{{todo.title}}</label>
+
+                <div ng-if="todo === editedTodo">
+                  <label>{{todo.title}}</label>
+                </div>
+
+                <div ng-if="todo !== editedTodo">
+                  <label style="float: left, height:100%"
+                    ng-dblclick="editTodo(todo)"
+                    ng-bind-html="todo.html_title"></label>
+                </div>
+
                 <button class="destroy" ng-click="removeTodo(todo)"></button>
               </div>
 
@@ -65,44 +78,25 @@
             <ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }">
             </ng-pluralize>
           </span>
-          <ul id="filters">
-            <li>
-              <a ng-class="{selected: status == ''} " href="#/">All</a>
-            </li>
-            <li>
-              <a ng-class="{selected: status == 'active'}" href="#/active">Active</a>
-            </li>
-            <li>
-              <a ng-class="{selected: status == 'completed'}" href="#/completed">Completed</a>
-            </li>
-          </ul>
-
-          <button id="clear-completed" ng-click="clearCompletedTodos()" ng-show="completedCount">
-            Clear completed ({{completedCount}})
-          </button>
 
         </footer>
       </section>
 
       <footer id="info">
         <p>Double-click to edit a todo</p>
-        <p>Credits:
-          <a href="http://twitter.com/cburgdorf">Christoph Burgdorf</a>,
-          <a href="http://ericbidelman.com">Eric Bidelman</a>,
-          <a href="http://jacobmumm.com">Jacob Mumm</a> and
-          <a href="http://igorminar.com">Igor Minar</a>
-        </p>
-        <p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
       </footer>
 
     </script>
+
     <script src="/static/node_modules/todomvc-common/base.js"></script>
     <script src="/static/node_modules/angular/angular.js"></script>
+    <script src="/static/node_modules/angular-sanitize/angular-sanitize.js"></script>
     <script src="/static/node_modules/angular-route/angular-route.js"></script>
     <script src="/static/js/app.js"></script>
     <script src="/static/js/controllers/todoCtrl.js"></script>
     <script src="/static/js/services/todoStorage.js"></script>
     <script src="/static/js/directives/todoFocus.js"></script>
     <script src="/static/js/directives/todoEscape.js"></script>
+
   </body>
 </html>

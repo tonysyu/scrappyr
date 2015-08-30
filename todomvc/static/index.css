@@ -1,0 +1,11 @@
+
+
+/* This mainly counteracts the changes for the main page title. */
+#todo-list h1 {
+    position: relative;
+	font-size: 24px;
+    color: black;
+	text-align: left;
+	top: 0px;
+	font-weight: normal;
+}

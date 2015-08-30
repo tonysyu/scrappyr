@@ -3,6 +3,8 @@
 We have started you with an initial blueprint. Add more as needed.
 """
 
+import markdown
+
 from flask import Blueprint, jsonify, request
 from .models import Todo
 from .forms import TodoForm
@@ -24,7 +26,7 @@ def api():
 
 @todomvc.route("/api/todos", methods=["GET"])
 def todos():
-    todos = [todo.to_dict() for todo in Todo.query.all()]
+    todos = [render_data(todo) for todo in Todo.query.all()]
     return jsonify(todos=todos)
 
 
@@ -36,11 +38,9 @@ def add_todo():
         todo = Todo(**form.data)
         db.session.add(todo)
         db.session.commit()
-        return jsonify(todo.to_dict())
+        return jsonify(render_data(todo))
     else:
-        resp = jsonify(form.errors)
-        resp.status_code = 400
-        return resp
+        return _jsonify_errors(form.errors)
 
 
 @todomvc.route("/api/todos/<int:id>", methods=["PUT"])
@@ -51,11 +51,9 @@ def update_todo(id):
     if form.validate():
         form.populate_obj(todo)
         db.session.commit()
-        return jsonify(todo.to_dict())
+        return jsonify(render_data(todo))
     else:
-        resp = jsonify(form.errors)
-        resp.status_code = 400
-        return resp
+        return _jsonify_errors(form.errors)
 
 
 @todomvc.route("/api/todos/<int:id>", methods=["DELETE"])
@@ -64,3 +62,15 @@ def delete_todo(id):
     db.session.delete(todo)
     db.session.commit()
     return jsonify({"deleted": "true"})
+
+
+def render_data(todo):
+    data = todo.to_dict()
+    data['html_title'] = markdown.markdown(data['title'])
+    return data
+
+
+def _jsonify_errors(errors):
+    resp = jsonify(errors)
+    resp.status_code = 400
+    return resp

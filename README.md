@@ -54,3 +54,16 @@ This will generate a new migration script. Then run:
 to apply the migration.
 
 For a full migration command reference, run `python manage.py db --help`.
+
+
+Credits
+-------
+
+This is adapted from Vincenzo Prignano's
+[TodoApp](https://github.com/vinceprignano/todoapp), which itself was adapted
+from a [TodoMVC](http://todomvc.com) implementation by
+[Christoph Burgdorf](http://twitter.com/cburgdorf),
+[Eric Bidelman](http://ericbidelman.com),
+[Jacob Mumm](http://jacobmumm.com), and
+[Igor Minar](http://igorminar.com).
+
