@@ -111,4 +111,4 @@ angular.module('todomvc')
         };
 
         return store;
-    })
+    });
