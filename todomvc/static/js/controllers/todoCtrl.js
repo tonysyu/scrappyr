@@ -1,4 +1,5 @@
 /*global angular */
+/*jslint nomen: true*/
 
 /**
  * The main controller for the app. The controller:
