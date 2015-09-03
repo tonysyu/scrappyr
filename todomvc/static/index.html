@@ -47,12 +47,13 @@
                     ng-model="todo.completed"
                     ng-change="toggleCompleted(todo)">
 
+
                 <div ng-if="todo === editedTodo">
                   <label>{{todo.title}}</label>
                 </div>
 
                 <div ng-if="todo !== editedTodo">
-                  <label style="float: left, height:100%"
+                  <label
                     ng-dblclick="editTodo(todo)"
                     ng-bind-html="todo.html_title"></label>
                 </div>
