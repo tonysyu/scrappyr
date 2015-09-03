@@ -14,9 +14,12 @@
             scope = $rootScope.$new();
             store = api;
 
+            // Setup POST method to echo the input data.
             $httpBackend
                 .when('POST', '/api/todos')
-                .respond(200, {status: 'success'});
+                .respond(function (method, url, data) {
+                    return [200, JSON.parse(data)];
+                });
 
             ctrl = $controller('TodoCtrl', {
                 $scope: scope,
