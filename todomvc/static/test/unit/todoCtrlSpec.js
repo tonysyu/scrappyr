@@ -10,10 +10,13 @@
         // Load the module containing the app, only 'ng' is loaded by default.
         beforeEach(module('todomvc'));
 
-        beforeEach(inject(function ($controller, $rootScope, localStorage) {
+        beforeEach(inject(function ($controller, $rootScope, api, $httpBackend) {
             scope = $rootScope.$new();
+            store = api;
 
-            store = localStorage;
+            $httpBackend
+                .when('POST', '/api/todos')
+                .respond(200, {status: 'success'});
 
             ctrl = $controller('TodoCtrl', {
                 $scope: scope,
@@ -21,20 +24,26 @@
             });
         }));
 
-        it('should not have an edited Todo on start', function () {
+        it('No todos on start', function () {
             expect(scope.editedTodo).toBeNull();
         });
 
-        it('should not have any Todos on start', function () {
+        it('No active todos on start', function () {
             expect(scope.todos.length).toBe(0);
         });
 
-        it('should have all Todos completed', function () {
+        it('No `editedTodo` on start', function () {
+            expect(scope.editedTodo).toBeNull();
+        });
+
+        it('All Todos completed on start', function () {
             scope.$digest();
+            // Is this worth checking? There are no checked todos because
+            // there are no todos period.
             expect(scope.allChecked).toBeTruthy();
         });
 
-        describe('the filter', function () {
+        describe('Filter', function () {
             it('should default to ""', function () {
                 scope.$emit('$routeChangeSuccess');
 
@@ -76,14 +85,6 @@
         describe('having no Todos', function () {
             var ctrl;
 
-            beforeEach(inject(function ($controller) {
-                ctrl = $controller('TodoCtrl', {
-                    $scope: scope,
-                    store: store
-                });
-                scope.$digest();
-            }));
-
             it('should not add empty Todos', function () {
                 scope.newTodo = '';
                 scope.addTodo();
@@ -99,19 +100,23 @@
             });
 
 
-            it('should trim whitespace from new Todos', function () {
-                scope.newTodo = '  buy some unicorns  ';
-                scope.addTodo();
-                scope.$digest();
-                expect(scope.todos.length).toBe(1);
-                expect(scope.todos[0].title).toBe('buy some unicorns');
-            });
+            it('should trim whitespace from new Todos', inject(
+                function ($httpBackend) {
+                    scope.newTodo = '  buy some unicorns  ';
+                    scope.addTodo();
+                    $httpBackend.flush();
+
+                    scope.$digest();
+                    expect(scope.todos.length).toBe(1);
+                    expect(scope.todos[0].title).toBe('buy some unicorns');
+                }
+            ));
         });
 
-        describe('having some saved Todos', function () {
+        describe('Pre-populate 5 Todos', function () {
             var ctrl;
 
-            beforeEach(inject(function ($controller) {
+            beforeEach(inject(function ($controller, $httpBackend) {
                 ctrl = $controller('TodoCtrl', {
                     $scope: scope,
                     store: store
@@ -123,6 +128,7 @@
                 store.insert({ title: 'Completed Item 0', completed: true });
                 store.insert({ title: 'Completed Item 1', completed: true });
                 scope.$digest();
+                $httpBackend.flush();
             }));
 
             it('should count Todos correctly', function () {
@@ -157,11 +163,17 @@
                 expect(scope.todos.length).toBe(3);
             });
 
-            it('markAll() should mark all Todos completed', function () {
-                scope.markAll(true);
-                scope.$digest();
-                expect(scope.completedCount).toBe(5);
-            });
+            it('markAll() should mark all Todos completed', inject(
+                function ($httpBackend) {
+                    $httpBackend
+                        .when('PUT', '/api/todos/undefined')
+                        .respond(200, {status: 'success'});
+
+                    scope.markAll(true);
+                    scope.$digest();
+                    expect(scope.completedCount).toBe(5);
+                }
+            ));
 
             it('revertTodo() get a Todo to its previous state', function () {
                 var todo = store.todos[0];
