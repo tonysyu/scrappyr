@@ -14,7 +14,6 @@ angular.module('todomvc', ['ngRoute', 'ngSanitize'])
             templateUrl: 'todomvc-index.html',
             resolve: {
                 store: function (todoStorage) {
-                    // Get the correct module (API or localStorage).
                     return todoStorage.then(function (module) {
                         // Fetch the todo records in the background.
                         module.get();
