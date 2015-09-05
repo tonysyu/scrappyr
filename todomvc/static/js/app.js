@@ -11,7 +11,7 @@ angular.module('todomvc', ['ngRoute', 'ngSanitize'])
 
         var routeConfig = {
             controller: 'TodoCtrl',
-            templateUrl: 'todomvc-index.html',
+            templateUrl: 'static/views/main.html',
             resolve: {
                 store: function (todoStorage) {
                     return todoStorage.then(function (module) {
