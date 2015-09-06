@@ -3,7 +3,7 @@ from flask.ext.script import Manager, Server
 from flask.ext.migrate import MigrateCommand
 from flask.ext.script.commands import ShowUrls, Clean
 
-from todomvc import create_app, db
+from scrapps import create_app, db
 
 
 app = create_app()

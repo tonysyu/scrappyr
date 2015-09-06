@@ -1,4 +1,7 @@
-# TodoMVC
+Scrapps
+=======
+
+A simple app for managing scraps of data.
 
 
 Quickstart
@@ -8,7 +11,7 @@ Run the following commands to bootstrap your environment.
 
 
 ```
-cd todomvc
+cd path/to/directory/containing/this/file
 pip install -r requirements.txt
 python manage.py db init
 python manage.py server
@@ -32,18 +35,10 @@ To open the interactive shell, run:
 By default, you will have access to `app` and `db`.
 
 
-Running Tests
--------------
-
-To run all tests, run:
-
-    python manage.py test
-
-
 Migrations
 ----------
 
-Whenever a database migration needs to be made, run the following commmand:
+Whenever a database migration needs to be made, run the following command:
 
     python manage.py db migrate
 
@@ -54,6 +49,15 @@ This will generate a new migration script. Then run:
 to apply the migration.
 
 For a full migration command reference, run `python manage.py db --help`.
+
+
+What's in a name
+----------------
+
+I wanted to name this scrappy (an *app* built with *py*thon for managing
+*scrap*s of data), but there's already a python library named
+[scrapy](http://scrapy.org/). "Scrapps" seemed like a decent alternative.
+Ignore any undertones of "crap" that might arise in your head.
 
 
 Credits

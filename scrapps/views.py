@@ -11,26 +11,26 @@ from .forms import TodoForm
 from .extensions import db
 
 
-todomvc = Blueprint("todomvc", __name__, static_folder="./static")
+scrapps = Blueprint("scrapps", __name__, static_folder="./static")
 
 
-@todomvc.route("/")
+@scrapps.route("/")
 def index():
-    return todomvc.send_static_file("index.html")
+    return scrapps.send_static_file("index.html")
 
 
-@todomvc.route("/api")
+@scrapps.route("/api")
 def api():
     return ""
 
 
-@todomvc.route("/api/todos", methods=["GET"])
+@scrapps.route("/api/todos", methods=["GET"])
 def todos():
     todos = [render_data(todo) for todo in Todo.query.all()]
     return jsonify(todos=todos)
 
 
-@todomvc.route("/api/todos", methods=["POST"])
+@scrapps.route("/api/todos", methods=["POST"])
 def add_todo():
     todo_data = request.get_json()
     form = TodoForm(data=todo_data)
@@ -43,7 +43,7 @@ def add_todo():
         return _jsonify_errors(form.errors)
 
 
-@todomvc.route("/api/todos/<int:id>", methods=["PUT"])
+@scrapps.route("/api/todos/<int:id>", methods=["PUT"])
 def update_todo(id):
     todo = Todo.query.get_or_404(id)
     todo_data = request.get_json()
@@ -56,7 +56,7 @@ def update_todo(id):
         return _jsonify_errors(form.errors)
 
 
-@todomvc.route("/api/todos/<int:id>", methods=["DELETE"])
+@scrapps.route("/api/todos/<int:id>", methods=["DELETE"])
 def delete_todo(id):
     todo = Todo.query.get_or_404(id)
     db.session.delete(todo)

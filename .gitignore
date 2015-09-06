@@ -50,5 +50,5 @@ env
 
 # Project specific
 migrations
-todomvc/static/node_modules/*
-todomvc/static/test/node_modules/
+scrapps/static/node_modules/*
+scrapps/static/test/node_modules/
