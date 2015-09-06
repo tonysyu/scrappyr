@@ -5,7 +5,7 @@
  *
  * @type {angular.Module}
  */
-angular.module('todomvc', ['ngRoute', 'ngSanitize'])
+angular.module('scrapps', ['ngRoute', 'ngSanitize'])
     .config(function ($routeProvider) {
         'use strict';
 

@@ -8,7 +8,7 @@
         var ctrl, scope, store;
 
         // Load the module containing the app, only 'ng' is loaded by default.
-        beforeEach(module('todomvc'));
+        beforeEach(module('scrapps'));
 
         beforeEach(inject(function ($controller, $rootScope, api, $httpBackend) {
             scope = $rootScope.$new();

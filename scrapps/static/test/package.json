@@ -1,7 +1,7 @@
 {
-  "name": "todomvc-angular-tests",
-  "description": "Unit tests for the AngularJS example of TodoMVC",
-  "author": "Pascal Hartig <phartig@rdrei.net>",
+  "name": "scrapps-tests",
+  "description": "Unit tests for the scrapps app",
+  "author": "Tony Yu <tonysyu.github.io>",
   "version": "1.0.0",
   "devDependencies": {
     "karma": "^0.10.0"

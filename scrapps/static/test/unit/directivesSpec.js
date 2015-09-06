@@ -2,7 +2,7 @@
 (function () {
     'use strict';
 
-    beforeEach(module('todomvc'));
+    beforeEach(module('scrapps'));
 
     describe('todoFocus directive', function () {
         var scope, compile, browser;

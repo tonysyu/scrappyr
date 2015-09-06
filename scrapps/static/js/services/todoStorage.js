@@ -8,7 +8,7 @@
  * They both follow the same API, returning promises for all changes to the
  * model.
  */
-angular.module('todomvc')
+angular.module('scrapps')
     .factory('todoStorage', function ($http, $injector) {
         'use strict';
         return $http.get('/api').then(function () {
