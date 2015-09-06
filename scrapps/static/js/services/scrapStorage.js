@@ -9,7 +9,7 @@
  * model.
  */
 angular.module('scrapps')
-    .factory('todoStorage', function ($http, $injector) {
+    .factory('scrapStorage', function ($http, $injector) {
         'use strict';
         return $http.get('/api').then(function () {
             return $injector.get('api');

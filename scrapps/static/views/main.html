@@ -3,11 +3,11 @@
 
   <header id="header">
 
-    <h1 id="page-title">todos</h1>
+    <h1 id="page-title">scraps</h1>
 
     <form id="todo-form" ng-submit="addTodo()">
       <input id="new-todo"
-          placeholder="What needs to be done?"
+          placeholder="Enter a scrap of data"
           ng-model="newTodo"
           ng-disabled="saving"
           autofocus>
@@ -62,9 +62,9 @@
             class="edit"
             ng-trim="false"
             ng-model="todo.title"
-            todo-escape="revertEdits(todo)"
+            scrap-escape="revertEdits(todo)"
             ng-blur="saveEdits(todo, 'blur')"
-            todo-focus="todo == editedTodo">
+            scrap-focus="todo == editedTodo">
         </form>
 
       </li>

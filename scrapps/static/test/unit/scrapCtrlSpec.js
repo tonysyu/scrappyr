@@ -21,7 +21,7 @@
                     return [200, JSON.parse(data)];
                 });
 
-            ctrl = $controller('TodoCtrl', {
+            ctrl = $controller('ScrapCtrl', {
                 $scope: scope,
                 store: store
             });
@@ -56,7 +56,7 @@
 
             describe('being at /active', function () {
                 it('should filter non-completed', inject(function ($controller) {
-                    ctrl = $controller('TodoCtrl', {
+                    ctrl = $controller('ScrapCtrl', {
                         $scope: scope,
                         store: store,
                         $routeParams: {
@@ -71,7 +71,7 @@
 
             describe('being at /completed', function () {
                 it('should filter completed', inject(function ($controller) {
-                    ctrl = $controller('TodoCtrl', {
+                    ctrl = $controller('ScrapCtrl', {
                         $scope: scope,
                         $routeParams: {
                             status: 'completed'
@@ -120,7 +120,7 @@
             var ctrl;
 
             beforeEach(inject(function ($controller, $httpBackend) {
-                ctrl = $controller('TodoCtrl', {
+                ctrl = $controller('ScrapCtrl', {
                     $scope: scope,
                     store: store
                 });

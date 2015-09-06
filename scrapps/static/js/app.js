@@ -10,11 +10,11 @@ angular.module('scrapps', ['ngRoute', 'ngSanitize'])
         'use strict';
 
         var routeConfig = {
-            controller: 'TodoCtrl',
+            controller: 'ScrapCtrl',
             templateUrl: 'static/views/main.html',
             resolve: {
-                store: function (todoStorage) {
-                    return todoStorage.then(function (module) {
+                store: function (scrapStorage) {
+                    return scrapStorage.then(function (module) {
                         // Fetch the todo records in the background.
                         module.get();
                         return module;

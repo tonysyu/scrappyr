@@ -5,11 +5,11 @@
  * expression it binds to evaluates to true
  */
 angular.module('scrapps')
-    .directive('todoFocus', function todoFocus($timeout) {
+    .directive('scrapFocus', function scrapFocus($timeout) {
         'use strict';
 
         return function (scope, elem, attrs) {
-            scope.$watch(attrs.todoFocus, function (newVal) {
+            scope.$watch(attrs.scrapFocus, function (newVal) {
                 if (newVal) {
                     $timeout(function () {
                         elem[0].focus();
