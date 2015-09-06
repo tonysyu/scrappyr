@@ -66,7 +66,7 @@ def delete_scrap(id):
 
 def render_data(scrap):
     data = scrap.to_dict()
-    data['html_title'] = markdown.markdown(data['title'])
+    data['html_title'] = markdown.markdown('#' + data['title'])
     return data
 
 
