@@ -37,7 +37,7 @@ angular.module('scrapps')
 
                 angular.copy(incompleteTodos, store.todos);
 
-                return $http.delete('/api/todos')
+                return $http.delete('/api/scraps')
                     .then(function success() {
                         return store.todos;
                     }, function error() {
@@ -51,7 +51,7 @@ angular.module('scrapps')
 
                 store.todos.splice(store.todos.indexOf(todo), 1);
 
-                return $http.delete('/api/todos/' + todo.id)
+                return $http.delete('/api/scraps/' + todo.id)
                     .then(function success() {
                         return store.todos;
                     }, function error() {
@@ -61,9 +61,9 @@ angular.module('scrapps')
             },
 
             get: function () {
-                return $http.get('/api/todos')
+                return $http.get('/api/scraps')
                     .then(function (resp) {
-                        angular.copy(resp.data.todos, store.todos);
+                        angular.copy(resp.data.scraps, store.todos);
                         return store.todos;
                     });
             },
@@ -71,7 +71,7 @@ angular.module('scrapps')
             insert: function (todo) {
                 var originalTodos = store.todos.slice(0);
 
-                return $http.post('/api/todos', todo)
+                return $http.post('/api/scraps', todo)
                     .then(function success(resp) {
                         store.todos.push(resp.data);
                         return store.todos;
@@ -86,7 +86,7 @@ angular.module('scrapps')
                     clientTodo = todo,
                     i;
 
-                return $http.put('/api/todos/' + todo.id, todo)
+                return $http.put('/api/scraps/' + todo.id, todo)
                     .then(function success(resp) {
                         for (i = 0; i < store.todos.length; i += 1) {
                             var todo = store.todos[i];

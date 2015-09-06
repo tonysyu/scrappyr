@@ -16,7 +16,7 @@
 
             // Setup POST method to echo the input data.
             $httpBackend
-                .when('POST', '/api/todos')
+                .when('POST', '/api/scraps')
                 .respond(function (method, url, data) {
                     return [200, JSON.parse(data)];
                 });
@@ -169,7 +169,7 @@
             it('markAll() should mark all Todos completed', inject(
                 function ($httpBackend) {
                     $httpBackend
-                        .when('PUT', '/api/todos/undefined')
+                        .when('PUT', '/api/scraps/undefined')
                         .respond(200, {status: 'success'});
 
                     scope.markAll(true);

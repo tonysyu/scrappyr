@@ -24,13 +24,13 @@ def api():
     return ""
 
 
-@scrapps.route("/api/todos", methods=["GET"])
+@scrapps.route("/api/scraps", methods=["GET"])
 def scraps():
     scraps = [render_data(scrap) for scrap in Scrap.query.all()]
-    return jsonify(todos=scraps)
+    return jsonify(scraps=scraps)
 
 
-@scrapps.route("/api/todos", methods=["POST"])
+@scrapps.route("/api/scraps", methods=["POST"])
 def add_scrap():
     scrap_data = request.get_json()
     form = ScrapForm(data=scrap_data)
@@ -43,7 +43,7 @@ def add_scrap():
         return _jsonify_errors(form.errors)
 
 
-@scrapps.route("/api/todos/<int:id>", methods=["PUT"])
+@scrapps.route("/api/scraps/<int:id>", methods=["PUT"])
 def update_scrap(id):
     scrap = Scrap.query.get_or_404(id)
     scrap_data = request.get_json()
@@ -56,7 +56,7 @@ def update_scrap(id):
         return _jsonify_errors(form.errors)
 
 
-@scrapps.route("/api/todos/<int:id>", methods=["DELETE"])
+@scrapps.route("/api/scraps/<int:id>", methods=["DELETE"])
 def delete_scrap(id):
     scrap = Scrap.query.get_or_404(id)
     db.session.delete(scrap)
