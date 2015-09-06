@@ -1,7 +1,7 @@
 /*global angular */
 
 /**
- * The main TodoMVC app module
+ * The main Scrapps app module
  *
  * @type {angular.Module}
  */
@@ -15,7 +15,7 @@ angular.module('scrapps', ['ngRoute', 'ngSanitize'])
             resolve: {
                 store: function (scrapStorage) {
                     return scrapStorage.then(function (module) {
-                        // Fetch the todo records in the background.
+                        // Fetch the scraps data in the background.
                         module.get();
                         return module;
                     });

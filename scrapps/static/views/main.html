@@ -1,12 +1,12 @@
 
-<section id="todoapp">
+<section id="scrappsapp">
 
   <header id="header">
 
     <h1 id="page-title">scraps</h1>
 
-    <form id="todo-form" ng-submit="addScrap()">
-      <input id="new-todo"
+    <form id="scrap-form" ng-submit="addScrap()">
+      <input id="new-scrap"
           placeholder="Enter a scrap of data"
           ng-model="newScrap"
           ng-disabled="saving"
@@ -24,7 +24,7 @@
 
     <label for="toggle-all">Mark all as complete</label>
 
-    <ul id="todo-list">
+    <ul id="scrap-list">
       <li
         ng-repeat="scrap in scraps track by $index"
         ng-class="{completed: scrap.completed, editing: scrap == editedScrap}">
