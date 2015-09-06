@@ -2,7 +2,7 @@
 /*jslint nomen:true*/
 
 /**
- * Services that persists and retrieves todos from localStorage or a backend
+ * Services that persists and retrieves scraps from localStorage or a backend
  * API if available.
  *
  * They both follow the same API, returning promises for all changes to the
@@ -20,85 +20,85 @@ angular.module('scrapps')
         'use strict';
 
         var store = {
-            todos: [],
+            scraps: [],
 
             clearCompleted: function () {
-                var originalTodos = store.todos.slice(0),
-                    completeTodos = [],
-                    incompleteTodos = [];
+                var originalScraps = store.scraps.slice(0),
+                    completeScraps = [],
+                    incompleteScraps = [];
 
-                store.todos.forEach(function (todo) {
-                    if (todo.completed) {
-                        completeTodos.push(todo);
+                store.scraps.forEach(function (scrap) {
+                    if (scrap.completed) {
+                        completeScraps.push(scrap);
                     } else {
-                        incompleteTodos.push(todo);
+                        incompleteScraps.push(scrap);
                     }
                 });
 
-                angular.copy(incompleteTodos, store.todos);
+                angular.copy(incompleteScraps, store.scraps);
 
                 return $http.delete('/api/scraps')
                     .then(function success() {
-                        return store.todos;
+                        return store.scraps;
                     }, function error() {
-                        angular.copy(originalTodos, store.todos);
-                        return originalTodos;
+                        angular.copy(originalScraps, store.scraps);
+                        return originalScraps;
                     });
             },
 
-            delete: function (todo) {
-                var originalTodos = store.todos.slice(0);
+            delete: function (scrap) {
+                var originalScraps = store.scraps.slice(0);
 
-                store.todos.splice(store.todos.indexOf(todo), 1);
+                store.scraps.splice(store.scraps.indexOf(scrap), 1);
 
-                return $http.delete('/api/scraps/' + todo.id)
+                return $http.delete('/api/scraps/' + scrap.id)
                     .then(function success() {
-                        return store.todos;
+                        return store.scraps;
                     }, function error() {
-                        angular.copy(originalTodos, store.todos);
-                        return originalTodos;
+                        angular.copy(originalScraps, store.scraps);
+                        return originalScraps;
                     });
             },
 
             get: function () {
                 return $http.get('/api/scraps')
                     .then(function (resp) {
-                        angular.copy(resp.data.scraps, store.todos);
-                        return store.todos;
+                        angular.copy(resp.data.scraps, store.scraps);
+                        return store.scraps;
                     });
             },
 
-            insert: function (todo) {
-                var originalTodos = store.todos.slice(0);
+            insert: function (scrap) {
+                var originalScraps = store.scraps.slice(0);
 
-                return $http.post('/api/scraps', todo)
+                return $http.post('/api/scraps', scrap)
                     .then(function success(resp) {
-                        store.todos.push(resp.data);
-                        return store.todos;
+                        store.scraps.push(resp.data);
+                        return store.scraps;
                     }, function error() {
-                        angular.copy(originalTodos, store.todos);
-                        return store.todos;
+                        angular.copy(originalScraps, store.scraps);
+                        return store.scraps;
                     });
             },
 
-            put: function (todo) {
-                var originalTodos = store.todos.slice(0),
-                    clientTodo = todo,
+            put: function (scrap) {
+                var originalScraps = store.scraps.slice(0),
+                    clientScrap = scrap,
                     i;
 
-                return $http.put('/api/scraps/' + todo.id, todo)
+                return $http.put('/api/scraps/' + scrap.id, scrap)
                     .then(function success(resp) {
-                        for (i = 0; i < store.todos.length; i += 1) {
-                            var todo = store.todos[i];
-                            if (todo.id === resp.data.id) {
+                        for (i = 0; i < store.scraps.length; i += 1) {
+                            var scrap = store.scraps[i];
+                            if (scrap.id === resp.data.id) {
                                 break;
                             }
                         }
-                        store.todos[i] = resp.data;
-                        return store.todos;
+                        store.scraps[i] = resp.data;
+                        return store.scraps;
                     }, function error() {
-                        angular.copy(originalTodos, store.todos);
-                        return originalTodos;
+                        angular.copy(originalScraps, store.scraps);
+                        return originalScraps;
                     });
             }
         };

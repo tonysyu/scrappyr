@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    describe('Todo Controller', function () {
+    describe('Scrap Controller', function () {
         var ctrl, scope, store;
 
         // Load the module containing the app, only 'ng' is loaded by default.
@@ -27,22 +27,22 @@
             });
         }));
 
-        it('No todos on start', function () {
-            expect(scope.editedTodo).toBeNull();
+        it('No scraps on start', function () {
+            expect(scope.editedScrap).toBeNull();
         });
 
-        it('No active todos on start', function () {
-            expect(scope.todos.length).toBe(0);
+        it('No active scraps on start', function () {
+            expect(scope.scraps.length).toBe(0);
         });
 
-        it('No `editedTodo` on start', function () {
-            expect(scope.editedTodo).toBeNull();
+        it('No `editedScrap` on start', function () {
+            expect(scope.editedScrap).toBeNull();
         });
 
-        it('All Todos completed on start', function () {
+        it('All scraps completed on start', function () {
             scope.$digest();
-            // Is this worth checking? There are no checked todos because
-            // there are no todos period.
+            // Is this worth checking? There are no checked scraps because
+            // there are no scraps period.
             expect(scope.allChecked).toBeTruthy();
         });
 
@@ -85,38 +85,38 @@
             });
         });
 
-        describe('having no Todos', function () {
+        describe('having no scraps', function () {
             var ctrl;
 
-            it('should not add empty Todos', function () {
-                scope.newTodo = '';
-                scope.addTodo();
+            it('should not add empty scraps', function () {
+                scope.newScrap = '';
+                scope.addScrap();
                 scope.$digest();
-                expect(scope.todos.length).toBe(0);
+                expect(scope.scraps.length).toBe(0);
             });
 
             it('should not add items consisting only of whitespaces', function () {
-                scope.newTodo = '   ';
-                scope.addTodo();
+                scope.newScrap = '   ';
+                scope.addScrap();
                 scope.$digest();
-                expect(scope.todos.length).toBe(0);
+                expect(scope.scraps.length).toBe(0);
             });
 
 
-            it('should trim whitespace from new Todos', inject(
+            it('should trim whitespace from new scraps', inject(
                 function ($httpBackend) {
-                    scope.newTodo = '  buy some unicorns  ';
-                    scope.addTodo();
+                    scope.newScrap = '  buy some unicorns  ';
+                    scope.addScrap();
                     $httpBackend.flush();
 
                     scope.$digest();
-                    expect(scope.todos.length).toBe(1);
-                    expect(scope.todos[0].title).toBe('buy some unicorns');
+                    expect(scope.scraps.length).toBe(1);
+                    expect(scope.scraps[0].title).toBe('buy some unicorns');
                 }
             ));
         });
 
-        describe('Pre-populate 5 Todos', function () {
+        describe('Pre-populate 5 scraps', function () {
             var ctrl;
 
             beforeEach(inject(function ($controller, $httpBackend) {
@@ -134,39 +134,39 @@
                 $httpBackend.flush();
             }));
 
-            it('should count Todos correctly', function () {
-                expect(scope.todos.length).toBe(5);
+            it('should count scraps correctly', function () {
+                expect(scope.scraps.length).toBe(5);
                 expect(scope.remainingCount).toBe(3);
                 expect(scope.completedCount).toBe(2);
                 expect(scope.allChecked).toBeFalsy();
             });
 
-            it('should save Todos to local storage', function () {
-                expect(scope.todos.length).toBe(5);
+            it('should save scraps to local storage', function () {
+                expect(scope.scraps.length).toBe(5);
             });
 
-            it('should remove Todos w/o title on saving', function () {
-                var todo = store.todos[2];
-                scope.editTodo(todo);
-                todo.title = '';
-                scope.saveEdits(todo);
-                expect(scope.todos.length).toBe(4);
+            it('should remove scraps w/o title on saving', function () {
+                var scrap = store.scraps[2];
+                scope.editScrap(scrap);
+                scrap.title = '';
+                scope.saveEdits(scrap);
+                expect(scope.scraps.length).toBe(4);
             });
 
-            it('should trim Todos on saving', function () {
-                var todo = store.todos[0];
-                scope.editTodo(todo);
-                todo.title = ' buy moar unicorns  ';
-                scope.saveEdits(todo);
-                expect(scope.todos[0].title).toBe('buy moar unicorns');
+            it('should trim scraps on saving', function () {
+                var scrap = store.scraps[0];
+                scope.editScrap(scrap);
+                scrap.title = ' buy moar unicorns  ';
+                scope.saveEdits(scrap);
+                expect(scope.scraps[0].title).toBe('buy moar unicorns');
             });
 
-            it('clearCompletedTodos() should clear completed Todos', function () {
-                scope.clearCompletedTodos();
-                expect(scope.todos.length).toBe(3);
+            it('clearCompletedScraps() should clear completed scraps', function () {
+                scope.clearCompletedScraps();
+                expect(scope.scraps.length).toBe(3);
             });
 
-            it('markAll() should mark all Todos completed', inject(
+            it('markAll() should mark all scraps completed', inject(
                 function ($httpBackend) {
                     $httpBackend
                         .when('PUT', '/api/scraps/undefined')
@@ -178,13 +178,13 @@
                 }
             ));
 
-            it('revertTodo() get a Todo to its previous state', function () {
-                var todo = store.todos[0];
-                scope.editTodo(todo);
-                todo.title = 'Unicorn sparkly skypuffles.';
-                scope.revertEdits(todo);
+            it('revertScrap() get a scrap to its previous state', function () {
+                var scrap = store.scraps[0];
+                scope.editScrap(scrap);
+                scrap.title = 'Unicorn sparkly skypuffles.';
+                scope.revertEdits(scrap);
                 scope.$digest();
-                expect(scope.todos[0].title).toBe('Uncompleted Item 0');
+                expect(scope.scraps[0].title).toBe('Uncompleted Item 0');
             });
         });
     });

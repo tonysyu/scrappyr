@@ -10,14 +10,14 @@ angular.module('scrapps')
     .controller('ScrapCtrl', function ScrapCtrl($scope, $routeParams, $filter, store) {
         'use strict';
 
-        var todos = $scope.todos = store.todos;
+        var scraps = $scope.scraps = store.scraps;
 
-        $scope.newTodo = '';
-        $scope.editedTodo = null;
+        $scope.newScrap = '';
+        $scope.editedScrap = null;
 
-        $scope.$watch('todos', function () {
-            $scope.remainingCount = $filter('filter')(todos, { completed: false }).length;
-            $scope.completedCount = todos.length - $scope.remainingCount;
+        $scope.$watch('scraps', function () {
+            $scope.remainingCount = $filter('filter')(scraps, { completed: false }).length;
+            $scope.completedCount = scraps.length - $scope.remainingCount;
             $scope.allChecked = !$scope.remainingCount;
         }, true);
 
@@ -30,33 +30,33 @@ angular.module('scrapps')
                                 : null;
         });
 
-        $scope.addTodo = function () {
-            var newTodo = {
-                title: $scope.newTodo.trim(),
+        $scope.addScrap = function () {
+            var newScrap = {
+                title: $scope.newScrap.trim(),
                 completed: false
             };
 
-            if (!newTodo.title) {
+            if (!newScrap.title) {
                 return;
             }
 
             $scope.saving = true;
-            store.insert(newTodo)
+            store.insert(newScrap)
                 .then(function success() {
-                    $scope.newTodo = '';
+                    $scope.newScrap = '';
                 })
                 .finally(function () {
                     $scope.saving = false;
                 });
         };
 
-        $scope.editTodo = function (todo) {
-            $scope.editedTodo = todo;
-            // Clone the original todo to restore it on demand.
-            $scope.originalTodo = angular.extend({}, todo);
+        $scope.editScrap = function (scrap) {
+            $scope.editedScrap = scrap;
+            // Clone the original scrap to restore it on demand.
+            $scope.originalScrap = angular.extend({}, scrap);
         };
 
-        $scope.saveEdits = function (todo, event) {
+        $scope.saveEdits = function (scrap, event) {
             // Blur events are automatically triggered after the form submit event.
             // This does some unfortunate logic handling to prevent saving twice.
             if (event === 'blur' && $scope.saveEvent === 'submit') {
@@ -67,60 +67,60 @@ angular.module('scrapps')
             $scope.saveEvent = event;
 
             if ($scope.reverted) {
-                // Todo edits were reverted-- don't save.
+                // Scrap edits were reverted-- don't save.
                 $scope.reverted = null;
                 return;
             }
 
-            todo.title = todo.title.trim();
+            scrap.title = scrap.title.trim();
 
-            if (todo.title === $scope.originalTodo.title) {
-                $scope.editedTodo = null;
+            if (scrap.title === $scope.originalScrap.title) {
+                $scope.editedScrap = null;
                 return;
             }
 
-            store[todo.title ? 'put' : 'delete'](todo)
+            store[scrap.title ? 'put' : 'delete'](scrap)
                 .then(function success() {}, function error() {
-                    todo.title = $scope.originalTodo.title;
+                    scrap.title = $scope.originalScrap.title;
                 })
                 .finally(function () {
-                    $scope.editedTodo = null;
+                    $scope.editedScrap = null;
                 });
         };
 
-        $scope.revertEdits = function (todo) {
-            todos[todos.indexOf(todo)] = $scope.originalTodo;
-            $scope.editedTodo = null;
-            $scope.originalTodo = null;
+        $scope.revertEdits = function (scrap) {
+            scraps[scraps.indexOf(scrap)] = $scope.originalScrap;
+            $scope.editedScrap = null;
+            $scope.originalScrap = null;
             $scope.reverted = true;
         };
 
-        $scope.removeTodo = function (todo) {
-            store.delete(todo);
+        $scope.removeScrap = function (scrap) {
+            store.delete(scrap);
         };
 
-        $scope.saveTodo = function (todo) {
-            store.put(todo);
+        $scope.saveScrap = function (scrap) {
+            store.put(scrap);
         };
 
-        $scope.toggleCompleted = function (todo, completed) {
+        $scope.toggleCompleted = function (scrap, completed) {
             if (angular.isDefined(completed)) {
-                todo.completed = completed;
+                scrap.completed = completed;
             }
-            store.put(todo, todos.indexOf(todo))
+            store.put(scrap, scraps.indexOf(scrap))
                 .then(function success() {}, function error() {
-                    todo.completed = !todo.completed;
+                    scrap.completed = !scrap.completed;
                 });
         };
 
-        $scope.clearCompletedTodos = function () {
+        $scope.clearCompletedScraps = function () {
             store.clearCompleted();
         };
 
         $scope.markAll = function (completed) {
-            todos.forEach(function (todo) {
-                if (todo.completed !== completed) {
-                    $scope.toggleCompleted(todo, completed);
+            scraps.forEach(function (scrap) {
+                if (scrap.completed !== completed) {
+                    $scope.toggleCompleted(scrap, completed);
                 }
             });
         };

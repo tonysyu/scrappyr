@@ -5,17 +5,17 @@
 
     <h1 id="page-title">scraps</h1>
 
-    <form id="todo-form" ng-submit="addTodo()">
+    <form id="todo-form" ng-submit="addScrap()">
       <input id="new-todo"
           placeholder="Enter a scrap of data"
-          ng-model="newTodo"
+          ng-model="newScrap"
           ng-disabled="saving"
           autofocus>
     </form>
 
   </header>
 
-  <section id="main" ng-show="todos.length" ng-cloak>
+  <section id="main" ng-show="scraps.length" ng-cloak>
 
     <input id="toggle-all"
         type="checkbox"
@@ -26,53 +26,53 @@
 
     <ul id="todo-list">
       <li
-        ng-repeat="todo in todos track by $index"
-        ng-class="{completed: todo.completed, editing: todo == editedTodo}">
+        ng-repeat="scrap in scraps track by $index"
+        ng-class="{completed: scrap.completed, editing: scrap == editedScrap}">
 
         <div class="view">
           <input class="toggle"
             type="checkbox"
-            ng-model="todo.completed"
-            ng-change="toggleCompleted(todo)">
+            ng-model="scrap.completed"
+            ng-change="toggleCompleted(scrap)">
 
           <div
             class="scrap"
-            ng-if="todo === editedTodo">
+            ng-if="scrap === editedScrap">
 
-            {{todo.title}}
+            {{scrap.title}}
 
           </div>
 
           <div
             class="scrap"
-            ng-if="todo !== editedTodo"
-            ng-dblclick="editTodo(todo)"
-            ng-bind-html="todo.html_title">
+            ng-if="scrap !== editedScrap"
+            ng-dblclick="editScrap(scrap)"
+            ng-bind-html="scrap.html_title">
           </div>
 
           <button
             class="destroy vertical-align-middle"
-            ng-click="removeTodo(todo)">
+            ng-click="removeScrap(scrap)">
           </button>
 
         </div>
 
-        <form ng-submit="saveEdits(todo, 'submit')">
+        <form ng-submit="saveEdits(scrap, 'submit')">
           <input
             class="edit"
             ng-trim="false"
-            ng-model="todo.title"
-            scrap-escape="revertEdits(todo)"
-            ng-blur="saveEdits(todo, 'blur')"
-            scrap-focus="todo == editedTodo">
+            ng-model="scrap.title"
+            scrap-escape="revertEdits(scrap)"
+            ng-blur="saveEdits(scrap, 'blur')"
+            scrap-focus="scrap == editedScrap">
         </form>
 
       </li>
     </ul>
   </section>
 
-  <footer id="footer" ng-show="todos.length" ng-cloak>
-    <span id="todo-count">
+  <footer id="footer" ng-show="scraps.length" ng-cloak>
+    <span id="scrap-count">
       <strong>{{remainingCount}}</strong>
       <ng-pluralize
         count="remainingCount"
@@ -84,5 +84,5 @@
 </section>
 
 <footer id="info">
-  <p>Double-click to edit a todo</p>
+  <p>Double-click to edit a scrap</p>
 </footer>
