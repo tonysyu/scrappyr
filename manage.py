@@ -1,12 +1,11 @@
 #!/usr/bin/env python
-import sys
-
 import pytest
 from flask.ext.script import Manager, Server
 from flask.ext.migrate import MigrateCommand
 from flask.ext.script.commands import ShowUrls, Clean
 
-from scrapps import create_app, db
+from scrapps.app import create_app
+from scrapps.common import db
 
 
 app = create_app()

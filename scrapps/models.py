@@ -1,6 +1,6 @@
 from sqlalchemy.ext.associationproxy import association_proxy
 
-from .extensions import db
+from .common import db
 
 
 scrap_tag = db.Table(
