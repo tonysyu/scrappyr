@@ -6,8 +6,8 @@ We have started you with an initial blueprint. Add more as needed.
 import markdown
 
 from flask import Blueprint, jsonify, request
-from .models import Todo
-from .forms import TodoForm
+from .models import Scrap
+from .forms import ScrapForm
 from .extensions import db
 
 
@@ -24,49 +24,49 @@ def api():
     return ""
 
 
-@scrapps.route("/api/todos", methods=["GET"])
-def todos():
-    todos = [render_data(todo) for todo in Todo.query.all()]
-    return jsonify(todos=todos)
+@scrapps.route("/api/scraps", methods=["GET"])
+def scraps():
+    scraps = [render_data(scrap) for scrap in Scrap.query.all()]
+    return jsonify(scraps=scraps)
 
 
-@scrapps.route("/api/todos", methods=["POST"])
-def add_todo():
-    todo_data = request.get_json()
-    form = TodoForm(data=todo_data)
+@scrapps.route("/api/scraps", methods=["POST"])
+def add_scrap():
+    scrap_data = request.get_json()
+    form = ScrapForm(data=scrap_data)
     if form.validate():
-        todo = Todo(**form.data)
-        db.session.add(todo)
+        scrap = Scrap(**form.data)
+        db.session.add(scrap)
         db.session.commit()
-        return jsonify(render_data(todo))
+        return jsonify(render_data(scrap))
     else:
         return _jsonify_errors(form.errors)
 
 
-@scrapps.route("/api/todos/<int:id>", methods=["PUT"])
-def update_todo(id):
-    todo = Todo.query.get_or_404(id)
-    todo_data = request.get_json()
-    form = TodoForm(data=todo_data)
+@scrapps.route("/api/scraps/<int:id>", methods=["PUT"])
+def update_scrap(id):
+    scrap = Scrap.query.get_or_404(id)
+    scrap_data = request.get_json()
+    form = ScrapForm(data=scrap_data)
     if form.validate():
-        form.populate_obj(todo)
+        form.populate_obj(scrap)
         db.session.commit()
-        return jsonify(render_data(todo))
+        return jsonify(render_data(scrap))
     else:
         return _jsonify_errors(form.errors)
 
 
-@scrapps.route("/api/todos/<int:id>", methods=["DELETE"])
-def delete_todo(id):
-    todo = Todo.query.get_or_404(id)
-    db.session.delete(todo)
+@scrapps.route("/api/scraps/<int:id>", methods=["DELETE"])
+def delete_scrap(id):
+    scrap = Scrap.query.get_or_404(id)
+    db.session.delete(scrap)
     db.session.commit()
     return jsonify({"deleted": "true"})
 
 
-def render_data(todo):
-    data = todo.to_dict()
-    data['html_title'] = markdown.markdown(data['title'])
+def render_data(scrap):
+    data = scrap.to_dict()
+    data['html_title'] = markdown.markdown('#' + data['title'])
     return data
 
 

@@ -5,7 +5,7 @@
  * an `escape` keydown event.
  */
 angular.module('scrapps')
-    .directive('todoEscape', function () {
+    .directive('scrapEscape', function () {
         'use strict';
 
         var ESCAPE_KEY = 27;
@@ -13,7 +13,7 @@ angular.module('scrapps')
         return function (scope, elem, attrs) {
             elem.bind('keydown', function (event) {
                 if (event.keyCode === ESCAPE_KEY) {
-                    scope.$apply(attrs.todoEscape);
+                    scope.$apply(attrs.scrapEscape);
                 }
             });
         };

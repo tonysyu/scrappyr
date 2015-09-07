@@ -4,7 +4,7 @@
 
     beforeEach(module('scrapps'));
 
-    describe('todoFocus directive', function () {
+    describe('scrapFocus directive', function () {
         var scope, compile, browser;
 
         beforeEach(inject(function ($rootScope, $compile, $browser) {
@@ -14,7 +14,7 @@
         }));
 
         it('should focus on truthy expression', function () {
-            var el = angular.element('<input todo-focus="focus">');
+            var el = angular.element('<input scrap-focus="focus">');
             scope.focus = false;
 
             compile(el)(scope);

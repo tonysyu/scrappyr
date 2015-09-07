@@ -12,7 +12,7 @@ class APIForm(Form):
         super().__init__(*args, **default_kwargs)
 
 
-class TodoForm(APIForm):
+class ScrapForm(APIForm):
 
     title = StringField('Title', validators=[DataRequired()])
     completed = BooleanField('Completed', default=False)
