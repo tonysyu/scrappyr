@@ -35,6 +35,16 @@ To open the interactive shell, run:
 By default, you will have access to `app` and `db`.
 
 
+Running Tests
+-------------
+
+To run all tests, run:
+
+    python manage.py test
+
+Alternatively, you can directly run `py.test`.
+
+
 Migrations
 ----------
 

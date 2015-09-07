@@ -6,9 +6,9 @@ We have started you with an initial blueprint. Add more as needed.
 import markdown
 
 from flask import Blueprint, jsonify, request
+from .common import db
 from .models import Scrap
 from .forms import ScrapForm
-from .extensions import db
 
 
 scrapps = Blueprint("scrapps", __name__, static_folder="./static")

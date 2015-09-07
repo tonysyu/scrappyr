@@ -1,9 +1,11 @@
 #!/usr/bin/env python
+import pytest
 from flask.ext.script import Manager, Server
 from flask.ext.migrate import MigrateCommand
 from flask.ext.script.commands import ShowUrls, Clean
 
-from scrapps import create_app, db
+from scrapps.app import create_app
+from scrapps.common import db
 
 
 app = create_app()
@@ -16,11 +18,13 @@ manager.add_command('clean', Clean())
 
 @manager.shell
 def make_shell_context():
-    """ Creates a python REPL with several default imports
-        in the context of the app
-    """
-
+    """Open ipython with several default imports in the context of the app."""
     return dict(app=app, db=db)
+
+
+@manager.command
+def test():
+    pytest.main('.')
 
 
 if __name__ == '__main__':
