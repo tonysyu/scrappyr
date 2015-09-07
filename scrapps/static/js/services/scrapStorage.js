@@ -22,30 +22,6 @@ angular.module('scrapps')
         var store = {
             scraps: [],
 
-            clearCompleted: function () {
-                var originalScraps = store.scraps.slice(0),
-                    completeScraps = [],
-                    incompleteScraps = [];
-
-                store.scraps.forEach(function (scrap) {
-                    if (scrap.completed) {
-                        completeScraps.push(scrap);
-                    } else {
-                        incompleteScraps.push(scrap);
-                    }
-                });
-
-                angular.copy(incompleteScraps, store.scraps);
-
-                return $http.delete('/api/scraps')
-                    .then(function success() {
-                        return store.scraps;
-                    }, function error() {
-                        angular.copy(originalScraps, store.scraps);
-                        return originalScraps;
-                    });
-            },
-
             delete: function (scrap) {
                 var originalScraps = store.scraps.slice(0);
 

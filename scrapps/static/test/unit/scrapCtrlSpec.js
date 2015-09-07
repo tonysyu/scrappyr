@@ -39,52 +39,6 @@
             expect(scope.editedScrap).toBeNull();
         });
 
-        it('All scraps completed on start', function () {
-            scope.$digest();
-            // Is this worth checking? There are no checked scraps because
-            // there are no scraps period.
-            expect(scope.allChecked).toBeTruthy();
-        });
-
-        describe('Filter', function () {
-            it('should default to ""', function () {
-                scope.$emit('$routeChangeSuccess');
-
-                expect(scope.status).toBe('');
-                expect(scope.statusFilter).toBeNull();
-            });
-
-            describe('being at /active', function () {
-                it('should filter non-completed', inject(function ($controller) {
-                    ctrl = $controller('ScrapCtrl', {
-                        $scope: scope,
-                        store: store,
-                        $routeParams: {
-                            status: 'active'
-                        }
-                    });
-
-                    scope.$emit('$routeChangeSuccess');
-                    expect(scope.statusFilter.completed).toBeFalsy();
-                }));
-            });
-
-            describe('being at /completed', function () {
-                it('should filter completed', inject(function ($controller) {
-                    ctrl = $controller('ScrapCtrl', {
-                        $scope: scope,
-                        $routeParams: {
-                            status: 'completed'
-                        },
-                        store: store
-                    });
-
-                    scope.$emit('$routeChangeSuccess');
-                    expect(scope.statusFilter.completed).toBeTruthy();
-                }));
-            });
-        });
-
         describe('having no scraps', function () {
             var ctrl;
 
@@ -125,21 +79,14 @@
                     store: store
                 });
 
-                store.insert({ title: 'Uncompleted Item 0', completed: false });
-                store.insert({ title: 'Uncompleted Item 1', completed: false });
-                store.insert({ title: 'Uncompleted Item 2', completed: false });
-                store.insert({ title: 'Completed Item 0', completed: true });
-                store.insert({ title: 'Completed Item 1', completed: true });
+                store.insert({ title: 'Item 0' });
+                store.insert({ title: 'Item 1' });
+                store.insert({ title: 'Item 2' });
+                store.insert({ title: 'Item 3' });
+                store.insert({ title: 'Item 4' });
                 scope.$digest();
                 $httpBackend.flush();
             }));
-
-            it('should count scraps correctly', function () {
-                expect(scope.scraps.length).toBe(5);
-                expect(scope.remainingCount).toBe(3);
-                expect(scope.completedCount).toBe(2);
-                expect(scope.allChecked).toBeFalsy();
-            });
 
             it('should save scraps to local storage', function () {
                 expect(scope.scraps.length).toBe(5);
@@ -161,30 +108,13 @@
                 expect(scope.scraps[0].title).toBe('buy moar unicorns');
             });
 
-            it('clearCompletedScraps() should clear completed scraps', function () {
-                scope.clearCompletedScraps();
-                expect(scope.scraps.length).toBe(3);
-            });
-
-            it('markAll() should mark all scraps completed', inject(
-                function ($httpBackend) {
-                    $httpBackend
-                        .when('PUT', '/api/scraps/undefined')
-                        .respond(200, {status: 'success'});
-
-                    scope.markAll(true);
-                    scope.$digest();
-                    expect(scope.completedCount).toBe(5);
-                }
-            ));
-
             it('revertScrap() get a scrap to its previous state', function () {
                 var scrap = store.scraps[0];
                 scope.editScrap(scrap);
                 scrap.title = 'Unicorn sparkly skypuffles.';
                 scope.revertEdits(scrap);
                 scope.$digest();
-                expect(scope.scraps[0].title).toBe('Uncompleted Item 0');
+                expect(scope.scraps[0].title).toBe('Item 0');
             });
         });
     });

@@ -17,23 +17,12 @@
 
   <section id="main" ng-show="scraps.length" ng-cloak>
 
-    <input id="toggle-all"
-        type="checkbox"
-        ng-model="allChecked"
-        ng-click="markAll(allChecked)">
-
-    <label for="toggle-all">Mark all as complete</label>
-
     <ul id="scrap-list">
       <li
         ng-repeat="scrap in scraps track by $index"
-        ng-class="{completed: scrap.completed, editing: scrap == editedScrap}">
+        ng-class="{editing: scrap == editedScrap}">
 
         <div class="view">
-          <input class="toggle"
-            type="checkbox"
-            ng-model="scrap.completed"
-            ng-change="toggleCompleted(scrap)">
 
           <div
             class="scrap"
@@ -73,10 +62,10 @@
 
   <footer id="footer" ng-show="scraps.length" ng-cloak>
     <span id="scrap-count">
-      <strong>{{remainingCount}}</strong>
+      <strong>{{scraps.length}}</strong>
       <ng-pluralize
-        count="remainingCount"
-        when="{ one: 'item left', other: 'items left' }">
+        count="scraps.length"
+        when="{ one: 'scrap', other: 'scraps' }">
       </ng-pluralize>
     </span>
 

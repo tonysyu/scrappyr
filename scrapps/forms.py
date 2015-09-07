@@ -15,4 +15,3 @@ class APIForm(Form):
 class ScrapForm(APIForm):
 
     title = StringField('Title', validators=[DataRequired()])
-    completed = BooleanField('Completed', default=False)
