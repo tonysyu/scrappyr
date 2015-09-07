@@ -15,25 +15,9 @@ angular.module('scrapps')
         $scope.newScrap = '';
         $scope.editedScrap = null;
 
-        $scope.$watch('scraps', function () {
-            $scope.remainingCount = $filter('filter')(scraps, { completed: false }).length;
-            $scope.completedCount = scraps.length - $scope.remainingCount;
-            $scope.allChecked = !$scope.remainingCount;
-        }, true);
-
-        // Monitor the current route for changes and adjust the filter accordingly.
-        $scope.$on('$routeChangeSuccess', function () {
-            var status = $scope.status = $routeParams.status || '';
-
-            $scope.statusFilter = (status === 'active') ?  { completed: false }
-                                : (status === 'completed') ? { completed: true }
-                                : null;
-        });
-
         $scope.addScrap = function () {
             var newScrap = {
-                title: $scope.newScrap.trim(),
-                completed: false
+                title: $scope.newScrap.trim()
             };
 
             if (!newScrap.title) {
@@ -103,25 +87,4 @@ angular.module('scrapps')
             store.put(scrap);
         };
 
-        $scope.toggleCompleted = function (scrap, completed) {
-            if (angular.isDefined(completed)) {
-                scrap.completed = completed;
-            }
-            store.put(scrap, scraps.indexOf(scrap))
-                .then(function success() {}, function error() {
-                    scrap.completed = !scrap.completed;
-                });
-        };
-
-        $scope.clearCompletedScraps = function () {
-            store.clearCompleted();
-        };
-
-        $scope.markAll = function (completed) {
-            scraps.forEach(function (scrap) {
-                if (scrap.completed !== completed) {
-                    $scope.toggleCompleted(scrap, completed);
-                }
-            });
-        };
     });

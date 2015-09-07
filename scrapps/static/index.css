@@ -220,11 +220,6 @@ label[for='toggle-all'] {
     width: 80%;
 }
 
-#scrap-list li.completed div.scrap {
-    color: #d9d9d9;
-    text-decoration: line-through;
-}
-
 #scrap-list li .destroy {
     display: none;
     right: 20px;
@@ -321,20 +316,6 @@ label[for='toggle-all'] {
 
 #filters li a.selected {
     border-color: rgba(175, 47, 47, 0.2);
-}
-
-#clear-completed,
-html #clear-completed:active {
-    float: right;
-    position: relative;
-    line-height: 20px;
-    text-decoration: none;
-    cursor: pointer;
-    position: relative;
-}
-
-#clear-completed:hover {
-    text-decoration: underline;
 }
 
 #info {

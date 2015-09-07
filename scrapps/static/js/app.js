@@ -25,7 +25,6 @@ angular.module('scrapps', ['ngRoute', 'ngSanitize'])
 
         $routeProvider
             .when('/', routeConfig)
-            .when('/:status', routeConfig)
             .otherwise({
                 redirectTo: '/'
             });
