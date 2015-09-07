@@ -1,9 +1,6 @@
 from flask import Flask
-# Change this to HerokuConfig if using Heroku.
-from flask.ext.appconfig import AppConfig
-from flask.ext.migrate import Migrate
-from flask.ext.sqlalchemy import SQLAlchemy
 
+from .common import config, db, migrate
 from .views import scrapps
 
 
@@ -11,14 +8,12 @@ SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/scrapps.db"
 DEBUG = True
 SECRET_KEY = 'development-key'
 
-db = SQLAlchemy()
-migrate = Migrate()
-config = AppConfig()
 
+def create_app(flask_config=None):
+    flask_config = __name__ if flask_config is None else flask_config
 
-def create_app():
     app = Flask(__name__)
-    app.config.from_object(__name__)
+    app.config.from_object(flask_config)
     app.register_blueprint(scrapps)
 
     config.init_app(app)
