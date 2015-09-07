@@ -1,6 +1,6 @@
 {
-  "name": "scrapps-tests",
-  "description": "Unit tests for the scrapps app",
+  "name": "scrappyr-tests",
+  "description": "Unit tests for the scrappyr app",
   "author": "Tony Yu <tonysyu.github.io>",
   "version": "1.0.0",
   "devDependencies": {

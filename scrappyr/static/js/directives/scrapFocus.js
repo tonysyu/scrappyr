@@ -4,7 +4,7 @@
  * Directive that places focus on the element it is applied to when the
  * expression it binds to evaluates to true
  */
-angular.module('scrapps')
+angular.module('scrappyr')
     .directive('scrapFocus', function scrapFocus($timeout) {
         'use strict';
 

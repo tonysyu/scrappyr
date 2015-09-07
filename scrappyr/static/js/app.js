@@ -1,11 +1,11 @@
 /*global angular */
 
 /**
- * The main Scrapps app module
+ * The main Scrappyr app module
  *
  * @type {angular.Module}
  */
-angular.module('scrapps', ['ngRoute', 'ngSanitize'])
+angular.module('scrappyr', ['ngRoute', 'ngSanitize'])
     .config(function ($routeProvider) {
         'use strict';
 

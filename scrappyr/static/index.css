@@ -44,7 +44,7 @@ input[type="checkbox"] {
     display: none;
 }
 
-#scrappsapp {
+#scrappyrapp {
     background: #fff;
     margin: 130px 0 40px 0;
     position: relative;
@@ -52,22 +52,22 @@ input[type="checkbox"] {
                 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
-#scrappsapp input::-webkit-input-placeholder {
+#scrappyrapp input::-webkit-input-placeholder {
     font-style: italic;
     color: #e6e6e6;
 }
 
-#scrappsapp input::-moz-placeholder {
+#scrappyrapp input::-moz-placeholder {
     font-style: italic;
     color: #e6e6e6;
 }
 
-#scrappsapp input::input-placeholder {
+#scrappyrapp input::input-placeholder {
     font-style: italic;
     color: #e6e6e6;
 }
 
-#scrappsapp h1#page-title {
+#scrappyrapp h1#page-title {
     position: absolute;
     top: -155px;
     width: 100%;

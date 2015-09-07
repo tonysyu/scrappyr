@@ -4,8 +4,8 @@ from flask.ext.script import Manager, Server
 from flask.ext.migrate import MigrateCommand
 from flask.ext.script.commands import ShowUrls, Clean
 
-from scrapps.app import create_app
-from scrapps.common import db
+from scrappyr.app import create_app
+from scrappyr.common import db
 
 
 app = create_app()

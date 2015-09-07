@@ -1,10 +1,10 @@
 from flask import Flask
 
 from .common import config, db, migrate
-from .views import scrapps
+from .views import scrappyr
 
 
-SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/scrapps.db"
+SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/scrappyr.db"
 DEBUG = True
 SECRET_KEY = 'development-key'
 
@@ -14,7 +14,7 @@ def create_app(flask_config=None):
 
     app = Flask(__name__)
     app.config.from_object(flask_config)
-    app.register_blueprint(scrapps)
+    app.register_blueprint(scrappyr)
 
     config.init_app(app)
     db.init_app(app)

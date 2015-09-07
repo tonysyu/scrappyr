@@ -11,26 +11,26 @@ from .models import Scrap
 from .forms import ScrapForm
 
 
-scrapps = Blueprint("scrapps", __name__, static_folder="./static")
+scrappyr = Blueprint("scrappyr", __name__, static_folder="./static")
 
 
-@scrapps.route("/")
+@scrappyr.route("/")
 def index():
-    return scrapps.send_static_file("index.html")
+    return scrappyr.send_static_file("index.html")
 
 
-@scrapps.route("/api")
+@scrappyr.route("/api")
 def api():
     return ""
 
 
-@scrapps.route("/api/scraps", methods=["GET"])
+@scrappyr.route("/api/scraps", methods=["GET"])
 def scraps():
     scraps = [render_data(scrap) for scrap in Scrap.query.all()]
     return jsonify(scraps=scraps)
 
 
-@scrapps.route("/api/scraps", methods=["POST"])
+@scrappyr.route("/api/scraps", methods=["POST"])
 def add_scrap():
     scrap_data = request.get_json()
     form = ScrapForm(data=scrap_data)
@@ -43,7 +43,7 @@ def add_scrap():
         return _jsonify_errors(form.errors)
 
 
-@scrapps.route("/api/scraps/<int:id>", methods=["PUT"])
+@scrappyr.route("/api/scraps/<int:id>", methods=["PUT"])
 def update_scrap(id):
     scrap = Scrap.query.get_or_404(id)
     scrap_data = request.get_json()
@@ -56,7 +56,7 @@ def update_scrap(id):
         return _jsonify_errors(form.errors)
 
 
-@scrapps.route("/api/scraps/<int:id>", methods=["DELETE"])
+@scrappyr.route("/api/scraps/<int:id>", methods=["DELETE"])
 def delete_scrap(id):
     scrap = Scrap.query.get_or_404(id)
     db.session.delete(scrap)

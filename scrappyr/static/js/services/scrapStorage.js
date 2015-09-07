@@ -8,7 +8,7 @@
  * They both follow the same API, returning promises for all changes to the
  * model.
  */
-angular.module('scrapps')
+angular.module('scrappyr')
     .factory('scrapStorage', function ($http, $injector) {
         'use strict';
         return $http.get('/api').then(function () {

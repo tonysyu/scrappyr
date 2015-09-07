@@ -2,7 +2,7 @@
 (function () {
     'use strict';
 
-    beforeEach(module('scrapps'));
+    beforeEach(module('scrappyr'));
 
     describe('scrapFocus directive', function () {
         var scope, compile, browser;

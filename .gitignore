@@ -50,5 +50,5 @@ env
 
 # Project specific
 migrations
-scrapps/static/node_modules/*
-scrapps/static/test/node_modules/
+scrappyr/static/node_modules/*
+scrappyr/static/test/node_modules/

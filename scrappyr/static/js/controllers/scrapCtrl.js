@@ -6,7 +6,7 @@
  * - retrieves and persists the model via the scrapStorage service
  * - exposes the model to the template and provides event handlers
  */
-angular.module('scrapps')
+angular.module('scrappyr')
     .controller('ScrapCtrl', function ScrapCtrl($scope, $routeParams, $filter, store) {
         'use strict';
 

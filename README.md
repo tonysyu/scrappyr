@@ -1,4 +1,4 @@
-Scrapps
+Scrappyr
 =======
 
 A simple app for managing scraps of data.
@@ -66,7 +66,7 @@ What's in a name
 
 I wanted to name this scrappy (an *app* built with *py*thon for managing
 *scrap*s of data), but there's already a python library named
-[scrapy](http://scrapy.org/). "Scrapps" seemed like a decent alternative.
+[scrapy](http://scrapy.org/). "Scrappyr" seemed like a decent alternative.
 Ignore any undertones of "crap" that might arise in your head.
 
 
