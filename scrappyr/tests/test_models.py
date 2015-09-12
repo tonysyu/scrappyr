@@ -30,6 +30,14 @@ def test_scrap_with_two_tags():
     assert set(scrap.tag_labels) == set(tags)
 
 
+def test_scrap_to_dict():
+    scrap = Scrap(id=1, title=TITLE, tag_labels=[TAG])
+    scrap_data = scrap.to_dict()
+    assert scrap_data['id'] == 1
+    assert scrap_data['title'] == TITLE
+    assert scrap_data['tags'] == [{'text': TAG}]
+
+
 class TestDatabase(TestCase):
 
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
@@ -75,4 +83,4 @@ class TestDatabase(TestCase):
         rows = db.session.query(Tag).all()
         assert len(rows) == 1
         loaded_tag = rows[0]
-        assert loaded_tag.label == TAG
+        assert loaded_tag.text == TAG
