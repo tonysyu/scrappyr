@@ -1,5 +1,5 @@
 Scrappyr
-=======
+========
 
 A simple app for managing scraps of data.
 
@@ -16,13 +16,6 @@ pip install -r requirements.txt
 python manage.py db init
 python manage.py server
 ```
-
-
-Deployment
-----------
-
-In your production environment, make sure you have an application.cfg
-file in your instance directory.
 
 
 Shell
