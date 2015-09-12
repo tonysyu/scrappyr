@@ -43,14 +43,14 @@
             var ctrl;
 
             it('should not add empty scraps', function () {
-                scope.newScrap = '';
+                scope.newScrap = {title: ''};
                 scope.addScrap();
                 scope.$digest();
                 expect(scope.scraps.length).toBe(0);
             });
 
             it('should not add items consisting only of whitespaces', function () {
-                scope.newScrap = '   ';
+                scope.newScrap = {title: '   '};
                 scope.addScrap();
                 scope.$digest();
                 expect(scope.scraps.length).toBe(0);
@@ -59,7 +59,7 @@
 
             it('should trim whitespace from new scraps', inject(
                 function ($httpBackend) {
-                    scope.newScrap = '  buy some unicorns  ';
+                    scope.newScrap = {title: '  buy some unicorns  '};
                     scope.addScrap();
                     $httpBackend.flush();
 
