@@ -21,10 +21,11 @@ class Scrap(db.Model):
     title = db.Column(db.String(255), nullable=False)
 
     tags = db.relationship('Tag', secondary=scrap_tag, backref='Scrap')
-    tag_labels = association_proxy('tags', 'label')
+    tag_labels = association_proxy('tags', 'text')
 
     def to_dict(self):
-        return dict(id=self.id, title=self.title, tags=self.tags)
+        tags = [t.to_dict() for t in self.tags]
+        return dict(id=self.id, title=self.title, tags=tags)
 
 
 class Tag(db.Model):
@@ -32,7 +33,10 @@ class Tag(db.Model):
     __tablename__ = 'tag'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    label = db.Column(db.String(30), nullable=False)
+    text = db.Column(db.String(30), nullable=False)
 
-    def __init__(self, label):
-        self.label = label
+    def __init__(self, text):
+        self.text = text
+
+    def to_dict(self):
+        return {'text': self.text}

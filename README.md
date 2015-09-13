@@ -1,5 +1,5 @@
 Scrappyr
-=======
+========
 
 A simple app for managing scraps of data.
 
@@ -16,13 +16,6 @@ pip install -r requirements.txt
 python manage.py db init
 python manage.py server
 ```
-
-
-Deployment
-----------
-
-In your production environment, make sure you have an application.cfg
-file in your instance directory.
 
 
 Shell
@@ -73,9 +66,9 @@ Ignore any undertones of "crap" that might arise in your head.
 Credits
 -------
 
-This is adapted from Vincenzo Prignano's
-[TodoApp](https://github.com/vinceprignano/todoapp), which itself was adapted
-from a [TodoMVC](http://todomvc.com) implementation by
+This is adapted from Clinton Dreisbach's
+[TodoApp](https://github.com/tiyd-python-2015-01/todomvc-angular-flask),
+which itself was adapted from a [TodoMVC](http://todomvc.com) implementation by
 [Christoph Burgdorf](http://twitter.com/cburgdorf),
 [Eric Bidelman](http://ericbidelman.com),
 [Jacob Mumm](http://jacobmumm.com), and

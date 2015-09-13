@@ -7,15 +7,16 @@
     <style>[ng-cloak] { display: none; }</style>
   </head>
 
-  <body ng-app="scrappyr">
+  <body data-ng-app="scrappyr">
 
-    <div ng-view></div>
+    <div data-ng-view></div>
 
-    <div ng-include='static/views/main.html'></div>
+    <div data-ng-include='static/views/main.html'></div>
 
     <script src="/static/node_modules/angular/angular.js"></script>
     <script src="/static/node_modules/angular-sanitize/angular-sanitize.js"></script>
     <script src="/static/node_modules/angular-route/angular-route.js"></script>
+    <script src="/static/node_modules/ng-tags-input/build/ng-tags-input.js"></script>
     <script src="/static/js/app.js"></script>
     <script src="/static/js/controllers/scrapCtrl.js"></script>
     <script src="/static/js/services/scrapStorage.js"></script>

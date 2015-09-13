@@ -10,24 +10,29 @@ angular.module('scrappyr')
     .controller('ScrapCtrl', function ScrapCtrl($scope, $routeParams, $filter, store) {
         'use strict';
 
+        function getEmptyScrap() {
+            return {
+                title: '',
+                tags: []
+            };
+        }
+
         var scraps = $scope.scraps = store.scraps;
 
-        $scope.newScrap = '';
+        $scope.newScrap = getEmptyScrap();
         $scope.editedScrap = null;
 
         $scope.addScrap = function () {
-            var newScrap = {
-                title: $scope.newScrap.trim()
-            };
+            $scope.newScrap.title =  $scope.newScrap.title.trim();
 
-            if (!newScrap.title) {
+            if (!$scope.newScrap.title) {
                 return;
             }
 
             $scope.saving = true;
-            store.insert(newScrap)
+            store.insert($scope.newScrap)
                 .then(function success() {
-                    $scope.newScrap = '';
+                    $scope.newScrap = getEmptyScrap();
                 })
                 .finally(function () {
                     $scope.saving = false;
@@ -75,7 +80,7 @@ angular.module('scrappyr')
         $scope.revertEdits = function (scrap) {
             scraps[scraps.indexOf(scrap)] = $scope.originalScrap;
             $scope.editedScrap = null;
-            $scope.originalScrap = null;
+            $scope.originalScrap = getEmptyScrap();
             $scope.reverted = true;
         };
 

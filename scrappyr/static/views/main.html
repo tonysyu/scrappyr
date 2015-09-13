@@ -8,7 +8,7 @@
     <form id="scrap-form" ng-submit="addScrap()">
       <input id="new-scrap"
           placeholder="Enter a scrap of data"
-          ng-model="newScrap"
+          ng-model="newScrap.title"
           ng-disabled="saving"
           autofocus>
     </form>
@@ -20,17 +20,9 @@
     <ul id="scrap-list">
       <li
         ng-repeat="scrap in scraps track by $index"
-        ng-class="{editing: scrap == editedScrap}">
+        ng-class="{editing: scrap === editedScrap}">
 
         <div class="view">
-
-          <div
-            class="scrap"
-            ng-if="scrap === editedScrap">
-
-            {{scrap.title}}
-
-          </div>
 
           <div
             class="scrap"
@@ -53,7 +45,7 @@
             ng-model="scrap.title"
             scrap-escape="revertEdits(scrap)"
             ng-blur="saveEdits(scrap, 'blur')"
-            scrap-focus="scrap == editedScrap">
+            scrap-focus="scrap === editedScrap">
         </form>
 
       </li>
