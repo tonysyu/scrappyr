@@ -22,7 +22,6 @@ angular.module('scrappyr')
         $scope.newScrap = getEmptyScrap();
         $scope.editedScrap = null;
 
-
         $scope.addScrap = function () {
             $scope.newScrap.title =  $scope.newScrap.title.trim();
 
