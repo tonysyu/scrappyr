@@ -1,6 +1,6 @@
 from flask_wtf import Form
 
-from wtforms import StringField
+from wtforms import FieldList, FormField, StringField
 from wtforms.validators import DataRequired
 
 
@@ -12,6 +12,10 @@ class APIForm(Form):
         super().__init__(*args, **default_kwargs)
 
 
-class ScrapForm(APIForm):
+class TagForm(APIForm):
+    text = StringField('Text', validators=[DataRequired()])
 
+
+class ScrapForm(APIForm):
     title = StringField('Title', validators=[DataRequired()])
+    tags = FieldList(FormField(TagForm))
