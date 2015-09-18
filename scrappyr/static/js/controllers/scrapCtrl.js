@@ -56,7 +56,7 @@ angular.module('scrappyr')
             $scope.saveEvent = event;
 
             if ($scope.reverted) {
-                // Scrap edits were reverted-- don't save.
+                // Scrap edits were reverted: Don't save.
                 $scope.reverted = null;
                 return;
             }
