@@ -255,6 +255,11 @@ label[for='toggle-all'] {
     margin-bottom: -1px;
 }
 
+#scrap-list li tags-input .tags .tag-item {
+    font-size: 14px;
+    background: lightgray;
+}
+
 #footer {
     color: #777;
     padding: 10px 15px;

@@ -5,7 +5,7 @@
  *
  * @type {angular.Module}
  */
-angular.module('scrappyr', ['ngRoute', 'ngSanitize'])
+angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput'])
     .config(function ($routeProvider) {
         'use strict';
 
