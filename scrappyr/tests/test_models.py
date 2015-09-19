@@ -23,6 +23,12 @@ def test_scrap_append_tag():
     assert scrap.tag_labels == [TAG]
 
 
+def test_scrap_with_tag_object():
+    scrap = Scrap(title=TITLE, tags=[Tag(text=TAG)])
+    assert len(scrap.tag_labels) == 1
+    assert scrap.tag_labels == [TAG]
+
+
 def test_scrap_with_two_tags():
     tags = ['a', 'b']
     scrap = Scrap(title=TITLE, tag_labels=tags)
