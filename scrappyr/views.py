@@ -35,7 +35,7 @@ def add_scrap():
     scrap_data = request.get_json()
     form = ScrapForm(data=scrap_data)
     if form.validate():
-        scrap = Scrap(**form.data)
+        scrap = Scrap.from_dict(form.data)
         db.session.add(scrap)
         db.session.commit()
         return jsonify(render_data(scrap))

@@ -16,7 +16,7 @@ def add_to_db(obj):
 
 
 def count_scraps():
-    return len(list(db.session.query(Scrap)))
+    return len(db.session.query(Scrap).all())
 
 
 class TestView(TestCase):
@@ -59,6 +59,17 @@ class TestView(TestCase):
         scrap = response.json
         assert scrap['title'] == TITLE
         assert scrap['tags'] == []
+        assert TITLE in scrap['html_title']
+
+    def test_post_with_tag(self):
+        data = {'title': TITLE, 'tags': [{'text': TAG}]}
+        json_data = json.dumps(data)
+        response = self.client.post('/api/scraps', data=json_data,
+                                    content_type='application/json')
+        assert response.status_code == 200
+        scrap = response.json
+        assert scrap['title'] == TITLE
+        assert scrap['tags'] == [{'text': TAG}]
         assert TITLE in scrap['html_title']
 
     def test_put(self):

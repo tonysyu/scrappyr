@@ -13,6 +13,11 @@ scrap_tag = db.Table(
 )
 
 
+def tags_from_dicts(tag_list):
+    """Return a list of Tag objects from a list of dicts with tag data."""
+    return [Tag.from_dict(data) for data in tag_list]
+
+
 class Scrap(db.Model):
 
     __tablename__ = 'scrap'
@@ -27,6 +32,11 @@ class Scrap(db.Model):
         tags = [t.to_dict() for t in self.tags]
         return dict(id=self.id, title=self.title, tags=tags)
 
+    @classmethod
+    def from_dict(cls, data):
+        tags = tags_from_dicts(data['tags'])
+        return cls(title=data['title'], tags=tags)
+
 
 class Tag(db.Model):
 
@@ -40,3 +50,7 @@ class Tag(db.Model):
 
     def to_dict(self):
         return {'text': self.text}
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(text=data['text'])
