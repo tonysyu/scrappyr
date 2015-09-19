@@ -48,7 +48,12 @@
             scrap-focus="scrap === editedScrap">
         </form>
 
-        <tags-input class="input-group-sm" ng-model="scrap.tags"></tags-input>
+        <tags-input
+          class="input-group-sm"
+          ng-model="scrap.tags"
+          on-tag-added="onTagChanged(scrap)"
+          on-tag-removed="onTagChanged(scrap)">
+        </tags-input>
 
       </li>
     </ul>
