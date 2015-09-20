@@ -6,7 +6,6 @@ body {
 
 
 body,
-button,
 #new-scrap,
 .edit {
     -webkit-font-smoothing: antialiased;
@@ -14,28 +13,13 @@ button,
     font-smoothing: antialiased;
 }
 
-
-button {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    background: none;
-    font-size: 100%;
-    vertical-align: baseline;
-    font-family: inherit;
-    font-weight: inherit;
-    color: inherit;
-    -webkit-appearance: none;
-    appearance: none;
-}
-
 body {
     font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
     line-height: 1.4em;
     background: #f5f5f5;
     color: #4d4d4d;
-    min-width: 230px;
-    max-width: 550px;
+    min-width: 200px;
+    max-width: 500px;
     margin: 0 auto;
     font-weight: 300;
 }
@@ -93,7 +77,7 @@ body {
 #new-scrap,
 li.scrap input.scrap-title,
 li.scrap .scrap-title h1 {
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 300;
 }
 
@@ -128,7 +112,9 @@ li.scrap .destroy {
     right: 20px;
     margin: auto 0;
     font-size: 30px;
+    border: none;
     color: #cc9a9a;
+    background: none;
     transition: color 0.2s ease-out;
 }
 
@@ -165,7 +151,6 @@ Customize ng-tags-input
 */
 
 li.scrap tags-input .tags .tag-item {
-    font-size: 12px;
     background: lightgray;
 }
 
@@ -181,4 +166,11 @@ tags-input .tags {
     background-color: #f5f5f5;
     border: none;
     box-shadow: none;
+}
+
+li.scrap tags-input .tags .tag-item,
+li.scrap tags-input .input {
+    height: 20px;
+    font-size: 12px;
+    line-height: 1em;
 }
