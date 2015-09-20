@@ -72,7 +72,7 @@ angular.module('scrappyr')
                 return;
             }
 
-            store[scrap.title ? 'put' : 'delete'](scrap)
+            store[scrap.title ? 'put' : 'remove'](scrap)
                 .then(function success() {}, function error() {
                     scrap.title = $scope.originalScrap.title;
                 })
@@ -82,14 +82,14 @@ angular.module('scrappyr')
         };
 
         $scope.revertEdits = function (scrap) {
-            scraps[scraps.indexOf(scrap)] = $scope.originalScrap;
+            scraps.set(scrap.id, $scope.originalScrap);
             $scope.editedScrap = null;
             $scope.originalScrap = getEmptyScrap();
             $scope.reverted = true;
         };
 
         $scope.removeScrap = function (scrap) {
-            store.delete(scrap);
+            store.remove(scrap);
         };
 
         $scope.saveScrap = function (scrap) {

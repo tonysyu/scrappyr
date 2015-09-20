@@ -19,7 +19,7 @@
 
     <ul id="scrap-list">
       <li
-        ng-repeat="scrap in scraps track by $index"
+        ng-repeat="scrap in scraps.all() track by scrap.id"
         ng-class="{editing: scrap === editedScrap}">
 
         <div class="view">
@@ -67,8 +67,8 @@
         when="{ one: 'scrap', other: 'scraps' }">
       </ng-pluralize>
     </span>
-
   </footer>
+
 </section>
 
 
