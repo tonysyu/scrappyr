@@ -45,11 +45,8 @@ input[type="checkbox"] {
 }
 
 #scrappyrapp {
-    background: #fff;
     margin: 130px 0 40px 0;
     position: relative;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
-                0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 
 #scrappyrapp input::-webkit-input-placeholder {
@@ -95,7 +92,6 @@ input[type="checkbox"] {
     color: inherit;
     padding: 6px;
     border: 1px solid #999;
-    box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
@@ -105,8 +101,7 @@ input[type="checkbox"] {
 #new-scrap {
     padding: 16px 16px 16px 60px;
     border: none;
-    background: rgba(0, 0, 0, 0.003);
-    box-shadow: inset 0 -2px 1px rgba(0,0,0,0.03);
+    background: white;
 }
 
 #main {
@@ -156,33 +151,33 @@ label[for='toggle-all'] {
     font-weight: 300;
 }
 
-#scrap-list li {
+li.scrap {
+    margin: 10px 0px;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+li.scrap {
     position: relative;
     font-size: 24px;
-    border-bottom: 1px solid #ededed;
 }
 
-#scrap-list li:last-child {
-    border-bottom: none;
-}
-
-#scrap-list li.editing {
-    border-bottom: none;
-    padding: 0;
-}
-
-#scrap-list li.editing .edit {
-    display: block;
+li.scrap .edit {
+    display: none;
     width: 506px;
     padding: 13px 17px 12px 17px;
     margin: 0 0 0 43px;
 }
 
-#scrap-list li.editing .view {
+li.scrap.editing .edit {
+    display: block;
+}
+
+li.scrap.editing .view {
     display: none;
 }
 
-#scrap-list li .toggle {
+li.scrap .toggle {
     text-align: center;
     width: 40px;
     /* auto, since non-WebKit browsers doesn't support input styling */
@@ -196,15 +191,15 @@ label[for='toggle-all'] {
     appearance: none;
 }
 
-#scrap-list li .toggle:after {
+li.scrap .toggle:after {
     content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>');
 }
 
-#scrap-list li .toggle:checked:after {
+li.scrap .toggle:checked:after {
     content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
 }
 
-#scrap-list li label {
+li.scrap label {
     white-space: pre;
     word-break: break-word;
     padding: 15px;
@@ -214,13 +209,13 @@ label[for='toggle-all'] {
     transition: color 0.4s;
 }
 
-#scrap-list div.scrap {
+div.scrap {
     display: inline-block;
     margin-left: 45px;
     width: 80%;
 }
 
-#scrap-list li .destroy {
+li.scrap .destroy {
     display: none;
     right: 20px;
     margin: auto 0;
@@ -235,61 +230,21 @@ label[for='toggle-all'] {
     transform: translateY(-50%);
 }
 
-#scrap-list li .destroy:hover {
+li.scrap .destroy:hover {
     color: #af5b5e;
 }
 
-#scrap-list li .destroy:after {
+li.scrap .destroy:after {
     content: '×';
 }
 
-#scrap-list li:hover .destroy {
+li.scrap:hover .destroy {
     display: inline;
 }
 
-#scrap-list li .edit {
-    display: none;
-}
-
-#scrap-list li.editing:last-child {
-    margin-bottom: -1px;
-}
-
-#scrap-list li tags-input .tags .tag-item {
-    font-size: 14px;
+li.scrap tags-input .tags .tag-item {
+    font-size: 12px;
     background: lightgray;
-}
-
-#footer {
-    color: #777;
-    padding: 10px 15px;
-    height: 20px;
-    text-align: center;
-    border-top: 1px solid #e6e6e6;
-}
-
-#footer:before {
-    content: '';
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    height: 50px;
-    overflow: hidden;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2),
-                0 8px 0 -3px #f6f6f6,
-                0 9px 1px -3px rgba(0, 0, 0, 0.2),
-                0 16px 0 -6px #f6f6f6,
-                0 17px 2px -6px rgba(0, 0, 0, 0.2);
-}
-
-#scrap-count {
-    float: left;
-    text-align: left;
-}
-
-#scrap-count strong {
-    font-weight: 300;
 }
 
 #filters {
@@ -351,11 +306,11 @@ label[for='toggle-all'] {
 */
 @media screen and (-webkit-min-device-pixel-ratio:0) {
     #toggle-all,
-    #scrap-list li .toggle {
+    li.scrap .toggle {
         background: none;
     }
 
-    #scrap-list li .toggle {
+    li.scrap .toggle {
         height: 40px;
     }
 
