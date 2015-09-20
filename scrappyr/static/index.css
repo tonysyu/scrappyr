@@ -109,31 +109,6 @@ input[type="checkbox"] {
     border-top: 1px solid #e6e6e6;
 }
 
-label[for='toggle-all'] {
-    display: none;
-}
-
-#toggle-all {
-    position: absolute;
-    top: -55px;
-    left: -12px;
-    width: 60px;
-    height: 34px;
-    text-align: center;
-    border: none; /* Mobile Safari */
-}
-
-#toggle-all:before {
-    content: '❯';
-    font-size: 22px;
-    color: #e6e6e6;
-    padding: 10px 27px 10px 27px;
-}
-
-#toggle-all:checked:before {
-    color: #737373;
-}
-
 #scrap-list {
     margin: 0;
     padding: 0;
@@ -174,28 +149,6 @@ li.scrap.editing .edit {
 
 li.scrap.editing .view {
     display: none;
-}
-
-li.scrap .toggle {
-    text-align: center;
-    width: 40px;
-    /* auto, since non-WebKit browsers doesn't support input styling */
-    height: auto;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto 0;
-    border: none; /* Mobile Safari */
-    -webkit-appearance: none;
-    appearance: none;
-}
-
-li.scrap .toggle:after {
-    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>');
-}
-
-li.scrap .toggle:checked:after {
-    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>');
 }
 
 li.scrap label {
@@ -254,37 +207,6 @@ tags-input .tags {
     border: none;
 }
 
-#filters {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    position: absolute;
-    right: 0;
-    left: 0;
-}
-
-#filters li {
-    display: inline;
-}
-
-#filters li a {
-    color: inherit;
-    margin: 3px;
-    padding: 3px 7px;
-    text-decoration: none;
-    border: 1px solid transparent;
-    border-radius: 3px;
-}
-
-#filters li a.selected,
-#filters li a:hover {
-    border-color: rgba(175, 47, 47, 0.1);
-}
-
-#filters li a.selected {
-    border-color: rgba(175, 47, 47, 0.2);
-}
-
 #info {
     margin: 65px auto 0;
     color: #bfbfbf;
@@ -305,36 +227,4 @@ tags-input .tags {
 
 #info a:hover {
     text-decoration: underline;
-}
-
-/*
-    Hack to remove background from Mobile Safari.
-    Can't use it globally since it destroys checkboxes in Firefox
-*/
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-    #toggle-all,
-    li.scrap .toggle {
-        background: none;
-    }
-
-    li.scrap .toggle {
-        height: 40px;
-    }
-
-    #toggle-all {
-        -webkit-transform: rotate(90deg);
-        transform: rotate(90deg);
-        -webkit-appearance: none;
-        appearance: none;
-    }
-}
-
-@media (max-width: 430px) {
-    #footer {
-        height: 50px;
-    }
-
-    #filters {
-        bottom: 10px;
-    }
 }
