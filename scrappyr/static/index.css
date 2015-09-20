@@ -4,6 +4,17 @@ body {
     padding: 0;
 }
 
+
+body,
+button,
+#new-scrap,
+.edit {
+    -webkit-font-smoothing: antialiased;
+    -moz-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+}
+
+
 button {
     margin: 0;
     padding: 0;
@@ -16,9 +27,6 @@ button {
     color: inherit;
     -webkit-appearance: none;
     appearance: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: antialiased;
-    font-smoothing: antialiased;
 }
 
 body {
@@ -29,19 +37,7 @@ body {
     min-width: 230px;
     max-width: 550px;
     margin: 0 auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: antialiased;
-    font-smoothing: antialiased;
     font-weight: 300;
-}
-
-button,
-input[type="checkbox"] {
-    outline: none;
-}
-
-.hidden {
-    display: none;
 }
 
 #scrappyrapp {
@@ -64,9 +60,6 @@ input[type="checkbox"] {
     font-weight: 100;
     text-align: center;
     color: rgba(175, 47, 47, 0.15);
-    -webkit-text-rendering: optimizeLegibility;
-    -moz-text-rendering: optimizeLegibility;
-    text-rendering: optimizeLegibility;
 }
 
 #new-scrap,
@@ -74,7 +67,6 @@ input[type="checkbox"] {
     position: relative;
     margin: 0;
     width: 100%;
-    font-size: 24px;
     font-family: inherit;
     font-weight: inherit;
     line-height: 1.4em;
@@ -82,23 +74,14 @@ input[type="checkbox"] {
     outline: none;
     color: inherit;
     padding: 6px;
-    border: 1px solid #999;
+    border: 1px solid #ddd;
     box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-font-smoothing: antialiased;
-    font-smoothing: antialiased;
 }
 
 #new-scrap {
-    padding: 16px 16px 16px 60px;
+    padding: 20px;
     border: none;
     background: white;
-}
-
-#main {
-    position: relative;
-    z-index: 2;
-    border-top: 1px solid #e6e6e6;
 }
 
 #scrap-list {
@@ -107,7 +90,9 @@ input[type="checkbox"] {
     list-style: none;
 }
 
-li.scrap h1 {
+#new-scrap,
+li.scrap input.scrap-title,
+li.scrap .scrap-title h1 {
     font-size: 24px;
     font-weight: 300;
 }
@@ -118,14 +103,13 @@ li.scrap input.edit {
     background-color: white;
     border: 1px solid #ddd;
     position: relative;
-    font-size: 24px;
 }
 
-li.scrap input.edit {
+li.scrap input.scrap-title {
     display: none;
 }
 
-li.scrap.editing input.edit {
+li.scrap.editing input.scrap-title {
     display: block;
 }
 
@@ -133,7 +117,7 @@ li.scrap.editing .view {
     display: none;
 }
 
-div.scrap {
+div.scrap-title {
     display: inline-block;
     margin: 0px 20px;
     width: 80%;
@@ -185,10 +169,16 @@ li.scrap tags-input .tags .tag-item {
     background: lightgray;
 }
 
+tags-input .input {
+    background: transparent;
+}
+
 tags-input .host {
     margin: 0px;
 }
 
 tags-input .tags {
+    background-color: #f5f5f5;
     border: none;
+    box-shadow: none;
 }

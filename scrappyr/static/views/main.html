@@ -26,7 +26,7 @@
         <div class="view">
 
           <div
-            class="scrap"
+            class="scrap-title"
             ng-if="scrap !== editedScrap"
             ng-dblclick="editScrap(scrap)"
             ng-bind-html="scrap.html_title">
@@ -42,7 +42,7 @@
 
         <form ng-submit="saveEdits(scrap, 'submit')">
           <input
-            class="edit"
+            class="edit scrap-title"
             ng-trim="false"
             ng-model="scrap.title"
             scrap-escape="revertEdits(scrap)"
