@@ -49,16 +49,8 @@ input[type="checkbox"] {
     position: relative;
 }
 
-#scrappyrapp input::-webkit-input-placeholder {
-    font-style: italic;
-    color: #e6e6e6;
-}
-
-#scrappyrapp input::-moz-placeholder {
-    font-style: italic;
-    color: #e6e6e6;
-}
-
+#scrappyrapp input::-webkit-input-placeholder,
+#scrappyrapp input::-moz-placeholder,
 #scrappyrapp input::input-placeholder {
     font-style: italic;
     color: #e6e6e6;
@@ -115,35 +107,25 @@ input[type="checkbox"] {
     list-style: none;
 }
 
-/* This mainly counteracts the changes for the main page title. */
-#scrap-list h1 {
-    position: relative;
+li.scrap h1 {
     font-size: 24px;
-    color: black;
-    text-align: left;
-    top: 0px;
     font-weight: 300;
 }
 
-li.scrap {
+li.scrap,
+li.scrap input.edit {
     margin: 10px 0px;
     background-color: white;
     border: 1px solid #ddd;
-}
-
-li.scrap {
     position: relative;
     font-size: 24px;
 }
 
-li.scrap .edit {
+li.scrap input.edit {
     display: none;
-    width: 506px;
-    padding: 13px 17px 12px 17px;
-    margin: 0 0 0 43px;
 }
 
-li.scrap.editing .edit {
+li.scrap.editing input.edit {
     display: block;
 }
 
@@ -151,19 +133,9 @@ li.scrap.editing .view {
     display: none;
 }
 
-li.scrap label {
-    white-space: pre;
-    word-break: break-word;
-    padding: 15px;
-    margin: 0 45px;
-    display: inline;
-    line-height: 1.2;
-    transition: color 0.4s;
-}
-
 div.scrap {
     display: inline-block;
-    margin-left: 45px;
+    margin: 0px 20px;
     width: 80%;
 }
 
@@ -194,6 +166,20 @@ li.scrap:hover .destroy {
     display: inline;
 }
 
+#info {
+    margin: 65px auto 0;
+    color: #bfbfbf;
+    font-size: 10px;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+    text-align: center;
+}
+
+/*
+------------------------------------------------------------------------------
+Customize ng-tags-input
+------------------------------------------------------------------------------
+*/
+
 li.scrap tags-input .tags .tag-item {
     font-size: 12px;
     background: lightgray;
@@ -205,26 +191,4 @@ tags-input .host {
 
 tags-input .tags {
     border: none;
-}
-
-#info {
-    margin: 65px auto 0;
-    color: #bfbfbf;
-    font-size: 10px;
-    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-    text-align: center;
-}
-
-#info p {
-    line-height: 1;
-}
-
-#info a {
-    color: inherit;
-    text-decoration: none;
-    font-weight: 400;
-}
-
-#info a:hover {
-    text-decoration: underline;
 }
