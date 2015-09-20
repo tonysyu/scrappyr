@@ -77,7 +77,6 @@ input[type="checkbox"] {
     text-rendering: optimizeLegibility;
 }
 
-
 #new-scrap,
 .edit {
     position: relative;
@@ -245,6 +244,14 @@ li.scrap:hover .destroy {
 li.scrap tags-input .tags .tag-item {
     font-size: 12px;
     background: lightgray;
+}
+
+tags-input .host {
+    margin: 0px;
+}
+
+tags-input .tags {
+    border: none;
 }
 
 #filters {
