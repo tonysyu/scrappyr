@@ -1,20 +1,20 @@
 
 <section id="scrappyrapp" class="col-xs-6">
 
-  <header id="header">
-
-    <form id="scrap-form" ng-submit="addScrap()">
-      <input id="new-scrap"
-          placeholder="Enter a scrap of data"
-          ng-model="newScrap.title"
-          ng-disabled="saving"
-          autofocus>
-    </form>
-
-  </header>
-
   <section id="main" ng-show="scraps.length" ng-cloak>
-
+    <div>
+      <div class="input-group">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">
+            <span class="glyphicon glyphicon-search"></span>
+          </button>
+        </span>
+        <input type="text" class="form-control" placeholder="Search for...">
+        <!--<button class="btn">-->
+          <!--<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>-->
+        <!--</button>-->
+      </div>
+    </div>
     <ul id="scrap-list">
       <li
         class="scrap"
@@ -66,4 +66,11 @@
 </section>
 
 <section class="col-xs-6">
+  <form id="scrap-form" ng-submit="addScrap()">
+    <input id="new-scrap"
+        placeholder="Enter a scrap of data"
+        ng-model="newScrap.title"
+        ng-disabled="saving"
+        autofocus>
+  </form>
 </section>
