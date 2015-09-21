@@ -20,13 +20,7 @@ body {
     color: #4d4d4d;
     min-width: 200px;
     max-width: 500px;
-    margin: 0 auto;
     font-weight: 300;
-}
-
-#scrappyrapp {
-    margin: 130px 0 40px 0;
-    position: relative;
 }
 
 #scrappyrapp input::-webkit-input-placeholder,
@@ -34,16 +28,6 @@ body {
 #scrappyrapp input::input-placeholder {
     font-style: italic;
     color: #e6e6e6;
-}
-
-#scrappyrapp h1#page-title {
-    position: absolute;
-    top: -155px;
-    width: 100%;
-    font-size: 100px;
-    font-weight: 100;
-    text-align: center;
-    color: rgba(175, 47, 47, 0.15);
 }
 
 #new-scrap,
