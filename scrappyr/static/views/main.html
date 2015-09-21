@@ -19,16 +19,18 @@
 
     <ul id="scrap-list">
       <li
+        class="scrap"
         ng-repeat="scrap in scraps.all() track by scrap.id"
         ng-class="{editing: scrap === editedScrap}">
 
         <div class="view">
 
           <div
-            class="scrap"
+            class="scrap-title"
             ng-if="scrap !== editedScrap"
             ng-dblclick="editScrap(scrap)"
             ng-bind-html="scrap.html_title">
+
           </div>
 
           <button
@@ -40,7 +42,7 @@
 
         <form ng-submit="saveEdits(scrap, 'submit')">
           <input
-            class="edit"
+            class="edit scrap-title"
             ng-trim="false"
             ng-model="scrap.title"
             scrap-escape="revertEdits(scrap)"
@@ -58,16 +60,6 @@
       </li>
     </ul>
   </section>
-
-  <footer id="footer" ng-show="scraps.length" ng-cloak>
-    <span id="scrap-count">
-      <strong>{{scraps.length}}</strong>
-      <ng-pluralize
-        count="scraps.length"
-        when="{ one: 'scrap', other: 'scraps' }">
-      </ng-pluralize>
-    </span>
-  </footer>
 
 </section>
 
