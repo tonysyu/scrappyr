@@ -8,7 +8,7 @@ import markdown
 from flask import Blueprint, jsonify, request
 from .common import db
 from .models import Scrap
-from .forms import ScrapForm
+from .validation import ScrapForm
 
 
 scrappyr = Blueprint('scrappyr', __name__, static_folder='./static')
@@ -33,27 +33,29 @@ def get_all_scraps():
 @scrappyr.route('/api/scraps', methods=['POST'])
 def add_scrap():
     scrap_data = request.get_json()
-    form = ScrapForm(data=scrap_data)
-    if form.validate():
-        scrap = Scrap.from_dict(form.data)
+    form = ScrapForm(scrap_data)
+    error_message = form.validation_errors()
+    if error_message:
+        return _jsonify_errors(form.errors)
+    else:
+        scrap = Scrap.from_dict(form.to_primitive())
         db.session.add(scrap)
         db.session.commit()
         return jsonify(render_data(scrap))
-    else:
-        return _jsonify_errors(form.errors)
 
 
 @scrappyr.route('/api/scraps/<int:id>', methods=['PUT'])
 def update_scrap(id):
     scrap = Scrap.query.get_or_404(id)
     scrap_data = request.get_json()
-    form = ScrapForm(data=scrap_data)
-    if form.validate():
-        form.populate_obj(scrap)
+    form = ScrapForm(scrap_data)
+    error_message = form.validation_errors()
+    if error_message:
+        return _jsonify_errors(form.errors)
+    else:
+        scrap.update_from(form.to_primitive())
         db.session.commit()
         return jsonify(render_data(scrap))
-    else:
-        return _jsonify_errors(form.errors)
 
 
 @scrappyr.route('/api/scraps/<int:id>', methods=['DELETE'])

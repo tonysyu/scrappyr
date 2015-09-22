@@ -45,6 +45,12 @@ class Scrap(db.Model):
     def create(cls, **data):
         return cls.from_dict(data)
 
+    def update_from(self, data):
+        if 'id' in data and data['id'] is not None:
+            assert data['id'] == self.id
+        self.title = data['title']
+        self.tags = tags_from_dicts(data['tags'])
+
 
 class Tag(db.Model):
 

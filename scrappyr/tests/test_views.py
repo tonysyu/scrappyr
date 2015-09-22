@@ -3,7 +3,8 @@ from flask.ext.testing import TestCase
 
 from ..app import create_app
 from ..common import db
-from ..models import Scrap
+from ..models import Scrap, Tag
+from ..testing import count_rows
 
 
 TAG = 'dummy-tag-for-testing'
@@ -56,23 +57,13 @@ class TestBasicView(TestHarness):
         assert TITLE in scrap['html_title']
 
     def test_post(self):
-        data = {'title': TITLE}
+        data = {'title': TITLE, 'tags': TAG_DATA_LIST}
         response = self.client.post('/api/scraps', data=json.dumps(data),
                                     content_type='application/json')
         assert response.status_code == 200
         scrap = response.json
         assert scrap['title'] == TITLE
-        assert scrap['tags'] == []
-        assert TITLE in scrap['html_title']
-
-    def test_put(self):
-        add_to_db(Scrap(title='Original title'))
-        data = {'title': TITLE}
-        response = self.client.put('/api/scraps/1', data=json.dumps(data),
-                                   content_type='application/json')
-        assert response.status_code == 200
-        scrap = response.json
-        assert scrap['title'] == TITLE
+        assert scrap['tags'] == TAG_DATA_LIST
         assert TITLE in scrap['html_title']
 
     def test_delete(self):
@@ -83,25 +74,47 @@ class TestBasicView(TestHarness):
         assert count_scraps() == 0
 
 
-class TestTags(TestHarness):
+class TestPut(TestHarness):
 
-    def test_post(self):
-        data = {'title': TITLE, 'tags': TAG_DATA_LIST}
-        json_data = json.dumps(data)
-        response = self.client.post('/api/scraps', data=json_data,
-                                    content_type='application/json')
+    def test_put_new_title(self):
+        data = {'title': 'Original title', 'tags':  TAG_DATA_LIST}
+        add_to_db(Scrap.from_dict(data))
+        data['title'] = TITLE
+
+        response = self.put(data)
         assert response.status_code == 200
-        scrap = response.json
-        assert scrap['title'] == TITLE
-        assert scrap['tags'] == TAG_DATA_LIST
-        assert TITLE in scrap['html_title']
 
-    def test_put(self):
-        add_to_db(Scrap(title=TITLE))
+        assert response.json['title'] == TITLE
+        # Tags and Tag table should remain unchanged:
+        assert response.json['tags'] == TAG_DATA_LIST
+        assert count_rows(Tag) == 1
+
+    def test_put_new_tag(self):
         data = {'title': TITLE, 'tags':  TAG_DATA_LIST}
-        response = self.client.put('/api/scraps/1', data=json.dumps(data),
-                                   content_type='application/json')
+        add_to_db(Scrap.from_dict(data))
+        data['tags'] = [{'text': 'new'}]
+
+        response = self.put(data)
         assert response.status_code == 200
-        scrap = response.json
-        assert scrap['title'] == TITLE
-        assert scrap['tags'] == TAG_DATA_LIST
+
+        assert response.json['tags'] == data['tags']
+        # Updating a scrap's tag shouldn't overwrite the original:
+        assert count_rows(Tag) == 2
+        # Title and size of Scrap table should be unchanged:
+        assert response.json['title'] == TITLE
+        assert count_rows(Scrap) == 1
+
+    def test_put_all_properties(self):
+        # Add minimal scrap
+        add_to_db(Scrap(title=TITLE))
+        # Update with all properties
+        data = {'id': 1, 'title': TITLE, 'tags': TAG_DATA_LIST,
+                'html_title': '<h1>{}</h1>'.format(TITLE)}
+        response = self.put(data)
+        assert response.status_code == 200
+        assert response.json == data
+
+    def put(self, data, scrap_id=1):
+        url = '/api/scraps/{}'.format(scrap_id)
+        return self.client.put(url, data=json.dumps(data),
+                               content_type='application/json')
