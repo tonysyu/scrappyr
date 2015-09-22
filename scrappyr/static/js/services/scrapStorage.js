@@ -19,56 +19,58 @@ angular.module('scrappyr')
     .factory('api', function ($http) {
         'use strict';
 
-        function ScrapStore() {
+        function Map() {
             // Isolate data storage from methods.
             this.cache = {};
             this.length = 0;
         }
 
-        ScrapStore.prototype.copy = function () {
+        Map.prototype.copy = function () {
             return angular.copy(this);
         };
 
-        ScrapStore.prototype.update = function (scrapsCache) {
-            if (scrapsCache instanceof ScrapStore) {
-                scrapsCache = scrapsCache.cache;
+        // Update from dictionary or Map.
+        Map.prototype.update = function (cache) {
+            if (cache instanceof Map) {
+                cache = cache.cache;
             }
-            angular.copy(scrapsCache, this.cache);
+            angular.copy(cache, this.cache);
             this.length = Object.keys(this.cache).length;
         };
 
-        ScrapStore.prototype.get = function (id) {
+        Map.prototype.get = function (id) {
             return this.cache[id];
         };
 
-        ScrapStore.prototype.set = function (id, value) {
+        Map.prototype.set = function (id, value) {
             if (!this.cache.hasOwnProperty(id)) {
                 this.length += 1;
             }
             this.cache[id] = value;
         };
 
-        ScrapStore.prototype.remove = function (id) {
+        Map.prototype.remove = function (id) {
             if (this.cache.hasOwnProperty(id)) {
                 this.length -= 1;
                 delete this.cache[id];
             }
         };
 
-        ScrapStore.prototype.all = function () {
+        Map.prototype.all = function () {
             var id,
-                scrapList = [];
+                list = [];
 
             for (id in this.cache) {
                 if (this.cache.hasOwnProperty(id)) {
-                    scrapList.push(this.get(id));
+                    list.push(this.get(id));
                 }
             }
-            return scrapList;
+            return list;
         };
 
         var store = {
-            scraps: new ScrapStore(),
+            scraps: new Map(),
+            tags: new Map(),
 
             remove: function (scrap) {
                 var originalScraps = store.scraps.copy();
@@ -85,10 +87,14 @@ angular.module('scrappyr')
             },
 
             get: function () {
-                return $http.get('/api/scraps')
+                $http.get('/api/scraps')
                     .then(function (resp) {
                         store.scraps.update(resp.data.scraps);
-                        return store.scraps;
+                    });
+                $http.get('/api/tags')
+                    .then(function (resp) {
+                        store.tags.update(resp.data.tags);
+                        console.log(store.tags);
                     });
             },
 

@@ -7,7 +7,7 @@ import markdown
 
 from flask import Blueprint, jsonify, request
 from .common import db
-from .models import Scrap
+from .models import Scrap, Tag
 from .validation import ScrapForm
 
 
@@ -22,6 +22,13 @@ def index():
 @scrappyr.route('/api')
 def api():
     return ''
+
+
+@scrappyr.route('/api/tags', methods=['GET'])
+def get_all_tags():
+    # TODO: Set tag.id as the key!!!
+    tags = {tag.text: tag.to_dict() for tag in Tag.query.all()}
+    return jsonify(tags=tags)
 
 
 @scrappyr.route('/api/scraps', methods=['GET'])

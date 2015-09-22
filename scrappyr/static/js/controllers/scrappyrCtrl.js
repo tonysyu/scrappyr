@@ -10,7 +10,6 @@ angular.module('scrappyr')
 
         $scope.isActive = function (viewLocation) {
             var value = viewLocation === $location.path();
-            console.log(value, viewLocation, $location.path());
             return value;
         };
     });
