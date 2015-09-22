@@ -1,6 +1,7 @@
 from sqlalchemy.ext.associationproxy import association_proxy
 
 from .common import db
+from .utils import repr_attrs
 
 
 scrap_tag = db.Table(
@@ -28,6 +29,9 @@ class Scrap(db.Model):
     tags = db.relationship('Tag', secondary=scrap_tag)
     tag_labels = association_proxy('tags', 'text')
 
+    def __repr__(self):
+        return repr_attrs(self, ['id', 'title', 'tags'])
+
     def to_dict(self):
         tags = [t.to_dict() for t in self.tags]
         return dict(id=self.id, title=self.title, tags=tags)
@@ -51,6 +55,9 @@ class Tag(db.Model):
 
     def __init__(self, text=None):
         self.text = text
+
+    def __repr__(self):
+        return repr_attrs(self, ['id', 'text'])
 
     def to_dict(self):
         return {'text': self.text}
