@@ -49,8 +49,6 @@
         });
 
         describe('having no scraps', function () {
-            var ctrl;
-
             it('should not add empty scraps', function () {
                 scope.newScrap = {title: ''};
                 scope.addScrap();
@@ -80,8 +78,6 @@
         });
 
         describe('Pre-populate 5 scraps', function () {
-            var ctrl;
-
             beforeEach(inject(function ($controller, $httpBackend) {
                 ctrl = $controller('ScrapCtrl', {
                     $scope: scope,
