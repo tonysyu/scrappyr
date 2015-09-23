@@ -3,7 +3,14 @@
 
     <ul class="tags-list">
       <li class="tag" ng-repeat="tag in tags.all()">
-        {{tag.text}}
+        <div class="btn-group" data-toggle="buttons">
+
+          <label class="btn btn-default">
+            <input type="checkbox" autocomplete="off">
+            {{tag.text}}
+          </label>
+
+        </div>
       </li>
     </ul>
 
