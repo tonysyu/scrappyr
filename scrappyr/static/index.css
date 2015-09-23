@@ -23,13 +23,6 @@ body {
     font-weight: 300;
 }
 
-#scrappyrapp input::-webkit-input-placeholder,
-#scrappyrapp input::-moz-placeholder,
-#scrappyrapp input::input-placeholder {
-    font-style: italic;
-    color: #e6e6e6;
-}
-
 #new-scrap,
 .edit {
     position: relative;
@@ -126,6 +119,11 @@ li.scrap:hover .destroy {
     font-size: 10px;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
     text-align: center;
+}
+
+ul.tags-list {
+    list-style: none;
+    line-height: 3em;
 }
 
 /*

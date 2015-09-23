@@ -1,14 +1,15 @@
-<div id="scrappyrapp" class="col-xs-6">
+<div id="scrappyrapp">
+  <div class="col-xs-6">
 
-  <div id="main" ng-show="tags.length" ng-cloak>
-
-    <ul id="tags-list">
+    <ul class="tags-list">
       <li class="tag" ng-repeat="tag in tags.all()">
-        <div class="view">
-          <div>{{tag.text}}</div>
-        </div>
+        {{tag.text}}
       </li>
     </ul>
+
+  </div>
+
+  <div class="col-xs-6">
 
   </div>
 
