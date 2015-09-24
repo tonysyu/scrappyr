@@ -7,7 +7,7 @@
  * - exposes the model to the template and provides event handlers
  */
 angular.module('scrappyr')
-    .controller('ScrapCtrl', function ScrapCtrl($scope, $routeParams, store) {
+    .controller('ScrapsCtrl', function ScrapsCtrl($scope, $routeParams, store) {
         'use strict';
 
         function getEmptyScrap() {

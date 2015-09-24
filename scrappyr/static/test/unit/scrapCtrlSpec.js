@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    describe('Scrap Controller', function () {
+    describe('Scraps Controller', function () {
         var ctrl, scope, store;
 
         // Load the module containing the app, only 'ng' is loaded by default.
@@ -30,7 +30,7 @@
                     return [200, data];
                 });
 
-            ctrl = $controller('ScrapCtrl', {
+            ctrl = $controller('ScrapsCtrl', {
                 $scope: scope,
                 store: store
             });
@@ -79,7 +79,7 @@
 
         describe('Pre-populate 5 scraps', function () {
             beforeEach(inject(function ($controller, $httpBackend) {
-                ctrl = $controller('ScrapCtrl', {
+                ctrl = $controller('ScrapsCtrl', {
                     $scope: scope,
                     store: store
                 });

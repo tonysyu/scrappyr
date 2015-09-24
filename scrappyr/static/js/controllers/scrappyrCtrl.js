@@ -5,7 +5,7 @@
  */
 
 angular.module('scrappyr')
-    .controller('ScrappyrCtrl', function ScrapCtrl($scope, $location) {
+    .controller('ScrappyrCtrl', function ScrappyrCtrl($scope, $location) {
         'use strict';
 
         $scope.isActive = function (viewLocation) {
