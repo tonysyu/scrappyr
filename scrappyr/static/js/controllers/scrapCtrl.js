@@ -17,7 +17,11 @@ angular.module('scrappyr')
             };
         }
 
-        var scraps = $scope.scraps = store.scraps;
+        $scope.scraps = store.scraps;
+
+        $scope.$watch('scraps.length', function () {
+            $scope.scrapsList = $scope.scraps.all();
+        });
 
         $scope.onTagChanged = function (scrap) {
             store.put(scrap);
@@ -82,7 +86,7 @@ angular.module('scrappyr')
         };
 
         $scope.revertEdits = function (scrap) {
-            scraps.set(scrap.id, $scope.originalScrap);
+            $scope.scraps.set(scrap.id, $scope.originalScrap);
             $scope.editedScrap = null;
             $scope.originalScrap = getEmptyScrap();
             $scope.reverted = true;

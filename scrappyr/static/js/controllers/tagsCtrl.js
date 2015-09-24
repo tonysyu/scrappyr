@@ -7,5 +7,11 @@
 angular.module('scrappyr')
     .controller('tagsCtrl', function ScrapCtrl($scope, store) {
         'use strict';
-        var tags = $scope.tags = store.tags;
+        $scope.scraps = store.scraps;
+        $scope.tags = store.tags;
+        $scope.scrapsList = [];
+
+        $scope.$watch('scraps.length', function () {
+            $scope.scrapsList = $scope.scraps.all();
+        });
     });

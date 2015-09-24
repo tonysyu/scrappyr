@@ -19,6 +19,7 @@ angular.module('scrappyr')
     .factory('api', function ($http) {
         'use strict';
 
+        // TODO: Add Babel as dependency and remove this object.
         function Map() {
             // Isolate data storage from methods.
             this.cache = {};
@@ -94,7 +95,6 @@ angular.module('scrappyr')
                 $http.get('/api/tags')
                     .then(function (resp) {
                         store.tags.update(resp.data.tags);
-                        console.log(store.tags);
                     });
             },
 
