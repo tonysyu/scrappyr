@@ -5,7 +5,7 @@
  * expression it binds to evaluates to true.
  *
  * The behavior of this directive differs from ng-if and ng-focus since
- * clicking away from an element is enough remove focus.
+ * clicking away from an element is enough to remove focus.
  */
 angular.module('scrappyr')
     .directive('scrapFocus', function scrapFocus($timeout) {

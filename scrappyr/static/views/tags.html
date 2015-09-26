@@ -1,0 +1,27 @@
+<div id="scrappyrapp">
+  <div class="col-xs-3">
+
+    <h3>Tags</h3>
+
+    <ul class="tags-list">
+      <li class="tag" ng-repeat="tag in tags.all()">
+        <div class="btn-group" data-toggle="buttons">
+
+          <label class="btn btn-default">
+            <input type="checkbox" autocomplete="off">
+            {{tag.text}}
+          </label>
+
+        </div>
+      </li>
+    </ul>
+
+  </div>
+
+  <div class="col-xs-9">
+
+    <!--TODO: Add display of scraps here-->
+
+  </div>
+
+</div>

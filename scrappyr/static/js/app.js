@@ -9,23 +9,29 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput'])
     .config(function ($routeProvider) {
         'use strict';
 
-        var routeConfig = {
-            controller: 'ScrapCtrl',
-            templateUrl: 'static/views/main.html',
-            resolve: {
-                store: function (scrapStorage) {
-                    return scrapStorage.then(function (module) {
-                        // Fetch the scraps data in the background.
-                        module.get();
-                        return module;
-                    });
-                }
-            }
-        };
+        function resolveScrapStorage(scrapStorage) {
+            return scrapStorage.then(function (module) {
+                // Fetch the scraps data in the background.
+                module.get();
+                return module;
+            });
+        }
+
+        var scrapsConfig = {
+                controller: 'ScrapsCtrl',
+                templateUrl: 'static/views/scraps.html',
+                resolve: {store: resolveScrapStorage}
+            },
+            tagsConfig = {
+                controller: 'tagsCtrl',
+                templateUrl: 'static/views/tags.html',
+                resolve: {store: resolveScrapStorage}
+            };
 
         $routeProvider
-            .when('/', routeConfig)
+            .when('/scraps', scrapsConfig)
+            .when('/tags', tagsConfig)
             .otherwise({
-                redirectTo: '/'
+                redirectTo: '/scraps'
             });
     });

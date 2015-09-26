@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    describe('Scrap Controller', function () {
+    describe('Scraps Controller', function () {
         var ctrl, scope, store;
 
         // Load the module containing the app, only 'ng' is loaded by default.
@@ -30,7 +30,7 @@
                     return [200, data];
                 });
 
-            ctrl = $controller('ScrapCtrl', {
+            ctrl = $controller('ScrapsCtrl', {
                 $scope: scope,
                 store: store
             });
@@ -49,8 +49,6 @@
         });
 
         describe('having no scraps', function () {
-            var ctrl;
-
             it('should not add empty scraps', function () {
                 scope.newScrap = {title: ''};
                 scope.addScrap();
@@ -80,10 +78,8 @@
         });
 
         describe('Pre-populate 5 scraps', function () {
-            var ctrl;
-
             beforeEach(inject(function ($controller, $httpBackend) {
-                ctrl = $controller('ScrapCtrl', {
+                ctrl = $controller('ScrapsCtrl', {
                     $scope: scope,
                     store: store
                 });

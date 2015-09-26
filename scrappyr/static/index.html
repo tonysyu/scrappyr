@@ -14,7 +14,7 @@
   </head>
 
   <body data-ng-app="scrappyr">
-    <div class="container">
+    <div class="container" ng-controller="ScrappyrCtrl">
 
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -29,9 +29,12 @@
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Contact</a></li>
+              <li ng-class="{active: isActive('/scraps')}">
+                <a href="/#/scraps">Scraps</a>
+              </li>
+              <li ng-class="{active: isActive('/tags')}">
+                <a href="/#/tags">Tags</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -41,8 +44,6 @@
 
     </div>
 
-    <div data-ng-include='static/views/main.html'></div>
-
     <script src="/static/node_modules/jquery/dist/jquery.min.js"></script>
     <script src="/static/node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/static/node_modules/angular/angular.js"></script>
@@ -50,7 +51,9 @@
     <script src="/static/node_modules/angular-route/angular-route.js"></script>
     <script src="/static/node_modules/ng-tags-input/build/ng-tags-input.js"></script>
     <script src="/static/js/app.js"></script>
-    <script src="/static/js/controllers/scrapCtrl.js"></script>
+    <script src="/static/js/controllers/scrappyrCtrl.js"></script>
+    <script src="/static/js/controllers/scrapsCtrl.js"></script>
+    <script src="/static/js/controllers/tagsCtrl.js"></script>
     <script src="/static/js/services/scrapStorage.js"></script>
     <script src="/static/js/directives/scrapFocus.js"></script>
     <script src="/static/js/directives/scrapEscape.js"></script>

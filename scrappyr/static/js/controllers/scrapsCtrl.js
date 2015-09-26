@@ -7,7 +7,7 @@
  * - exposes the model to the template and provides event handlers
  */
 angular.module('scrappyr')
-    .controller('ScrapCtrl', function ScrapCtrl($scope, $routeParams, $filter, store) {
+    .controller('ScrapsCtrl', function ScrapsCtrl($scope, $routeParams, store) {
         'use strict';
 
         function getEmptyScrap() {
@@ -17,7 +17,11 @@ angular.module('scrappyr')
             };
         }
 
-        var scraps = $scope.scraps = store.scraps;
+        $scope.scraps = store.scraps;
+
+        $scope.$watch('scraps.length', function () {
+            $scope.scrapsList = $scope.scraps.all();
+        });
 
         $scope.onTagChanged = function (scrap) {
             store.put(scrap);
@@ -82,7 +86,7 @@ angular.module('scrappyr')
         };
 
         $scope.revertEdits = function (scrap) {
-            scraps.set(scrap.id, $scope.originalScrap);
+            $scope.scraps.set(scrap.id, $scope.originalScrap);
             $scope.editedScrap = null;
             $scope.originalScrap = getEmptyScrap();
             $scope.reverted = true;
