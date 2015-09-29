@@ -5,7 +5,7 @@
  */
 
 angular.module('scrappyr')
-    .controller('tagsCtrl', function TagsCtrl($scope, store) {
+    .controller('tagsPageCtrl', function ($scope, store) {
         'use strict';
         $scope.scraps = store.scraps;
         $scope.tags = store.tags;

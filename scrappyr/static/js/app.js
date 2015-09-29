@@ -18,12 +18,12 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput'])
         }
 
         var scrapsConfig = {
-                controller: 'ScrapsCtrl',
+                controller: 'scrapsPageCtrl',
                 templateUrl: 'static/views/scraps.html',
                 resolve: {store: resolveScrapStorage}
             },
             tagsConfig = {
-                controller: 'tagsCtrl',
+                controller: 'tagsPageCtrl',
                 templateUrl: 'static/views/tags.html',
                 resolve: {store: resolveScrapStorage}
             };

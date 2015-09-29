@@ -30,7 +30,7 @@
                     return [200, data];
                 });
 
-            ctrl = $controller('ScrapsCtrl', {
+            ctrl = $controller('scrapsPageCtrl', {
                 $scope: scope,
                 store: store
             });

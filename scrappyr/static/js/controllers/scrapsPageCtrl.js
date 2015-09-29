@@ -1,13 +1,10 @@
 /*global angular */
-/*jslint nomen: true*/
 
 /**
- * The main controller for the app. The controller:
- * - retrieves and persists the model via the scrapStorage service
- * - exposes the model to the template and provides event handlers
+ * The controller for main scraps page.
  */
 angular.module('scrappyr')
-    .controller('ScrapsCtrl', function ScrapsCtrl($scope, $routeParams, store) {
+    .controller('scrapsPageCtrl', function ($scope, $routeParams, store) {
         'use strict';
 
         function getEmptyScrap() {
