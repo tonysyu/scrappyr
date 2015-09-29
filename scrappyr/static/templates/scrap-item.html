@@ -1,0 +1,32 @@
+<div class="view">
+
+  <div
+    class="scrap-title"
+    ng-if="!isEditing"
+    ng-click="editScrap(scrap)"
+    ng-bind-html="scrap.html_title">
+
+  </div>
+
+  <button
+    class="destroy vertical-align-middle"
+    ng-click="removeScrap(scrap)">
+  </button>
+
+</div>
+
+<form ng-submit="saveEdits(scrap, 'submit')"  ng-class="{editing: isEditing}">
+  <input
+    class="edit scrap-title"
+    ng-trim="false"
+    ng-model="scrap.title"
+    scrap-escape="revertEdits(scrap)"
+    ng-blur="saveEdits(scrap, 'blur')"
+    scrap-focus="scrap === editedScrap">
+</form>
+
+<tags-input
+  ng-model="scrap.tags"
+  on-tag-added="onTagChanged(scrap)"
+  on-tag-removed="onTagChanged(scrap)">
+</tags-input>

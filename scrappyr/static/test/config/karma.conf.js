@@ -1,3 +1,5 @@
+/*global module*/
+
 module.exports = function (config) {
     'use strict';
 
@@ -11,10 +13,21 @@ module.exports = function (config) {
             'node_modules/angular-sanitize/angular-sanitize.js',
             'node_modules/ng-tags-input/build/ng-tags-input.js',
             'js/**/*.js',
+            'templates/*.html',
             'test/unit/**/*.js'
         ],
         autoWatch: true,
         singleRun: false,
-        browsers: ['Chrome', 'Firefox']
+        browsers: ['Firefox'],
+        preprocessors: {
+            'templates/*.html': ['ng-html2js']
+        },
+        ngHtml2JsPreprocessor: {
+            moduleName: 'my.templates',
+            // Some users report full paths are appended to templates.
+            // Strip and add back the templates directory just in case.
+            stripPrefix: '.*templates/',
+            prependPrefix: '/static/templates/'
+        }
     });
 };

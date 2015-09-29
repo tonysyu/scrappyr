@@ -70,7 +70,7 @@ li.scrap input.scrap-title {
     display: none;
 }
 
-li.scrap.editing input.scrap-title {
+li.scrap form.editing input.scrap-title{
     display: block;
 }
 
