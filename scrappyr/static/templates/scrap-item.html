@@ -13,17 +13,17 @@
     ng-click="removeScrap(scrap)">
   </button>
 
-</div>
+  <form ng-submit="saveEdits(scrap, 'submit')"  ng-class="{editing: isEditing}">
+    <input
+      class="edit scrap-title"
+      ng-trim="false"
+      ng-model="scrap.title"
+      scrap-escape="revertEdits(scrap)"
+      ng-blur="saveEdits(scrap, 'blur')"
+      scrap-focus="isEditing">
+  </form>
 
-<form ng-submit="saveEdits(scrap, 'submit')"  ng-class="{editing: isEditing}">
-  <input
-    class="edit scrap-title"
-    ng-trim="false"
-    ng-model="scrap.title"
-    scrap-escape="revertEdits(scrap)"
-    ng-blur="saveEdits(scrap, 'blur')"
-    scrap-focus="scrap === editedScrap">
-</form>
+</div>
 
 <tags-input
   ng-model="scrap.tags"
