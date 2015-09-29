@@ -9,9 +9,4 @@ angular.module('scrappyr')
         'use strict';
         $scope.scraps = store.scraps;
         $scope.tags = store.tags;
-        $scope.scrapsList = [];
-
-        $scope.$watch('scraps.length', function () {
-            $scope.scrapsList = $scope.scraps.all();
-        });
     });

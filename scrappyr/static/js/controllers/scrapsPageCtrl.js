@@ -16,10 +16,6 @@ angular.module('scrappyr')
 
         $scope.scraps = store.scraps;
 
-        $scope.$watch('scraps.length', function () {
-            $scope.scrapsList = $scope.scraps.all();
-        });
-
         $scope.onTagChanged = function (scrap) {
             store.put(scrap);
         };
