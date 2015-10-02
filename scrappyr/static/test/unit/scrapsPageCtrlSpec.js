@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    describe('Scraps Controller', function () {
+    describe('scrapsPageCtrl:', function () {
         var ctrl, scope, store;
 
         // Load the module containing the app, only 'ng' is loaded by default.
@@ -44,7 +44,7 @@
             expect(scope.editedScrap).toBeNull();
         });
 
-        describe('having no scraps', function () {
+        describe('Empty scraps list', function () {
             it('should not add null title', function () {
                 scope.newScrap = {title: ''};
                 scope.addScrap();
@@ -59,7 +59,7 @@
                 expect(scope.scraps.length).toBe(0);
             });
 
-            it('should trim whitespace from new scraps', inject(
+            it('should trim whitespace in new scrap', inject(
                 function ($httpBackend) {
                     scope.newScrap = {title: '  buy some unicorns  '};
                     scope.addScrap();

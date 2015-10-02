@@ -33,7 +33,7 @@ def get_all_tags():
 
 @scrappyr.route('/api/scraps', methods=['GET'])
 def get_all_scraps():
-    scraps = {scrap.id: render_data(scrap) for scrap in Scrap.query.all()}
+    scraps = [render_data(scrap) for scrap in Scrap.query.all()]
     return jsonify(scraps=scraps)
 
 

@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    describe('directive: scrap-item', function () {
+    describe('scrap-item directive:', function () {
         var ctrl, element, scope, store,
             default_scrap = {title: 'Start with one scrap'};
 

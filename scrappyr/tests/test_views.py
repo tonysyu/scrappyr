@@ -43,7 +43,7 @@ class TestBasicView(TestHarness):
     def test_get_from_empty_db(self):
         response = self.client.get('/api/scraps')
         assert response.status_code == 200
-        assert response.json['scraps'] == {}
+        assert response.json['scraps'] == []
 
     def test_get(self):
         add_to_db(Scrap(title=TITLE))
@@ -51,7 +51,7 @@ class TestBasicView(TestHarness):
         assert response.status_code == 200
         assert len(response.json['scraps']) == 1
 
-        scrap = list(response.json['scraps'].values())[0]
+        scrap = response.json['scraps'][0]
         assert scrap['title'] == TITLE
         assert scrap['tags'] == []
         assert TITLE in scrap['html_title']
