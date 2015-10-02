@@ -60,7 +60,7 @@ angular.module('scrappyr')
             array.remove = function (id) {
                 var i, index = indexMap[id];
 
-                this.splice(index, 1);
+                Array.prototype.splice.call(this, index, 1);
 
                 for (i = index; i < this.length; i += 1) {
                     indexMap[this[i].id] -= 1;
@@ -73,6 +73,15 @@ angular.module('scrappyr')
             };
 
             // TODO: Override native methods to ensure integrity of `indexMap`.
+
+            array.concat = function () { throw "`concat` not implemented"; };
+            array.pop = function () { throw "`pop` not implemented"; };
+            array.push = function () { throw "`push` not implemented"; };
+            array.reverse = function () { throw "`reverse` not implemented"; };
+            array.sort = function () { throw "`sort` not implemented"; };
+            array.splice = function () { throw "`splice` not implemented"; };
+            array.shift = function () { throw "`shift` not implemented"; };
+            array.unshift = function () { throw "`unshift` not implemented"; };
 
             return array;
         }
