@@ -68,10 +68,6 @@ angular.module('scrappyr')
 
             };
 
-            array.all = function () {
-                return this;
-            };
-
             // TODO: Override native methods to ensure integrity of `indexMap`.
 
             array.concat = function () { throw "`concat` not implemented"; };
