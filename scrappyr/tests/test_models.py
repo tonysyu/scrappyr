@@ -42,7 +42,7 @@ def test_scrap_to_dict():
     scrap_data = scrap.to_dict()
     assert scrap_data['id'] == 1
     assert scrap_data['title'] == TITLE
-    assert scrap_data['tags'] == [{'text': TAG}]
+    assert scrap_data['tags'] == [{'id': None, 'text': TAG}]
 
 
 class TestDatabase(TestCase):

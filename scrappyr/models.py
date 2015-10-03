@@ -66,7 +66,7 @@ class Tag(db.Model):
         return repr_attrs(self, ['id', 'text'])
 
     def to_dict(self):
-        return {'text': self.text}
+        return {'id': self.id, 'text': self.text}
 
     @classmethod
     def from_dict(cls, data):
