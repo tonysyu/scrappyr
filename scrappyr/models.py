@@ -73,8 +73,11 @@ class Tag(db.Model):
         return cls.get_or_create(**data)
 
     @classmethod
-    def get_or_create(cls, text):
+    def get_or_create(cls, text, id=None):
         """Return a matching tag from the database or create it."""
+        if id is not None:
+            return db.session.query(cls).filter_by(id=id).first()
+
         instance = db.session.query(cls).filter_by(text=text).first()
         if instance:
             return instance

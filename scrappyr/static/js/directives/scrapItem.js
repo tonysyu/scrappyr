@@ -11,6 +11,10 @@ angular.module('scrappyr')
             };
         }
 
+        $scope.onTagChanged = function (scrap) {
+            api.put(scrap);
+        };
+
         $scope.removeScrap = function (scrap) {
             api.remove(scrap);
         };

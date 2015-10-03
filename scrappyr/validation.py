@@ -20,6 +20,7 @@ class BaseModel(Model):
 
 
 class TagForm(BaseModel):
+    id = IntType()
     text = StringType(required=True)
 
 

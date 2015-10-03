@@ -16,10 +16,6 @@ angular.module('scrappyr')
 
         $scope.scraps = store.scraps;
 
-        $scope.onTagChanged = function (scrap) {
-            store.put(scrap);
-        };
-
         $scope.newScrap = getEmptyScrap();
         $scope.editedScrap = null;
 
