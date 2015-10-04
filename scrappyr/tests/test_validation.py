@@ -1,6 +1,7 @@
 import pytest
 from schematics.exceptions import ModelConversionError
 
+from ..testing import strip_ids
 from ..validation import ScrapForm
 
 
@@ -13,7 +14,7 @@ def test_basic():
     form = ScrapForm(data)
     scrap = form.to_primitive()
     assert scrap['title'] == data['title']
-    assert scrap['tags'] == data['tags']
+    assert strip_ids(scrap['tags']) == data['tags']
     assert form.validation_errors() is None
 
 
@@ -31,5 +32,5 @@ def test_multiple_tags():
     tags = [{'text': TAG}, {'text': 'Another-tag'}]
     form = ScrapForm({'title': TITLE, 'tags': tags})
     scrap = form.to_primitive()
-    assert scrap['tags'] == tags
+    assert strip_ids(scrap['tags']) == tags
     assert form.validation_errors() is None

@@ -9,7 +9,6 @@ def count_rows(model):
     return len(db.session.query(model).all())
 
 
-
 def strip_ids(dict_list):
     """Remove id from each dictionary in a list of dictionaries.
 
