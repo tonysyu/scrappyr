@@ -1,6 +1,5 @@
-"""Add your views here.
+"""Route controllers for the app.
 
-We have started you with an initial blueprint. Add more as needed.
 """
 
 import markdown

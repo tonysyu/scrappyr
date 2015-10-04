@@ -1,7 +1,7 @@
 from flask import Flask
 
 from .common import config, db, migrate
-from .views import scrappyr
+from .controllers import scrappyr
 
 
 SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/scrappyr.db"
