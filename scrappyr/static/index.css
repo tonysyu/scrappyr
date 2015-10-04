@@ -54,6 +54,7 @@ body {
 #new-scrap,
 li.scrap input.scrap-title,
 li.scrap .scrap-title h1 {
+    margin: 15px 0px;
     font-size: 16px;
     font-weight: 300;
 }
@@ -80,36 +81,26 @@ li.scrap.editing .view {
 
 div.scrap-title {
     display: inline-block;
-    margin: 0px 20px;
-    width: 80%;
+    padding: 0px 20px;
+    width: 100%;
 }
 
-li.scrap .destroy {
+li.scrap .remove-scrap {
     display: none;
-    right: 20px;
     margin: auto 0;
-    font-size: 20px;
+    padding: 5px;
+    font-size: 16px;
     border: none;
-    color: #cc9a9a;
+    color: lightgray;
     background: none;
     transition: color 0.2s ease-out;
 }
 
-.vertical-align-middle {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+li.scrap .remove-scrap:hover {
+    color: darkred;
 }
 
-li.scrap .destroy:hover {
-    color: #af5b5e;
-}
-
-li.scrap .destroy:after {
-    content: '×';
-}
-
-li.scrap:hover .destroy {
+li.scrap:hover .remove-scrap {
     display: inline;
 }
 
@@ -126,6 +117,19 @@ ul.tags-list {
     line-height: 3em;
 }
 
+
+/*
+------------------------------------------------------------------------------
+Positioning
+------------------------------------------------------------------------------
+*/
+
+.top-right {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+}
+
 /*
 ------------------------------------------------------------------------------
 Customize ng-tags-input
@@ -134,6 +138,8 @@ Customize ng-tags-input
 
 li.scrap tags-input .tags .tag-item {
     background: lightgray;
+    border: none;
+    border-radius: 2px;
 }
 
 tags-input .input {
@@ -145,6 +151,7 @@ tags-input .host {
 }
 
 tags-input .tags {
+    color: #777;
     background-color: #f5f5f5;
     border: none;
     box-shadow: none;
@@ -154,8 +161,18 @@ li.scrap tags-input .tags .tag-item,
 li.scrap tags-input .input {
     height: 20px;
     font-size: 12px;
-    line-height: 1em;
+    line-height: 1.8em;
 }
+
+tags-input .tags .tag-item .remove-button {
+    color: #999;
+}
+
+tags-input .tags .tag-item .remove-button:hover {
+    color: darkred;
+    text-decoration: none;
+}
+
 
 /*
 ------------------------------------------------------------------------------
@@ -166,3 +183,17 @@ Customize bootstrap classes
 .alert {
     padding: 6px;
     margin: 4px;
+    border-radius: 2px;
+}
+
+.alert-success,
+.alert-info,
+.alert-warning,
+.alert-danger {
+    background-image: none;
+}
+
+.btn-default {
+    background-color: #f0f0f0;
+    background-image: none;
+}
