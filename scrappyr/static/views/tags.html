@@ -4,7 +4,7 @@
     <h3>Tags</h3>
 
     <ul class="tags-list">
-      <li class="tag" ng-repeat="tag in tags track by tag.id">
+      <li class="tag" ng-repeat="tag in tags | orderBy:'text' track by tag.id">
         <div class="btn-group" data-toggle="buttons">
 
           <label class="btn btn-default">

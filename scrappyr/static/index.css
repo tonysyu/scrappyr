@@ -54,7 +54,7 @@ body {
 #new-scrap,
 li.scrap input.scrap-title,
 li.scrap .scrap-title h1 {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 300;
 }
 
@@ -88,7 +88,7 @@ li.scrap .destroy {
     display: none;
     right: 20px;
     margin: auto 0;
-    font-size: 30px;
+    font-size: 20px;
     border: none;
     color: #cc9a9a;
     background: none;
