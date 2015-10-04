@@ -1,4 +1,4 @@
-/*global angular */
+/*global angular*/
 
 angular.module('scrappyr')
     .controller('scrapItemCtrl', function ($scope, api) {
@@ -69,9 +69,9 @@ angular.module('scrappyr')
 
         return {
             controller: 'scrapItemCtrl',
+            templateUrl: '/static/templates/scrap-item.html',
             scope: {
                 scrap: '='
-            },
-            templateUrl: '/static/templates/scrap-item.html'
+            }
         };
     });

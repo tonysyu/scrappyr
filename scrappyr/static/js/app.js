@@ -1,4 +1,4 @@
-/*global angular */
+/*global angular, MathJax*/
 
 /**
  * The main Scrappyr app module
@@ -8,6 +8,10 @@
 angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput'])
     .config(function ($routeProvider) {
         'use strict';
+
+        MathJax.Hub.Config({
+            skipStartupTypeset: true
+        });
 
         function resolveScrapStorage(scrapStorage) {
             return scrapStorage.then(function (module) {
