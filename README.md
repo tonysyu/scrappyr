@@ -7,6 +7,11 @@ This is primarily a learning project for me, so there are probably many
 issues that make this app unusable, even for me. Nevertheless, there are a few
 interesting ideas here.
 
+One of my primary motivations was to have markdown-generated snippets for
+cheat sheets, flash cards, etc. Here's what this currently looks like:
+
+![Scrappyr Screenshot](./static/scrappyr_screenshot.png)
+
 
 Quickstart
 ----------
@@ -19,6 +24,13 @@ cd path/to/directory/containing/this/file
 pip install -r requirements.txt
 python manage.py db init
 python manage.py server
+```
+
+You'll also need to go into the static directory and install some node modules:
+
+```
+cd scrappyr/static
+npm install
 ```
 
 
@@ -65,11 +77,11 @@ I use [Evernote](https://evernote.com/) quite frequently (in fact, I used it
 to plan my development of this project), but ran into a couple of pain points:
 
 1. I really like [reStructuredText](http://sphinx-doc.org/rest.html) and
-   [Markdown](https://daringfireball.net/projects/markdown/) and would much
-   prefer that over WYSIWYG interace.
+   [Markdown](https://daringfireball.net/projects/markdown/) for text
+   formatting and would much prefer that over a WYSIWYG interface.
 
     - There's also [Marxico](https://marxi.co/), which is a markdown editor
-      on top of Evernote, but for some reason, that never work right for me.
+      on top of Evernote, but for some reason, that never worked for me.
 
 2. I tend to organize around smaller snippets rather than full blown notes,
    whereas Evernote seems geared more toward page-like notes. (Although, I'm
@@ -80,7 +92,7 @@ to plan my development of this project), but ran into a couple of pain points:
 
     - Also, I just heard about another contender called [Transpose](https://transpose.com/), which looks really interesting.
 
-3. I'm currently working a
+3. I'm currently working at a
    [company that does healthcare software](http://www.athenahealth.com/),
    which as you might expect, has sensitive information that you wouldn't want
    to keep on untrusted servers.
