@@ -1,4 +1,5 @@
-/*global angular */
+/*jslint nomen: true*/
+/*global _, angular*/
 
 /**
  * The controller for tags page.
@@ -9,4 +10,46 @@ angular.module('scrappyr')
         'use strict';
         $scope.scraps = store.scraps;
         $scope.tags = store.tags;
+
+        $scope.checkbox = {enabled: true};
+
+        $scope.tagSelections = {};
+        $scope.selectedTags = [];
+
+        $scope.$watch('tagSelections', function () {
+            var name,
+                tagList = [];
+
+            for (name in $scope.tagSelections) {
+                if ($scope.tagSelections.hasOwnProperty(name)) {
+                    if ($scope.tagSelections[name] === true) {
+                        tagList.push(name);
+                    }
+                }
+            }
+            $scope.selectedTags = tagList;
+
+        }, true);  // `true` tells $watch to check object properties.
+    })
+    .filter('hasTagInList', function () {
+        "use strict";
+
+        function tagObjectsToStrings(tagObjects) {
+            if (!tagObjects) {
+                return [];
+            }
+            return tagObjects.map(function (tag) { return tag.text; });
+        }
+
+        function createTagFilter(tagList) {
+            return function (scrap) {
+                var tags = tagObjectsToStrings(scrap.tags);
+                return _.intersection(tags, tagList).length > 0;
+            }
+        }
+
+        return function (scraps, tagList) {
+            var scrapHasTagInList = createTagFilter(tagList);
+            return scraps.filter(scrapHasTagInList);
+        };
     });

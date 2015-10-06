@@ -5,10 +5,12 @@
 
     <ul class="tags-list">
       <li class="tag" ng-repeat="tag in tags | orderBy:'text' track by tag.id">
-        <div class="btn-group" data-toggle="buttons">
+        <div class="btn-group">
 
           <label class="btn btn-default">
-            <input type="checkbox" autocomplete="off">
+            <input type="checkbox"
+              ng-model="tagSelections[tag.text]"
+              autocomplete="off">
             {{tag.text}}
           </label>
 
@@ -22,7 +24,8 @@
 
     <ul id="scrap-list">
 
-      <li class="scrap" ng-repeat="scrap in scraps track by scrap.id">
+      <li class="scrap"
+        ng-repeat="scrap in scraps | hasTagInList:selectedTags track by scrap.id">
         <scrap-item scrap=scrap></scrap-item>
       </li>
 
