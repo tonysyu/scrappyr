@@ -16,7 +16,7 @@ angular.module('scrappyr')
         $scope.tagSelections = {};
         $scope.selectedTags = [];
 
-        $scope.$watch('tagSelections', function () {
+        $scope.$watchCollection('tagSelections', function () {
             var name,
                 tagList = [];
 
@@ -29,7 +29,7 @@ angular.module('scrappyr')
             }
             $scope.selectedTags = tagList;
 
-        }, true);  // `true` tells $watch to check object properties.
+        });
     })
     .filter('hasTagInList', function () {
         "use strict";
