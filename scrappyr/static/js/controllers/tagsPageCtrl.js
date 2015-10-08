@@ -13,7 +13,9 @@ angular.module('scrappyr')
 
         $scope.checkbox = {enabled: true};
 
+        // Dict-like object which maps tag text to selection state.
         $scope.tagSelections = {};
+        // Array of tag text for ng-repeat.
         $scope.selectedTags = [];
 
         $scope.$watchCollection('tagSelections', function () {
