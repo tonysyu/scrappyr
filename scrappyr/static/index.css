@@ -51,31 +51,32 @@ body {
     list-style: none;
 }
 
+/* all .scrap input* should be removed when editing is moved out */
 #new-scrap,
-li.scrap input.scrap-title,
-li.scrap .scrap-title h1 {
+.scrap input.scrap-title,
+.scrap .scrap-title h1 {
     margin: 15px 0px;
     font-size: 16px;
     font-weight: normal;
 }
 
-li.scrap,
-li.scrap input.edit {
+.scrap,
+.scrap input.edit {
     margin: 10px 0px;
     background-color: white;
     border: 1px solid #ddd;
     position: relative;
 }
 
-li.scrap input.scrap-title {
+.scrap scrap-item input.scrap-title {
     display: none;
 }
 
-li.scrap form.editing input.scrap-title{
+.scrap form.editing input.scrap-title{
     display: block;
 }
 
-li.scrap.editing .view {
+.scrap.editing .view {
     display: none;
 }
 
@@ -85,7 +86,7 @@ div.scrap-title {
     width: 100%;
 }
 
-li.scrap .remove-scrap {
+.scrap .remove-scrap {
     display: none;
     margin: auto 0;
     padding: 5px;
@@ -96,11 +97,11 @@ li.scrap .remove-scrap {
     transition: color 0.2s ease-out;
 }
 
-li.scrap .remove-scrap:hover {
+.scrap .remove-scrap:hover {
     color: darkred;
 }
 
-li.scrap:hover .remove-scrap {
+.scrap:hover .remove-scrap {
     display: inline;
 }
 
@@ -136,7 +137,7 @@ Customize ng-tags-input
 ------------------------------------------------------------------------------
 */
 
-li.scrap tags-input .tags .tag-item {
+.scrap tags-input .tags .tag-item {
     background: lightgray;
     border: none;
     border-radius: 2px;
@@ -157,8 +158,8 @@ tags-input .tags {
     box-shadow: none;
 }
 
-li.scrap tags-input .tags .tag-item,
-li.scrap tags-input .input {
+.scrap tags-input .tags .tag-item,
+.scrap tags-input .input {
     height: 20px;
     font-size: 12px;
     line-height: 1.8em;
