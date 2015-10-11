@@ -5,7 +5,6 @@ angular.module('scrappyr')
         "use strict";
 
         $scope.originalScrap = null;
-        $scope.reverted = false;
 
         function revertToOriginalScrap(scrap) {
             angular.copy($scope.originalScrap, scrap);
@@ -33,17 +32,9 @@ angular.module('scrappyr')
                 $scope.saveEvent = null;
                 return;
             }
-
             $scope.saveEvent = event;
 
-            if ($scope.reverted) {
-                // Scrap edits were reverted: Don't save.
-                $scope.reverted = false;
-                return;
-            }
-
             scrap.title = scrap.title.trim();
-
             if (scrap.title === $scope.originalScrap.title) {
                 $scope.isEditing = false;
                 return;
@@ -69,7 +60,6 @@ angular.module('scrappyr')
             }
             revertToOriginalScrap(scrap);
             $scope.isEditing = false;
-            $scope.reverted = true;
         };
     })
     .directive('scrapEditor', function () {
