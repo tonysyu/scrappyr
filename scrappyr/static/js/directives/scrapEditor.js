@@ -34,7 +34,6 @@ angular.module('scrappyr')
             }
             $scope.saveEvent = event;
 
-            scrap.title = scrap.title.trim();
             if (scrap.title === $scope.originalScrap.title) {
                 $scope.isEditing = false;
                 return;

@@ -3,7 +3,6 @@
   <form ng-submit="saveEdits(scrap, 'submit')"  ng-class="{editing: isEditing}">
     <textarea
       class="edit scrap-title"
-      ng-trim="false"
       ng-model="scrap.title"
       scrap-escape="revertEdits(scrap)"
       ng-blur="saveEdits(scrap, 'blur')"
