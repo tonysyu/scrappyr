@@ -20,7 +20,7 @@
     <li class="scrap"
       ng-repeat="scrap in scraps | filter:scrapFilter track by scrap.id">
 
-      <scrap-item ng-click="editScrap(scrap)" scrap=scrap></scrap-item>
+      <scrap-item ng-click="selectScrap(scrap)" scrap=scrap></scrap-item>
 
     </li>
 

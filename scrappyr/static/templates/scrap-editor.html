@@ -1,8 +1,17 @@
 <div class="view">
 
+  <div
+    class="scrap-title"
+    data-mathjax
+    ng-if="!isEditing"
+    ng-click="editScrap(scrap)"
+    ng-bind-html="scrap.html_title">
+  </div>
+
   <form ng-class="{editing: isEditing}">
     <textarea
       class="edit scrap-title vertical-resize"
+      ng-if="isEditing"
       ng-model="scrap.title"
       scrap-escape="revertEdits(scrap)"
       ng-blur="saveEdits(scrap)"

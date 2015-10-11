@@ -36,9 +36,7 @@ angular.module('scrappyr')
                 });
         };
 
-        $scope.editScrap = function (scrap) {
-            // FIXME: Remove isEditing?
-            $scope.isEditing = true;
+        $scope.selectScrap = function (scrap) {
             $scope.selectedScrap = scrap;
         };
 

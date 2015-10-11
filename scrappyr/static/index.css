@@ -68,16 +68,8 @@ body {
     position: relative;
 }
 
-.scrap scrap-item textarea.scrap-title {
-    display: none;
-}
-
 .scrap form.editing textarea.scrap-title{
     display: block;
-}
-
-.scrap.editing .view {
-    display: none;
 }
 
 div.scrap-title {

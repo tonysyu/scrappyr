@@ -25,6 +25,10 @@ angular.module('scrappyr')
             api.put(scrap);
         };
 
+        $scope.editScrap = function (scrap) {
+            $scope.isEditing = true;
+        };
+
         $scope.saveEdits = function (scrap) {
             scrap.title = scrap.title.trim();
             if (scrap.title === $scope.originalScrap.title) {
@@ -42,7 +46,7 @@ angular.module('scrappyr')
                     }
                 )
                 .finally(function () {
-                    $scope.isEditing = true;
+                    $scope.isEditing = false;
                 });
         };
 
