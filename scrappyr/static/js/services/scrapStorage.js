@@ -125,18 +125,15 @@ angular.module('scrappyr')
             },
 
             put: function (scrap) {
-                var originalScraps = store.scraps.copy(),
+                var originalScrap = angular.copy(scrap),
                     clientScrap = scrap,
                     i;
 
                 return $http.put('/api/scraps/' + scrap.id, scrap)
                     .then(function success(resp) {
                         angular.extend(scrap, resp.data);
-                        return store.scraps;
                     }, function error() {
-                        // FIXME: Update only the element that was changed?
-                        store.scraps.update(originalScraps);
-                        return store.scraps;
+                        angular.extend(scrap, originalScrap);
                     });
             }
         };
