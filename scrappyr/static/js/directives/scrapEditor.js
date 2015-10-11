@@ -25,15 +25,7 @@ angular.module('scrappyr')
             api.put(scrap);
         };
 
-        $scope.saveEdits = function (scrap, event) {
-            // Blur events are automatically triggered after the form submit event.
-            // This does some unfortunate logic handling to prevent saving twice.
-            if (event === 'blur' && $scope.saveEvent === 'submit') {
-                $scope.saveEvent = null;
-                return;
-            }
-            $scope.saveEvent = event;
-
+        $scope.saveEdits = function (scrap) {
             scrap.title = scrap.title.trim();
             if (scrap.title === $scope.originalScrap.title) {
                 $scope.isEditing = false;

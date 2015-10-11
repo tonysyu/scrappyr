@@ -1,11 +1,11 @@
 <div class="view">
 
-  <form ng-submit="saveEdits(scrap, 'submit')"  ng-class="{editing: isEditing}">
+  <form ng-class="{editing: isEditing}">
     <textarea
       class="edit scrap-title vertical-resize"
       ng-model="scrap.title"
       scrap-escape="revertEdits(scrap)"
-      ng-blur="saveEdits(scrap, 'blur')"
+      ng-blur="saveEdits(scrap)"
       scrap-focus="isEditing">
     </textarea>
 
