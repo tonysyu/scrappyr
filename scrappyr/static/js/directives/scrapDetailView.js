@@ -1,7 +1,7 @@
 /*global angular*/
 
 angular.module('scrappyr')
-    .controller('scrapEditorCtrl', function ($scope, api) {
+    .controller('scrapDetailViewCtrl', function ($scope, api) {
         "use strict";
 
         $scope.originalScrap = null;
@@ -58,12 +58,12 @@ angular.module('scrappyr')
             $scope.isEditing = false;
         };
     })
-    .directive('scrapEditor', function () {
+    .directive('scrapDetailView', function () {
         "use strict";
 
         return {
-            controller: 'scrapEditorCtrl',
-            templateUrl: '/static/templates/scrap-editor.html',
+            controller: 'scrapDetailViewCtrl',
+            templateUrl: '/static/templates/scrap-detail-view.html',
             scope: {
                 scrap: '='
             }

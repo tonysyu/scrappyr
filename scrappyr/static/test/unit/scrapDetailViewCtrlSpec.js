@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    describe('scrapEditorCtrl:', function () {
+    describe('scrapDetailViewCtrl:', function () {
         var ctrl, element, scope, store;
 
         beforeEach(inject(function ($rootScope, api, $httpBackend, $compile) {
@@ -31,7 +31,7 @@
 
         describe('Pre-populate store with a scrap', function () {
             beforeEach(inject(function ($controller, $httpBackend) {
-                ctrl = $controller('scrapEditorCtrl', {
+                ctrl = $controller('scrapDetailViewCtrl', {
                     $scope: scope,
                     store: store
                 });
