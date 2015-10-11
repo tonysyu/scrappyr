@@ -131,9 +131,10 @@ angular.module('scrappyr')
 
                 return $http.put('/api/scraps/' + scrap.id, scrap)
                     .then(function success(resp) {
-                        store.scraps.set(resp.data.id, resp.data);
+                        angular.extend(scrap, resp.data);
                         return store.scraps;
                     }, function error() {
+                        // FIXME: Update only the element that was changed?
                         store.scraps.update(originalScraps);
                         return store.scraps;
                     });
