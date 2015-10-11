@@ -17,7 +17,7 @@ angular.module('scrappyr')
         $scope.scraps = store.scraps;
 
         $scope.newScrap = getEmptyScrap();
-        $scope.editedScrap = null;
+        $scope.selectedScrap = null;
 
         $scope.addScrap = function () {
             $scope.newScrap.title =  $scope.newScrap.title.trim();
@@ -39,7 +39,7 @@ angular.module('scrappyr')
         $scope.editScrap = function (scrap) {
             // FIXME: Remove isEditing?
             $scope.isEditing = true;
-            $scope.editedScrap = scrap;
+            $scope.selectedScrap = scrap;
         };
 
     });

@@ -40,8 +40,8 @@
             expect(scope.scraps.length).toBe(0);
         });
 
-        it('No `editedScrap` on start', function () {
-            expect(scope.editedScrap).toBeNull();
+        it('No `selectedScrap` on start', function () {
+            expect(scope.selectedScrap).toBeNull();
         });
 
         describe('Empty scraps list', function () {
