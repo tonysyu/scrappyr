@@ -1,0 +1,21 @@
+<div class="view">
+
+  <form ng-submit="saveEdits(scrap, 'submit')"  ng-class="{editing: isEditing}">
+    <textarea
+      class="edit scrap-title"
+      ng-trim="false"
+      ng-model="scrap.title"
+      scrap-escape="revertEdits(scrap)"
+      ng-blur="saveEdits(scrap, 'blur')"
+      scrap-focus="isEditing">
+    </textarea>
+
+  </form>
+
+</div>
+
+<tags-input
+  ng-model="scrap.tags"
+  on-tag-added="onTagChanged(scrap)"
+  on-tag-removed="onTagChanged(scrap)">
+</tags-input>

@@ -4,19 +4,13 @@
 (function () {
     'use strict';
 
-    describe('scrapItemCtrl:', function () {
-        var ctrl, element, scope, store,
-            default_scrap = {title: 'Start with one scrap'};
-
-        // Load the module containing the app, only 'ng' is loaded by default.
-        beforeEach(module('scrappyr'));
-        beforeEach(module('my.templates'));
+    describe('scrapEditorCtrl:', function () {
+        var ctrl, element, scope, store;
 
         beforeEach(inject(function ($rootScope, api, $httpBackend, $compile) {
             var count = 0;
 
             scope = $rootScope.$new();
-            scope.scrap = default_scrap;
             store = api;
 
             // Setup POST method to echo the input data.
@@ -35,21 +29,35 @@
 
         }));
 
-        describe('Pre-populate 5 scraps', function () {
+        describe('Pre-populate store with a scrap', function () {
             beforeEach(inject(function ($controller, $httpBackend) {
-                ctrl = $controller('scrapItemCtrl', {
+                ctrl = $controller('scrapEditorCtrl', {
                     $scope: scope,
                     store: store
                 });
                 store.insert({ title: 'Item 1' });
-                store.insert({ title: 'Item 2' });
-                store.insert({ title: 'Item 3' });
-                scope.$digest();
                 $httpBackend.flush();
+
+                scope.scrap = store.scraps.get(1);
+                scope.$digest();
             }));
 
-            it('should save scraps to local storage', function () {
-                expect(store.scraps.length).toBe(3);
+            it('should remove scraps w/o title on saving', function () {
+                scope.scrap.title = '';
+                scope.saveEdits(scope.scrap);
+                expect(store.scraps.length).toBe(0);
+            });
+
+            it('should trim scraps on saving', function () {
+                scope.scrap.title = ' buy moar unicorns  ';
+                scope.saveEdits(scope.scrap);
+                expect(store.scraps.get(1).title).toBe('buy moar unicorns');
+            });
+
+            it('revertScrap() get a scrap to its previous state', function () {
+                scope.scrap.title = 'Unicorn sparkly skypuffles.';
+                scope.revertEdits(scope.scrap);
+                expect(store.scraps.get(1).title).toBe('Item 1');
             });
 
         });

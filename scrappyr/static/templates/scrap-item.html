@@ -3,8 +3,6 @@
   <div
     class="scrap-title"
     data-mathjax
-    ng-if="!isEditing"
-    ng-click="editScrap(scrap)"
     ng-bind-html="scrap.html_title">
 
   </div>
@@ -14,20 +12,4 @@
     ng-click="removeScrap(scrap)">
   </button>
 
-  <form ng-submit="saveEdits(scrap, 'submit')"  ng-class="{editing: isEditing}">
-    <input
-      class="edit scrap-title"
-      ng-trim="false"
-      ng-model="scrap.title"
-      scrap-escape="revertEdits(scrap)"
-      ng-blur="saveEdits(scrap, 'blur')"
-      scrap-focus="isEditing">
-  </form>
-
 </div>
-
-<tags-input
-  ng-model="scrap.tags"
-  on-tag-added="onTagChanged(scrap)"
-  on-tag-removed="onTagChanged(scrap)">
-</tags-input>

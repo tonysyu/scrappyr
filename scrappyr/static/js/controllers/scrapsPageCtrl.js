@@ -36,4 +36,10 @@ angular.module('scrappyr')
                 });
         };
 
+        $scope.editScrap = function (scrap) {
+            // FIXME: Remove isEditing?
+            $scope.isEditing = true;
+            $scope.editedScrap = scrap;
+        };
+
     });
