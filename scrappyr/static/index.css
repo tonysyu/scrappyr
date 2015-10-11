@@ -118,6 +118,9 @@ ul.tags-list {
     line-height: 3em;
 }
 
+textarea.vertical-resize {
+    resize:vertical;
+}
 
 /*
 ------------------------------------------------------------------------------
