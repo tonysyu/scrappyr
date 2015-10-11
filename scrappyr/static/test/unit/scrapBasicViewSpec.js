@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    describe('scrap-item directive:', function () {
+    describe('scrap-basic-view directive:', function () {
         var ctrl, element, scope, store,
             default_scrap = {title: 'Start with one scrap'};
 
@@ -19,7 +19,7 @@
             scope.scrap = default_scrap;
             store = api;
 
-            element = '<scrap-item scrap=scrap></scrap-item>';
+            element = '<scrap-basic-view scrap=scrap></scrap-basic-view>';
             element = $compile(element)(scope);
             scope.$digest();
         }));

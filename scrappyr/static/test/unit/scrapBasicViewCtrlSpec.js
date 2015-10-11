@@ -4,7 +4,7 @@
 (function () {
     'use strict';
 
-    describe('scrapItemCtrl:', function () {
+    describe('scrapBasicViewCtrl:', function () {
         var ctrl, element, scope, store,
             default_scrap = {title: 'Start with one scrap'};
 
@@ -37,7 +37,7 @@
 
         describe('Pre-populate 5 scraps', function () {
             beforeEach(inject(function ($controller, $httpBackend) {
-                ctrl = $controller('scrapItemCtrl', {
+                ctrl = $controller('scrapBasicViewCtrl', {
                     $scope: scope,
                     store: store
                 });

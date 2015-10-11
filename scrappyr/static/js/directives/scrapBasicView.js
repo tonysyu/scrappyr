@@ -1,7 +1,7 @@
 /*global angular*/
 
 angular.module('scrappyr')
-    .controller('scrapItemCtrl', function ($scope, api) {
+    .controller('scrapBasicViewCtrl', function ($scope, api) {
         "use strict";
 
         function getEmptyScrap() {
@@ -20,12 +20,12 @@ angular.module('scrappyr')
         };
 
     })
-    .directive('scrapItem', function () {
+    .directive('scrapBasicView', function () {
         "use strict";
 
         return {
-            controller: 'scrapItemCtrl',
-            templateUrl: '/static/templates/scrap-item.html',
+            controller: 'scrapBasicViewCtrl',
+            templateUrl: '/static/templates/scrap-basic-view.html',
             scope: {
                 scrap: '='
             }
