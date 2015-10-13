@@ -2,11 +2,7 @@
 /*jslint nomen:true*/
 
 /**
- * Services that persists and retrieves scraps from localStorage or a backend
- * API if available.
- *
- * They both follow the same API, returning promises for all changes to the
- * model.
+ * Services that persists and retrieves scraps from the backend API.
  */
 angular.module('scrappyr')
     .factory('scrapStorage', function ($http, scrappyrUtils) {
@@ -14,7 +10,6 @@ angular.module('scrappyr')
 
         var store = {
             scraps: scrappyrUtils.createMappedArray(),
-            tags: scrappyrUtils.createMappedArray(),
 
             remove: function (scrap) {
                 var originalScraps = store.scraps.copy();
@@ -34,10 +29,6 @@ angular.module('scrappyr')
                 $http.get('/api/scraps')
                     .then(function (resp) {
                         store.scraps.update(resp.data.scraps);
-                    });
-                $http.get('/api/tags')
-                    .then(function (resp) {
-                        store.tags.update(resp.data.tags);
                     });
             },
 

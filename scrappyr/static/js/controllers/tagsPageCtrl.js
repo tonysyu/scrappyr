@@ -6,10 +6,10 @@
  */
 
 angular.module('scrappyr')
-    .controller('tagsPageCtrl', function ($scope, store) {
+    .controller('tagsPageCtrl', function ($scope, scrapStore, tagStore) {
         'use strict';
-        $scope.scraps = store.scraps;
-        $scope.tags = store.tags;
+        $scope.scraps = scrapStore.scraps;
+        $scope.tags = tagStore.tags;
 
         $scope.checkbox = {enabled: true};
 

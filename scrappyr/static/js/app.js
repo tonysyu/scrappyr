@@ -20,6 +20,13 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'scrappyrUti
             return scrapStorage;
         }
 
+        function resolveTagStorage($http, tagStorage) {
+            if (tagStorage.tags.length === 0) {
+                tagStorage.get();
+            }
+            return tagStorage;
+        }
+
         var scrapsConfig = {
                 controller: 'scrapsPageCtrl',
                 templateUrl: 'static/views/scraps.html',
@@ -28,7 +35,10 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'scrappyrUti
             tagsConfig = {
                 controller: 'tagsPageCtrl',
                 templateUrl: 'static/views/tags.html',
-                resolve: {store: resolveScrapStorage}
+                resolve: {
+                    scrapStore: resolveScrapStorage,
+                    tagStore: resolveTagStorage
+                }
             };
 
         $routeProvider
