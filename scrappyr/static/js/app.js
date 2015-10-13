@@ -14,7 +14,9 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'scrappyrUti
         });
 
         function resolveScrapStorage($http, scrapStorage) {
-            scrapStorage.get();
+            if (scrapStorage.scraps.length === 0) {
+                scrapStorage.get();
+            }
             return scrapStorage;
         }
 
