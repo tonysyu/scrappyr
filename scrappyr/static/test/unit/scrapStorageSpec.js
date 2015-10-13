@@ -15,8 +15,8 @@
         // Load the module containing the app, only 'ng' is loaded by default.
         beforeEach(module('scrappyr'));
 
-        beforeEach(inject(function (api) {
-            store = api;
+        beforeEach(inject(function (scrapStorage) {
+            store = scrapStorage;
         }));
 
         it('Unimplemented MappedArray methods should throw error', function () {

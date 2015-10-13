@@ -9,14 +9,7 @@
  * model.
  */
 angular.module('scrappyr')
-    .factory('scrapStorage', function ($http, $injector) {
-        'use strict';
-        return $http.get('/api').then(function () {
-            return $injector.get('api');
-        });
-    })
-
-    .factory('api', function ($http, scrappyrUtils) {
+    .factory('scrapStorage', function ($http, scrappyrUtils) {
         'use strict';
 
         var store = {

@@ -10,9 +10,9 @@
         // Load the module containing the app, only 'ng' is loaded by default.
         beforeEach(module('scrappyr'));
 
-        beforeEach(inject(function ($controller, $rootScope, api, $httpBackend) {
+        beforeEach(inject(function ($controller, $rootScope, scrapStorage, $httpBackend) {
             scope = $rootScope.$new();
-            store = api;
+            store = scrapStorage;
 
             var count = 0;
 

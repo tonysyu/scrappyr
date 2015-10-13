@@ -12,12 +12,12 @@
         beforeEach(module('scrappyr'));
         beforeEach(module('my.templates'));
 
-        beforeEach(inject(function ($rootScope, api, $httpBackend, $compile) {
+        beforeEach(inject(function ($rootScope, scrapStorage, $httpBackend, $compile) {
             var count = 0;
 
             scope = $rootScope.$new();
             scope.scrap = default_scrap;
-            store = api;
+            store = scrapStorage;
 
             // Setup POST method to echo the input data.
             $httpBackend

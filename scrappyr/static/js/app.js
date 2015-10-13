@@ -13,11 +13,10 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'scrappyrUti
             skipStartupTypeset: true
         });
 
-        function resolveScrapStorage(scrapStorage) {
-            return scrapStorage.then(function (module) {
-                // Fetch the scraps data in the background.
-                module.get();
-                return module;
+        function resolveScrapStorage($http, scrapStorage) {
+            return $http.get('/api').then(function () {
+                scrapStorage.get();
+                return scrapStorage;
             });
         }
 

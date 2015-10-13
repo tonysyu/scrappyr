@@ -7,11 +7,11 @@
     describe('scrapDetailViewCtrl:', function () {
         var ctrl, element, scope, store;
 
-        beforeEach(inject(function ($rootScope, api, $httpBackend, $compile) {
+        beforeEach(inject(function ($rootScope, scrapStorage, $httpBackend, $compile) {
             var count = 0;
 
             scope = $rootScope.$new();
-            store = api;
+            store = scrapStorage;
 
             // Setup POST method to echo the input data.
             $httpBackend

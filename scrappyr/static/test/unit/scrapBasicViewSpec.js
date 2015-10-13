@@ -12,12 +12,12 @@
         beforeEach(module('scrappyr'));
         beforeEach(module('my.templates'));
 
-        beforeEach(inject(function ($rootScope, api, $httpBackend, $compile) {
+        beforeEach(inject(function ($rootScope, scrapStorage, $httpBackend, $compile) {
             var count = 0;
 
             scope = $rootScope.$new();
             scope.scrap = default_scrap;
-            store = api;
+            store = scrapStorage;
 
             element = '<scrap-basic-view scrap=scrap></scrap-basic-view>';
             element = $compile(element)(scope);

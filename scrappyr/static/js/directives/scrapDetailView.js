@@ -1,7 +1,7 @@
 /*global angular*/
 
 angular.module('scrappyr')
-    .controller('scrapDetailViewCtrl', function ($scope, api) {
+    .controller('scrapDetailViewCtrl', function ($scope, scrapStorage) {
         "use strict";
 
         $scope.originalScrap = null;
@@ -22,7 +22,7 @@ angular.module('scrappyr')
         // TODO: Pass just the ID and tag list and have the backend update just
         // the tags.
         $scope.onTagChanged = function (scrap) {
-            api.put(scrap);
+            scrapStorage.put(scrap);
         };
 
         $scope.editScrap = function (scrap) {
@@ -36,7 +36,7 @@ angular.module('scrappyr')
                 return;
             }
 
-            api[scrap.title ? 'put' : 'remove'](scrap)
+            scrapStorage[scrap.title ? 'put' : 'remove'](scrap)
                 .then(
                     function success() {
                         updateOriginalScrap(scrap);
