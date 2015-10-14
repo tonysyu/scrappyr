@@ -78,22 +78,39 @@ div.scrap-title {
     width: 100%;
 }
 
-.scrap .remove-scrap {
+.scrap .remove-scrap,
+.remove-tag {
     display: none;
     margin: auto 0;
     padding: 5px;
     font-size: 16px;
     border: none;
-    color: lightgray;
     background: none;
     transition: color 0.2s ease-out;
+    position: absolute;
 }
 
-.scrap .remove-scrap:hover {
+.scrap .remove-scrap{
+    color: lightgray;
+}
+
+.remove-tag {
+    color: gray;
+    font-size: 10px;
+    transform: translateY(5px);  /* FIXME: This is hacky */
+}
+
+label.tag {
+    padding-right: 20px;  /* Make room for close icon */
+}
+
+.scrap .remove-scrap:hover,
+.remove-tag:hover {
     color: darkred;
 }
 
-.scrap:hover .remove-scrap {
+.scrap:hover .remove-scrap,
+.tag:hover .remove-tag {
     display: inline;
 }
 

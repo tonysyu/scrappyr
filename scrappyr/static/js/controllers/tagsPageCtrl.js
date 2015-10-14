@@ -18,6 +18,10 @@ angular.module('scrappyr')
         // Array of tag text for ng-repeat.
         $scope.selectedTags = [];
 
+        $scope.removeTag = function (tag) {
+            tagStore.remove(tag);
+        };
+
         $scope.$watchCollection('tagSelections', function () {
             var name,
                 tagList = [];

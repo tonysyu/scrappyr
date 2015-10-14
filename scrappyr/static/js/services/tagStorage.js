@@ -12,7 +12,8 @@ angular.module('scrappyr')
             tags: scrappyrUtils.createMappedArray(),
 
             remove: function (tag) {
-                throw "`remove` not implemented";
+                // FIXME: Add actual logic here.
+                console.log(tag.id, tag.text);
             },
 
             get: function () {
