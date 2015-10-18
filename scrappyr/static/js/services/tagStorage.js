@@ -12,8 +12,16 @@ angular.module('scrappyr')
             tags: scrappyrUtils.createMappedArray(),
 
             remove: function (tag) {
-                // FIXME: Add actual logic here.
-                console.log(tag.id, tag.text);
+                var originalTags = store.tags.copy();
+                store.tags.remove(tag.id);
+
+                return $http.delete('/api/tags/' + tag.id)
+                    .then(function success() {
+                        return store.tags;
+                    }, function error() {
+                        store.tags.update(originalTags);
+                        return store.tags;
+                    });
             },
 
             get: function () {

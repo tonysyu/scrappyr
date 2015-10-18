@@ -69,6 +69,18 @@ class TestBasicView(TestHarness):
         assert response.status_code == 200
         assert count_rows(Scrap) == 0
 
+    def test_delete_tag(self):
+        data = {'title': TITLE, 'tags':  TAG_DATA_LIST}
+        scrap = Scrap.from_dict(data)
+        add_to_db(scrap)
+        assert count_rows(Tag) == 1
+        assert len(scrap.tags) == 1
+
+        response = self.client.delete('/api/tags/1')
+        assert response.status_code == 200
+        assert count_rows(Tag) == 0
+        assert len(scrap.tags) == 0
+
 
 class TestPut(TestHarness):
 
