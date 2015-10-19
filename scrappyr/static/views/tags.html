@@ -7,11 +7,17 @@
       <li class="tag" ng-repeat="tag in tags | orderBy:'text' track by tag.id">
         <div class="btn-group">
 
-          <label class="btn btn-default">
+          <label class="tag btn btn-default">
             <input type="checkbox"
               ng-model="tagSelections[tag.text]"
               autocomplete="off">
             {{tag.text}}
+
+            <button
+              class="remove-tag glyphicon glyphicon-remove"
+              ng-click="removeTag(tag)">
+            </button>
+
           </label>
 
         </div>

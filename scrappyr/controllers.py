@@ -30,6 +30,14 @@ def get_all_tags():
     return jsonify(tags=tags)
 
 
+@scrappyr.route('/api/tags/<int:id>', methods=['DELETE'])
+def delete_tag(id):
+    tag = Tag.query.get_or_404(id)
+    db.session.delete(tag)
+    db.session.commit()
+    return jsonify({'deleted': 'true'})
+
+
 @scrappyr.route('/api/scraps', methods=['GET'])
 def get_all_scraps():
     scraps = [render_data(scrap) for scrap in Scrap.query.all()]
