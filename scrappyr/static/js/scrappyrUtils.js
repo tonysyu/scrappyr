@@ -19,6 +19,16 @@ angular.module('scrappyrUtils', [])
             var array = [],
                 indexMap = {};  // Map from element ID to array index.
 
+            function rebuildIndexMap() {
+                var i;
+                indexMap = {};
+
+                for (i = 0; i < array.length; i += 1) {
+                    indexMap[array[i].id] -= 1;
+                }
+
+            }
+
             array.copy = function () {
                 return angular.copy(this);
             };
@@ -46,13 +56,23 @@ angular.module('scrappyrUtils', [])
 
             array.remove = function (id) {
                 var i, index = indexMap[id];
+                array.splice(index, 1);
+            };
 
-                Array.prototype.splice.call(this, index, 1);
+            array.splice = function (start, length) {
+                var i,
+                    newItems = Array.prototype.slice.call(arguments, 2),
+                    shiftCount = newItems.length - (length || 0);
 
-                for (i = index; i < this.length; i += 1) {
-                    indexMap[this[i].id] -= 1;
+                // Shift the index for all *later* array elements.
+                for (i = start; i < this.length; i += 1) {
+                    indexMap[this[i].id] += shiftCount;
                 }
-
+                // Insert new elements into indexMap.
+                for (i = 0; i < newItems.length; i += 1) {
+                    indexMap[newItems[i].id] = start + i;
+                }
+                return Array.prototype.splice.apply(this, arguments);
             };
 
             // TODO: Override native methods to ensure integrity of `indexMap`.
@@ -62,7 +82,6 @@ angular.module('scrappyrUtils', [])
             array.push = function () { throw "`push` not implemented"; };
             array.reverse = function () { throw "`reverse` not implemented"; };
             array.sort = function () { throw "`sort` not implemented"; };
-            array.splice = function () { throw "`splice` not implemented"; };
             array.shift = function () { throw "`shift` not implemented"; };
             array.unshift = function () { throw "`unshift` not implemented"; };
 

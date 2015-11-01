@@ -5,12 +5,11 @@
     "angular-mocks": "1.4.x",
     "angular-route": "1.4.x",
     "angular-sanitize": "1.4.x",
+    "angular-ui-tree": "^2.10.0",
     "bootstrap": ">=3.0.0",
     "jquery": ">=2.1.0",
-    "ng-tags-input": "3.0.0"
-  },
-  "devDependencies": {
     "mathjax": "^2.5.1",
+    "ng-tags-input": "3.0.0",
     "underscore": "^1.8.3"
   }
 }

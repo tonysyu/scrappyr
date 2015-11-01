@@ -15,16 +15,24 @@
       placeholder="Filter by...">
   </div>
 
-  <ul id="scrap-list">
+  <div ui-tree>
+    <ol ui-tree-nodes ng-model="scraps" id="scrap-list">
 
-    <li class="scrap"
-      ng-repeat="scrap in scraps | filter:scrapFilter track by scrap.id">
+      <li class="scrap" ui-tree-node
+        ng-repeat="scrap in scraps | filter:scrapFilter track by scrap.id">
 
-      <scrap-basic-view ng-click="selectScrap(scrap)" scrap=scrap></scrap-basic-view>
+        <div class="scrap-view">
 
-    </li>
+          <div ui-tree-handle class="scrap-handle"></div>
 
-  </ul>
+          <scrap-basic-view ng-click="selectScrap(scrap)" scrap=scrap>
+          </scrap-basic-view>
+
+        </div>
+      </li>
+
+    </ol>
+  </div>
 
 </div>
 
