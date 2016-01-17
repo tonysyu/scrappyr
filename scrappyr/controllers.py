@@ -5,6 +5,7 @@
 import markdown
 
 from flask import Blueprint, jsonify, request
+from schematics.exceptions import ModelConversionError
 from .common import db
 from .models import Scrap, Tag
 from .validation import ScrapForm
@@ -47,10 +48,13 @@ def get_all_scraps():
 @scrappyr.route('/api/scraps', methods=['POST'])
 def add_scrap():
     scrap_data = request.get_json()
-    form = ScrapForm(scrap_data)
+    try:
+        form = ScrapForm(scrap_data)
+    except ModelConversionError as error:
+        return _jsonify_errors({'error': error.messages})
     error_message = form.validation_errors()
     if error_message:
-        return _jsonify_errors(form.errors)
+        return _jsonify_errors(error_message)
     else:
         scrap = Scrap.from_dict(form.to_primitive())
         db.session.add(scrap)
@@ -62,10 +66,13 @@ def add_scrap():
 def update_scrap(id):
     scrap = Scrap.query.get_or_404(id)
     scrap_data = request.get_json()
-    form = ScrapForm(scrap_data)
+    try:
+        form = ScrapForm(scrap_data)
+    except ValueError as error:
+        return _jsonify_errors({'error': error.args[0]})
     error_message = form.validation_errors()
     if error_message:
-        return _jsonify_errors(form.errors)
+        return _jsonify_errors(error_message)
     else:
         scrap.update_from(form.to_primitive())
         db.session.commit()

@@ -16,6 +16,12 @@ def test_scrap_init():
     assert scrap.tag_labels == [TAG]
 
 
+def test_scrap_repr():
+    scrap = Scrap(title=TITLE, tag_labels=[TAG])
+    template = "Scrap(id=None, title={}, tags=[{}])"
+    assert repr(scrap) == template.format(repr(TITLE), repr(Tag(TAG)))
+
+
 def test_scrap_append_tag():
     scrap = Scrap(title=TITLE)
     assert len(scrap.tag_labels) == 0
@@ -53,13 +59,6 @@ class TestDatabase(TestCase):
     def create_app(self):
         return create_app(self)
 
-    def setup(self):
-        db.create_all()
-
-    def teardown(self):
-        db.session.remove()
-        db.drop_all()
-
     def test_empty_scrap_table(self):
         assert count_rows(Scrap) == 0
 
@@ -79,6 +78,13 @@ class TestDatabase(TestCase):
         db.session.add(Tag(TAG))
         db.session.commit()
         assert count_rows(Tag) == 1
+
+    def test_get_tag_by_id(self):
+        original_tag = Tag.get_or_create(TAG)
+        db.session.add(original_tag)
+        db.session.commit()
+        new_tag = Tag.get_or_create(**original_tag.to_dict())
+        assert new_tag == original_tag
 
     def test_add_duplicate_tag(self):
         # Add two instances of tags with the same text

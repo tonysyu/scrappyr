@@ -17,6 +17,13 @@ def add_to_db(obj):
     db.session.commit()
 
 
+def drop_ids(sequence):
+    sequence = sequence[:]  # Modify copy of sequence instead of original.
+    for obj in sequence:
+        del obj['id']
+    return sequence
+
+
 class TestHarness(TestCase):
 
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
@@ -25,16 +32,12 @@ class TestHarness(TestCase):
     def create_app(self):
         return create_app(self)
 
-    def setup(self):
-        db.create_all()
-        self.client = self.app.test_client()
 
-    def teardown(self):
-        db.session.remove()
-        db.drop_all()
+class TestBasic(TestHarness):
 
-
-class TestBasicView(TestHarness):
+    def post_scrap(self, data):
+        return self.client.post('/api/scraps', data=json.dumps(data),
+                                content_type='application/json')
 
     def test_get_from_empty_db(self):
         response = self.client.get('/api/scraps')
@@ -52,15 +55,31 @@ class TestBasicView(TestHarness):
         assert scrap['tags'] == []
         assert TITLE in scrap['html_title']
 
+    def test_get_all_tags(self):
+        data = {'title': TITLE, 'tags': TAG_DATA_LIST}
+        response = self.post_scrap(data)
+        response = self.client.get('/api/tags')
+        assert response.status_code == 200
+        tags = drop_ids(response.json['tags'])
+        assert tags == TAG_DATA_LIST
+
     def test_post(self):
         data = {'title': TITLE, 'tags': TAG_DATA_LIST}
-        response = self.client.post('/api/scraps', data=json.dumps(data),
-                                    content_type='application/json')
+        response = self.post_scrap(data)
         assert response.status_code == 200
         scrap = response.json
         assert scrap['title'] == TITLE
         assert strip_ids(scrap['tags']) == TAG_DATA_LIST
         assert TITLE in scrap['html_title']
+
+    def test_post_scrap_with_bad_tag(self):
+        bad_tags = [{'bad-key': 'tag-label'}]
+        response = self.post_scrap({'title': TITLE, 'tags': bad_tags})
+        assert response.status_code == 400
+
+    def test_post_scrap_with_no_title(self):
+        response = self.post_scrap({})  # title is required
+        assert response.status_code == 400
 
     def test_delete(self):
         add_to_db(Scrap(title=TITLE))
@@ -113,8 +132,7 @@ class TestPut(TestHarness):
         assert count_rows(Scrap) == 1
 
     def test_put_all_properties(self):
-        # Add minimal scrap
-        add_to_db(Scrap(title=TITLE))
+        self.add_minimal_scrap()
         # Update with all properties
         data = {'id': 1, 'title': TITLE, 'tags': TAG_DATA_LIST,
                 'html_title': '<h1>{}</h1>'.format(TITLE)}
@@ -124,7 +142,22 @@ class TestPut(TestHarness):
         output['tags'] = strip_ids(output['tags'])
         assert output == data
 
+    def test_put_bad_tag(self):
+        self.add_minimal_scrap()
+        # Update with all properties
+        data = {'id': 1, 'title': TITLE, 'tags': {'bad-key': 'value'}}
+        response = self.put(data)
+        assert response.status_code == 400
+
+    def test_put_scrap_with_no_title(self):
+        self.add_minimal_scrap()
+        response = self.put({'id': 1})
+        assert response.status_code == 400
+
     def put(self, data, scrap_id=1):
         url = '/api/scraps/{}'.format(scrap_id)
         return self.client.put(url, data=json.dumps(data),
                                content_type='application/json')
+
+    def add_minimal_scrap(self):
+        add_to_db(Scrap(title=TITLE))

@@ -1,4 +1,4 @@
-from schematics.exceptions import ModelConversionError
+from schematics.exceptions import ModelConversionError, ModelValidationError
 from schematics.models import Model
 from schematics.types import IntType, StringType
 from schematics.types.compound import ListType, ModelType
@@ -13,8 +13,8 @@ class BaseModel(Model):
         """
         try:
             self.validate()
-        except ModelConversionError as error:
-            return error.message
+        except ModelValidationError as error:
+            return error.messages
         else:
             return None
 

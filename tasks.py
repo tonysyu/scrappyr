@@ -29,10 +29,16 @@ def run():
 
 @invoke.task(help={'coverage': "Display test-coverage summary"})
 def tests(coverage=False):
-    """Run python test suite."""
+    """Run python test suite.
+
+    If you want to run individual tests, run py.test directly. If you want to
+    debug a test, turn off output capture with `-s`:
+
+        py.test -s path/to/test.py::TestClass::test_method
+    """
     opts = ['.']
     if coverage:
-        opts.extend(['--cov', 'scrappyr'])
+        opts.extend(['--cov', 'scrappyr',  '--cov-report', 'term-missing'])
     with temp_working_directory(PROJECT_ROOT):
         pytest.main(opts)
 
