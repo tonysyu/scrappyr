@@ -22,7 +22,9 @@ flask-appconfig>=0.9.1
 
 # Testing
 pytest>=2.6.3
+pytest-cov
 webtest
 
 # Management script
 Flask-Script
+invoke

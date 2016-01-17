@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 import pytest
-from flask.ext.script import Manager, Server
 from flask.ext.migrate import MigrateCommand
+from flask.ext.script import Manager, Server
 from flask.ext.script.commands import ShowUrls, Clean
 
 from scrappyr.app import create_app
