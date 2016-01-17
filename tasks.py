@@ -1,3 +1,6 @@
+"""
+Project management tasks run using invoke (http://www.pyinvoke.org/).
+"""
 import os
 import subprocess
 import webbrowser
