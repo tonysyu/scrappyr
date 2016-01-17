@@ -35,6 +35,14 @@ class TestHarness(TestCase):
 
 class TestBasic(TestHarness):
 
+    def test_index(self):
+        response = self.client.get('/')
+        assert response.status_code == 200
+
+    def test_api(self):
+        response = self.client.get('/api')
+        assert response.status_code == 200
+
     def post_scrap(self, data):
         return self.client.post('/api/scraps', data=json.dumps(data),
                                 content_type='application/json')
