@@ -144,7 +144,6 @@ class TestPut(TestHarness):
 
     def test_put_bad_tag(self):
         self.add_minimal_scrap()
-        # Update with all properties
         data = {'id': 1, 'title': TITLE, 'tags': {'bad-key': 'value'}}
         response = self.put(data)
         assert response.status_code == 400

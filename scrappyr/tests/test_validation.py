@@ -1,8 +1,7 @@
 import pytest
-from schematics.exceptions import ModelConversionError, ModelValidationError
 
 from ..testing import strip_ids
-from ..validation import ScrapForm
+from ..validation import FormCreationError, FormValidationError, ScrapForm
 
 
 TAG = 'dummy-tag-for-testing'
@@ -16,21 +15,22 @@ def test_basic():
     scrap = form.to_primitive()
     assert scrap['title'] == data['title']
     assert strip_ids(scrap['tags']) == data['tags']
-    assert form.validation_errors() is None
+    form.validate()
 
 
 def test_no_title():
     form = ScrapForm({})
-    assert form.validation_errors()['title'] == [REQUIRED_FIELD_ERROR]
+    with pytest.raises(FormValidationError):
+        assert form.validate()
 
 
 def test_bad_title():
-    with pytest.raises(ModelConversionError):
+    with pytest.raises(FormCreationError):
         ScrapForm({'title': {}})
 
 
 def test_bad_tag():
-    with pytest.raises(ModelConversionError):
+    with pytest.raises(FormCreationError):
         ScrapForm({'title': TITLE, 'tags': [{'bad-key': 'tag'}]})
 
 
@@ -39,4 +39,4 @@ def test_multiple_tags():
     form = ScrapForm({'title': TITLE, 'tags': tags})
     scrap = form.to_primitive()
     assert strip_ids(scrap['tags']) == tags
-    assert form.validation_errors() is None
+    form.validate()

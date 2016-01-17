@@ -6,12 +6,20 @@ import markdown
 
 from flask import Blueprint, jsonify, request
 from schematics.exceptions import ModelConversionError
+
 from .common import db
 from .models import Scrap, Tag
-from .validation import ScrapForm
+from .validation import BaseScrappyrError, ScrapForm
 
 
 scrappyr = Blueprint('scrappyr', __name__, static_folder='./static')
+
+
+@scrappyr.errorhandler(BaseScrappyrError)
+def handle_scrappyr_error(error):
+    resp = jsonify(error.to_dict())
+    resp.status_code = 400
+    return resp
 
 
 @scrappyr.route('/')
@@ -48,35 +56,24 @@ def get_all_scraps():
 @scrappyr.route('/api/scraps', methods=['POST'])
 def add_scrap():
     scrap_data = request.get_json()
-    try:
-        form = ScrapForm(scrap_data)
-    except ModelConversionError as error:
-        return _jsonify_errors({'error': error.messages})
-    error_message = form.validation_errors()
-    if error_message:
-        return _jsonify_errors(error_message)
-    else:
-        scrap = Scrap.from_dict(form.to_primitive())
-        db.session.add(scrap)
-        db.session.commit()
-        return jsonify(render_data(scrap))
+
+    form = ScrapForm(scrap_data)
+    form.validate()
+    scrap = Scrap.from_dict(form.to_primitive())
+    db.session.add(scrap)
+    db.session.commit()
+    return jsonify(render_data(scrap))
 
 
 @scrappyr.route('/api/scraps/<int:id>', methods=['PUT'])
 def update_scrap(id):
     scrap = Scrap.query.get_or_404(id)
     scrap_data = request.get_json()
-    try:
-        form = ScrapForm(scrap_data)
-    except ValueError as error:
-        return _jsonify_errors({'error': error.args[0]})
-    error_message = form.validation_errors()
-    if error_message:
-        return _jsonify_errors(error_message)
-    else:
-        scrap.update_from(form.to_primitive())
-        db.session.commit()
-        return jsonify(render_data(scrap))
+    form = ScrapForm(scrap_data)
+    form.validate()
+    scrap.update_from(form.to_primitive())
+    db.session.commit()
+    return jsonify(render_data(scrap))
 
 
 @scrappyr.route('/api/scraps/<int:id>', methods=['DELETE'])
@@ -91,9 +88,3 @@ def render_data(scrap):
     data = scrap.to_dict()
     data['html_title'] = markdown.markdown('#' + data['title'])
     return data
-
-
-def _jsonify_errors(errors):
-    resp = jsonify(errors)
-    resp.status_code = 400
-    return resp
