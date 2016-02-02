@@ -11,7 +11,10 @@ from scrappyr.common import db
 manager = Manager(create_app)
 
 # Options passed to `create_app`.
-manager.add_option('-c', '--config', dest='flask_config', required=False)
+manager.add_option('-c', '--config-file', dest='config_file', required=False,
+                   help="Configuration file (*.py or *.json) for Flask app.")
+manager.add_option('-d', '--db-uri', dest='db_uri', required=False,
+                   help="SQLAlchemy database URI.")
 
 manager.add_command('server', Server())
 manager.add_command('db', MigrateCommand)
