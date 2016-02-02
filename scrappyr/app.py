@@ -10,6 +10,20 @@ SECRET_KEY = 'development-key'
 
 
 def create_app(flask_config=None):
+    """Return Flask app for scrappyr.
+
+    Parameters
+    ----------
+    flask_config : object
+        Object (or string pointing to object---e.g. module) containing
+        configuration for flask app. See [1]_ for possible configuration
+        values. Defaults to the name of this module, which means module
+        variables in this file are used for configuration by default.
+
+    References
+    ----------
+    .. [1] http://flask.pocoo.org/docs/0.10/config/#builtin-configuration-values
+    """
     flask_config = __name__ if flask_config is None else flask_config
 
     app = Flask(__name__)
