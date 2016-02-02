@@ -1,3 +1,5 @@
+import os.path
+
 from flask import Flask
 
 from .common import config, db, migrate
@@ -57,9 +59,11 @@ def _update_config_from_file(app, config_file):
     if config_file is None:
         return
 
-    if config_file.endswith('.py'):
+    file_ext = _get_ext(config_file)
+
+    if file_ext in ('.py', '.cfg'):
         app.config.from_pyfile(config_file)
-    elif config_file.endswith('.json'):
+    elif file_ext == '.json':
         try:
             app.config.from_json(config_file)
         except AttributeError:
@@ -67,3 +71,8 @@ def _update_config_from_file(app, config_file):
     else:
         msg = "Expected extension .py or .json for config file: {}"
         raise ValueError(msg.format(config_file))
+
+
+def _get_ext(path):
+    basename, ext = os.path.splitext(path)
+    return ext
