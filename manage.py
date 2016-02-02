@@ -8,8 +8,11 @@ from scrappyr.app import create_app
 from scrappyr.common import db
 
 
-app = create_app()
-manager = Manager(app)
+manager = Manager(create_app)
+
+# Options passed to `create_app`.
+manager.add_option('-c', '--config', dest='flask_config', required=False)
+
 manager.add_command('server', Server())
 manager.add_command('db', MigrateCommand)
 manager.add_command('show-urls', ShowUrls())
@@ -19,7 +22,7 @@ manager.add_command('clean', Clean())
 @manager.shell
 def make_shell_context():
     """Open ipython with several default imports in the context of the app."""
-    return dict(app=app, db=db)
+    return dict(app=manager.app, db=db)
 
 
 @manager.command

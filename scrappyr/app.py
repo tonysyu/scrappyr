@@ -4,9 +4,9 @@ from .common import config, db, migrate
 from .controllers import scrappyr
 
 
-SQLALCHEMY_DATABASE_URI = "sqlite:////tmp/scrappyr.db"
 DEBUG = True
 SECRET_KEY = 'development-key'
+SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/scrappyr.db'
 
 
 def create_app(flask_config=None):
@@ -28,6 +28,7 @@ def create_app(flask_config=None):
 
     app = Flask(__name__)
     app.config.from_object(flask_config)
+
     app.register_blueprint(scrappyr)
 
     config.init_app(app)
