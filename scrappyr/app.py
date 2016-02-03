@@ -2,7 +2,7 @@ import os.path
 
 from flask import Flask
 
-from .common import config, db, migrate
+from .common import db, migrate
 from .controllers import scrappyr
 
 
@@ -46,7 +46,6 @@ def create_app(config_obj=None, config_file=None, db_uri=None):
 
     app.register_blueprint(scrappyr)
 
-    config.init_app(app)
     db.init_app(app)
     migrate.init_app(app, db)
     with app.app_context():

@@ -17,9 +17,6 @@ Flask-Migrate>=1.3.0
 # Data validation
 schematics
 
-## Config
-flask-appconfig>=0.9.1
-
 # Testing
 pytest>=2.6.3
 pytest-cov
