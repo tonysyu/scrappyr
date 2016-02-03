@@ -1,10 +1,7 @@
-# Change this to HerokuConfig if using Heroku.
-from flask.ext.migrate import Migrate
 from flask.ext.sqlalchemy import SQLAlchemy
 
 
-__all__ = ['db', 'migrate']
+__all__ = ['db']
 
 
 db = SQLAlchemy()
-migrate = Migrate()

@@ -1,8 +1,9 @@
 import os.path
 
 from flask import Flask
+from flask.ext.migrate import Migrate
 
-from .common import db, migrate
+from .common import db
 from .controllers import scrappyr
 
 
@@ -46,10 +47,7 @@ def create_app(config_obj=None, config_file=None, db_uri=None):
 
     app.register_blueprint(scrappyr)
 
-    db.init_app(app)
-    migrate.init_app(app, db)
-    with app.app_context():
-        db.create_all()
+    _init_db(app)
 
     return app
 
@@ -70,6 +68,16 @@ def _update_config_from_file(app, config_file):
     else:
         msg = "Expected extension .py or .json for config file: {}"
         raise ValueError(msg.format(config_file))
+
+
+def _init_db(app):
+    db.init_app(app)
+
+    migrate = Migrate()
+    migrate.init_app(app, db)
+
+    with app.app_context():
+        db.create_all()
 
 
 def _get_ext(path):
