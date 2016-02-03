@@ -24,4 +24,3 @@ webtest
 
 # Management script
 Flask-Script
-invoke
