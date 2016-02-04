@@ -53,9 +53,9 @@ def make_shell_context():
     return dict(app=manager.app, db=db)
 
 
-@manager.option('-c', '--coverage', action='store_true',
-                help="Display test-coverage summary")
-def test(coverage=False):
+@manager.option('-s', '--skip-coverage', dest='skip_coverage',
+                action='store_true', help="Display test-coverage summary")
+def test(skip_coverage=False):
     """Run python test suite.
 
     If you want to run individual tests, run py.test directly. If you want to
@@ -64,7 +64,7 @@ def test(coverage=False):
         py.test -s path/to/test.py::TestClass::test_method
     """
     opts = ['.']
-    if coverage:
+    if not skip_coverage:
         opts.extend(['--cov', 'scrappyr',  '--cov-report', 'term-missing'])
 
     # Execute command in subprocess instead of `pytest.main(opts)` since the
