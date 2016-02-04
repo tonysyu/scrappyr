@@ -66,8 +66,13 @@ def test(coverage=False):
     opts = ['.']
     if coverage:
         opts.extend(['--cov', 'scrappyr',  '--cov-report', 'term-missing'])
+
+    # Execute command in subprocess instead of `pytest.main(opts)` since the
+    # `scrappyr` imports in this file execute before test execution and
+    # so reports of coverage display imported code as un-covered.
+    cmd = ['py.test'] + opts
     with temp_working_directory(PROJECT_ROOT):
-        pytest.main(opts)
+        run_command(cmd)
 
 
 @manager.command
