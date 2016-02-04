@@ -1,3 +1,7 @@
+import os
+import shutil
+import tempfile
+from contextlib import contextmanager
 from copy import deepcopy
 
 from .common import db
@@ -19,3 +23,21 @@ def strip_ids(dict_list):
     for each in new_dict_list:
         del each['id']
     return new_dict_list
+
+
+@contextmanager
+def temp_file_path(file_name='tmp.txt'):
+    """Yield a writeable temporary filename that is deleted on context exit.
+
+    Parameters
+    ----------
+    suffix : string, optional
+        The suffix for the file.
+
+    """
+    temp_dir = tempfile.mkdtemp()
+    file_path = os.path.join(temp_dir, file_name)
+    try:
+        yield file_path
+    finally:
+        shutil.rmtree(temp_dir)
