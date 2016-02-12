@@ -7,8 +7,8 @@ module.exports = function (config) {
         basePath: '../../',
         frameworks: ['jasmine'],
         files: [
-            'node_modules/angular/angular.js',
-            'node_modules/angular-route/angular-route.js',
+            'node_modules/angular/angular.min.js',
+            'node_modules/angular-route/angular-route.min.js',
             'node_modules/angular-mocks/angular-mocks.js',
             'node_modules/angular-sanitize/angular-sanitize.js',
             'node_modules/angular-ui-tree/dist/angular-ui-tree.min.js',
