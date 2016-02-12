@@ -19,14 +19,32 @@ angular.module('scrappyrUtils', [])
             var array = [],
                 indexMap = {};  // Map from element ID to array index.
 
-            function rebuildIndexMap() {
+            function rebuildIndexMapBruteForce() {
                 var i;
                 indexMap = {};
 
                 for (i = 0; i < array.length; i += 1) {
-                    indexMap[array[i].id] -= 1;
+                    indexMap[array[i].id] = i;
+                }
+            }
+
+            function rebuildIndexMap(start, length, deletedItems, addedItems) {
+                var i, newID,
+                    shiftCount = addedItems.length - (length || 0);
+
+                deletedItems.forEach(function (item) {delete indexMap[item.id]});
+
+                // Shift the index for all *later* array elements.
+                for (i = start; i < array.length; i += 1) {
+                    // shiftCount is negative when only deleting elements.
+                    indexMap[array[i].id] += shiftCount;
                 }
 
+                // Insert new elements into indexMap.
+                for (i = 0; i < addedItems.length; i += 1) {
+                    newID = addedItems[i].id;
+                    indexMap[newID] = start + i;
+                }
             }
 
             array.copy = function () {
@@ -49,6 +67,7 @@ angular.module('scrappyrUtils', [])
 
             array.set = function (id, value) {
                 if (!indexMap.hasOwnProperty(value.id)) {
+                    // If ID is new, add it as the last item in the array.
                     indexMap[value.id] = this.length;
                 }
                 this[indexMap[value.id]] = value;
@@ -60,19 +79,13 @@ angular.module('scrappyrUtils', [])
             };
 
             array.splice = function (start, length) {
-                var i,
-                    newItems = Array.prototype.slice.call(arguments, 2),
-                    shiftCount = newItems.length - (length || 0);
+                var deletedItems, addedItems;
 
-                // Shift the index for all *later* array elements.
-                for (i = start; i < this.length; i += 1) {
-                    indexMap[this[i].id] += shiftCount;
-                }
-                // Insert new elements into indexMap.
-                for (i = 0; i < newItems.length; i += 1) {
-                    indexMap[newItems[i].id] = start + i;
-                }
-                return Array.prototype.splice.apply(this, arguments);
+                addedItems = Array.prototype.slice.call(arguments, 2);
+                deletedItems = Array.prototype.splice.apply(this, arguments);
+                rebuildIndexMap(start, length, deletedItems, addedItems);
+
+                return deletedItems;
             };
 
             // TODO: Override native methods to ensure integrity of `indexMap`.

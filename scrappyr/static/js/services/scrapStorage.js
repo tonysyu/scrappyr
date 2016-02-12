@@ -37,6 +37,7 @@ angular.module('scrappyr')
 
                 return $http.post('/api/scraps', scrap)
                     .then(function success(resp) {
+
                         store.scraps.set(resp.data.id, resp.data);
                         return store.scraps;
                     }, function error() {
@@ -46,9 +47,7 @@ angular.module('scrappyr')
             },
 
             put: function (scrap) {
-                var originalScrap = angular.copy(scrap),
-                    clientScrap = scrap,
-                    i;
+                var originalScrap = angular.copy(scrap);
 
                 return $http.put('/api/scraps/' + scrap.id, scrap)
                     .then(function success(resp) {
