@@ -1,7 +1,7 @@
 /*global angular*/
 
 angular.module('scrappyr')
-    .controller('scrapBasicViewCtrl', function ($scope, scrapStorage) {
+    .controller('scrapBasicViewCtrl', function (scrapStorage) {
         "use strict";
 
         function getEmptyScrap() {
@@ -11,11 +11,7 @@ angular.module('scrappyr')
             };
         }
 
-        $scope.onTagChanged = function (scrap) {
-            scrapStorage.put(scrap);
-        };
-
-        $scope.removeScrap = function (scrap) {
+        this.removeScrap = function (scrap) {
             scrapStorage.remove(scrap);
         };
 
@@ -25,6 +21,7 @@ angular.module('scrappyr')
 
         return {
             controller: 'scrapBasicViewCtrl',
+            controllerAs: 'ctrl',
             templateUrl: '/static/templates/scrap-basic-view.html',
             scope: {
                 scrap: '='
