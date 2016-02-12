@@ -51,5 +51,6 @@ env
 
 # Project specific
 migrations
+scrappyr/static/coverage
 scrappyr/static/node_modules/*
 scrappyr/static/test/node_modules/

@@ -21,8 +21,14 @@ module.exports = function (config) {
         autoWatch: true,
         singleRun: false,
         browsers: ['Firefox'],
+        reporters: ['coverage', 'progress'],
         preprocessors: {
+            'js/**/*.js': ['coverage'],
             'templates/*.html': ['ng-html2js']
+        },
+        coverageReporter: {
+            dir: 'coverage/',
+            type: 'html'
         },
         ngHtml2JsPreprocessor: {
             moduleName: 'my.templates',
