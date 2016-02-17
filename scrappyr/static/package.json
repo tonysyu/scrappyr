@@ -1,10 +1,10 @@
 {
   "private": true,
   "dependencies": {
-    "angular": "1.4.x",
-    "angular-mocks": "1.4.x",
-    "angular-route": "1.4.x",
-    "angular-sanitize": "1.4.x",
+    "angular": "^1.5.0",
+    "angular-mocks": "^1.5.0",
+    "angular-route": "^1.5.0",
+    "angular-sanitize": "^1.5.0",
     "angular-ui-tree": "^2.10.0",
     "bootstrap": ">=3.0.0",
     "jquery": ">=2.1.0",
