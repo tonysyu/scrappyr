@@ -4,7 +4,7 @@ module.exports = function (config) {
     'use strict';
 
     config.set({
-        basePath: '../../',
+        basePath: '../',
         frameworks: ['jasmine'],
         files: [
             'node_modules/angular/angular.min.js',

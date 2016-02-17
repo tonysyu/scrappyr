@@ -15,10 +15,11 @@ from scrappyr.common import db
 
 # Global constants
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-JS_TEST_ROOT = os.path.join(PROJECT_ROOT, 'scrappyr', 'static', 'test')
-KARMA_EXEC = os.path.join(JS_TEST_ROOT, 'node_modules',
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'scrappyr', 'static')
+JS_TEST_ROOT = os.path.join(STATIC_ROOT, 'test')
+KARMA_EXEC = os.path.join(STATIC_ROOT, 'node_modules',
                           'karma-cli', 'bin', 'karma')
-KARMA_CONFIG = os.path.join(JS_TEST_ROOT, 'config', 'karma.conf.js')
+KARMA_CONFIG = os.path.join(JS_TEST_ROOT, 'karma.conf.js')
 
 
 manager = Manager(create_app)
