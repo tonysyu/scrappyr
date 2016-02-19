@@ -5,6 +5,12 @@
  *
  * @type {angular.Module}
  */
+var angular = require('angular');
+require('angular-route');
+require('angular-sanitize');
+require('angular-ui-tree');
+require('ng-tags-input');
+
 angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'scrappyrUtils', 'ui.tree'])
     .config(function ($routeProvider) {
         'use strict';
@@ -48,3 +54,15 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'scrappyrUti
                 redirectTo: '/scraps'
             });
     });
+
+require('./scrappyrUtils');
+require('./controllers/scrappyrCtrl');
+require('./controllers/scrapsPageCtrl');
+require('./controllers/tagsPageCtrl');
+require('./directives/mathjax');
+require('./directives/scrapBasicView');
+require('./directives/scrapDetailView');
+require('./directives/scrapEscape');
+require('./directives/scrapFocus');
+require('./services/scrapStorage');
+require('./services/tagStorage');

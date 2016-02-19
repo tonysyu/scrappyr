@@ -7,14 +7,10 @@ module.exports = function (config) {
         basePath: '../',
         frameworks: ['jasmine'],
         files: [
-            'node_modules/angular/angular.min.js',
-            'node_modules/angular-route/angular-route.min.js',
-            'node_modules/angular-mocks/angular-mocks.js',
-            'node_modules/angular-sanitize/angular-sanitize.js',
-            'node_modules/angular-ui-tree/dist/angular-ui-tree.min.js',
+            // Include bundle.js first to ensure dependencies are included.
+            'bundle.js',
             'node_modules/mathjax/MathJax.js',
-            'node_modules/ng-tags-input/build/ng-tags-input.js',
-            'js/**/*.js',
+            'node_modules/angular-mocks/angular-mocks.js',
             'templates/*.html',
             'test/unit/**/*.js'
         ],
@@ -26,6 +22,12 @@ module.exports = function (config) {
             'js/**/*.js': ['coverage'],
             'templates/*.html': ['ng-html2js']
         },
+        plugins: [
+            require("karma-coverage"),
+            require("karma-firefox-launcher"),
+            require("karma-jasmine"),
+            require("karma-ng-html2js-preprocessor"),
+        ],
         coverageReporter: {
             dir: 'coverage/',
             type: 'html'
