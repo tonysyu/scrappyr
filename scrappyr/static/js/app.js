@@ -5,11 +5,11 @@
  *
  * @type {angular.Module}
  */
-var angular = require('angular');
-require('angular-route');
-require('angular-sanitize');
-require('angular-ui-tree');
-require('ng-tags-input');
+import 'angular';
+import 'angular-route';
+import 'angular-sanitize';
+import 'angular-ui-tree';
+import 'ng-tags-input';
 
 angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'scrappyrUtils', 'ui.tree'])
     .config(function ($routeProvider) {
