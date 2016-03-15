@@ -4,12 +4,14 @@
  * The main controller for the app.
  */
 
-angular.module('scrappyr')
-    .controller('ScrappyrCtrl', function ScrappyrCtrl($scope, $location) {
-        'use strict';
-
+class ScrappyrController {
+    constructor($scope, $location) {
         $scope.isActive = function (viewLocation) {
             var value = viewLocation === $location.path();
             return value;
         };
-    });
+    }
+}
+
+ScrappyrController.$inject = ['$scope', '$location'];
+export default ScrappyrController;

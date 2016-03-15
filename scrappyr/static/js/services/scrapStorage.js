@@ -1,15 +1,17 @@
 /*global angular */
 /*jslint nomen:true*/
 
+import {createMappedArray} from '../scrappyrUtils';
+
 /**
  * Services that persists and retrieves scraps from the backend API.
  */
 angular.module('scrappyr')
-    .factory('scrapStorage', function ($http, scrappyrUtils) {
+    .factory('scrapStorage', function ($http) {
         'use strict';
 
         var store = {
-            scraps: scrappyrUtils.createMappedArray(),
+            scraps: createMappedArray(),
 
             remove: function (scrap) {
                 var originalScraps = store.scraps.copy();

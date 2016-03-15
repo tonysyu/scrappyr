@@ -11,7 +11,17 @@ import 'angular-sanitize';
 import 'angular-ui-tree';
 import 'ng-tags-input';
 
-angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'scrappyrUtils', 'ui.tree'])
+import ScrappyrController from './controllers/scrappyrCtrl';
+import ScrapsPageController from './controllers/scrapsPageCtrl';
+import mathjax from './directives/mathjax';
+import scrapEscape from './directives/scrapEscape';
+
+
+angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
+    .controller('ScrappyrCtrl', ScrappyrController)
+    .controller('scrapsPageCtrl', ScrapsPageController)
+    .directive('mathjax', mathjax)
+    .directive('scrapEscape', scrapEscape)
     .config(function ($routeProvider) {
         'use strict';
 
@@ -55,14 +65,10 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'scrappyrUti
             });
     });
 
-require('./scrappyrUtils');
-require('./controllers/scrappyrCtrl');
-require('./controllers/scrapsPageCtrl');
+
 require('./controllers/tagsPageCtrl');
-require('./directives/mathjax');
 require('./directives/scrapBasicView');
 require('./directives/scrapDetailView');
-require('./directives/scrapEscape');
 require('./directives/scrapFocus');
 require('./services/scrapStorage');
 require('./services/tagStorage');

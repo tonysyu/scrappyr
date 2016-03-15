@@ -1,15 +1,17 @@
 /*global angular */
 /*jslint nomen:true*/
 
+import {createMappedArray} from '../scrappyrUtils';
+
 /**
  * Services that persists and retrieves tags from the backend API.
  */
 angular.module('scrappyr')
-    .factory('tagStorage', function ($http, scrappyrUtils) {
+    .factory('tagStorage', function ($http) {
         'use strict';
 
         var store = {
-            tags: scrappyrUtils.createMappedArray(),
+            tags: createMappedArray(),
 
             remove: function (tag) {
                 var originalTags = store.tags.copy();

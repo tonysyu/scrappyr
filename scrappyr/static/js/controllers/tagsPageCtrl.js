@@ -1,10 +1,11 @@
 /*jslint nomen: true*/
 /*global _, angular*/
 
+import _ from 'underscore';
+
 /**
  * The controller for tags page.
  */
-
 angular.module('scrappyr')
     .controller('tagsPageCtrl', function ($scope, scrapStore, tagStore) {
         'use strict';

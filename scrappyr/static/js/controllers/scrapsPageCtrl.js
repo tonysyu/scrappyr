@@ -3,9 +3,10 @@
 /**
  * The controller for main scraps page.
  */
-angular.module('scrappyr')
-    .controller('scrapsPageCtrl', function ($scope, $routeParams, store) {
-        'use strict';
+
+
+class ScrapsPageController {
+    constructor($scope, $routeParams, store) {
 
         function getEmptyScrap() {
             return {
@@ -39,5 +40,9 @@ angular.module('scrappyr')
         $scope.selectScrap = function (scrap) {
             $scope.selectedScrap = scrap;
         };
+    }
+}
 
-    });
+
+ScrapsPageController.$inject = ['$scope', '$routeParams', 'store'];
+export default ScrapsPageController;
