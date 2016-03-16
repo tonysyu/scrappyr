@@ -1,4 +1,4 @@
-class ScrapBasicViewController {
+export class ScrapBasicViewController {
     constructor(scrapStorage) {
         this._scrapStorage = scrapStorage;
     }
@@ -8,7 +8,7 @@ class ScrapBasicViewController {
     }
 }
 
-export function scrapBasicViewControllerFactory(scrapStorage) {
+function scrapBasicViewControllerFactory(scrapStorage) {
     return new ScrapBasicViewController(scrapStorage);
 }
 
@@ -17,7 +17,7 @@ scrapBasicViewControllerFactory.$inject = ['scrapStorage'];
 
 class ScrapBasicView {
     constructor() {
-        this.controller = 'scrapBasicViewCtrl',
+        this.controller = scrapBasicViewControllerFactory,
         this.controllerAs = 'ctrl',
         this.templateUrl = '/static/templates/scrap-basic-view.html',
         this.scope = {

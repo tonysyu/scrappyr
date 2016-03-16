@@ -5,14 +5,14 @@
     'use strict';
 
     describe('scrapBasicViewCtrl:', function () {
-        var ctrl, element, scope, store,
+        var scope, store,
             default_scrap = {title: 'Start with one scrap'};
 
         // Load the module containing the app, only 'ng' is loaded by default.
         beforeEach(module('scrappyr'));
         beforeEach(module('my.templates'));
 
-        beforeEach(inject(function ($rootScope, scrapStorage, $httpBackend, $compile) {
+        beforeEach(inject(function ($rootScope, scrapStorage, $httpBackend) {
             var count = 0;
 
             scope = $rootScope.$new();
@@ -35,12 +35,8 @@
 
         }));
 
-        describe('Pre-populate 5 scraps', function () {
-            beforeEach(inject(function ($controller, $httpBackend) {
-                ctrl = $controller('scrapBasicViewCtrl', {
-                    $scope: scope,
-                    store: store
-                });
+        describe('Pre-populate 3 scraps', function () {
+            beforeEach(inject(function ($httpBackend) {
                 store.insert({ title: 'Item 1' });
                 store.insert({ title: 'Item 2' });
                 store.insert({ title: 'Item 3' });
