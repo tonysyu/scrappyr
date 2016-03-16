@@ -6,33 +6,34 @@ import {createMappedArray} from '../scrappyrUtils';
 /**
  * Services that persists and retrieves tags from the backend API.
  */
-angular.module('scrappyr')
-    .factory('tagStorage', function ($http) {
-        'use strict';
+class TagStorage {
+    constructor($http) {
+        this._http = $http;
+        this.tags = createMappedArray();
+    }
 
-        var store = {
-            tags: createMappedArray(),
+    remove(tag) {
+        var originalTags = this.tags.copy();
+        this.tags.remove(tag.id);
 
-            remove: function (tag) {
-                var originalTags = store.tags.copy();
-                store.tags.remove(tag.id);
+        var success = () => { return this.tags; };
+        var failure = () => {                       // failure
+            this.tags.update(originalTags);
+            return this.tags;
+        }
+        return this._http.delete('/api/tags/' + tag.id)
+            .then(success, failure);
+    }
 
-                return $http.delete('/api/tags/' + tag.id)
-                    .then(function success() {
-                        return store.tags;
-                    }, function error() {
-                        store.tags.update(originalTags);
-                        return store.tags;
-                    });
-            },
+    get() {
+        return this._http.get('/api/tags')
+            .then((resp) => { this.tags.update(resp.data.tags); });
+    }
 
-            get: function () {
-                $http.get('/api/tags')
-                    .then(function (resp) {
-                        store.tags.update(resp.data.tags);
-                    });
-            }
-        };
+    static TagStorageFactory($http){
+        return new TagStorage($http);
+    }
+}
 
-        return store;
-    });
+TagStorage.TagStorageFactory.$inject = ['$http'];
+export default TagStorage;

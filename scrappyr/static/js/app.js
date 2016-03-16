@@ -15,6 +15,7 @@ import ScrappyrController from './controllers/scrappyrCtrl';
 import ScrapsPageController from './controllers/scrapsPageCtrl';
 import mathjax from './directives/mathjax';
 import scrapEscape from './directives/scrapEscape';
+import TagStorage from './services/tagStorage';
 
 
 angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
@@ -22,6 +23,7 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
     .controller('scrapsPageCtrl', ScrapsPageController)
     .directive('mathjax', mathjax)
     .directive('scrapEscape', scrapEscape)
+    .factory('tagStorage', TagStorage.TagStorageFactory)
     .config(function ($routeProvider) {
         'use strict';
 
@@ -71,4 +73,3 @@ require('./directives/scrapBasicView');
 require('./directives/scrapDetailView');
 require('./directives/scrapFocus');
 require('./services/scrapStorage');
-require('./services/tagStorage');
