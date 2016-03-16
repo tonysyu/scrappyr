@@ -1,10 +1,9 @@
-/*global angular */
 /*jslint nomen:true*/
 
 import {createMappedArray} from '../scrappyrUtils';
 
 /**
- * Services that persists and retrieves tags from the backend API.
+ * Service that persists and retrieves tags from the backend API.
  */
 class TagStorage {
     constructor($http) {
@@ -29,11 +28,11 @@ class TagStorage {
         return this._http.get('/api/tags')
             .then((resp) => this.tags.update(resp.data.tags));
     }
-
-    static tagStorageFactory($http){
-        return new TagStorage($http);
-    }
 }
 
-TagStorage.tagStorageFactory.$inject = ['$http'];
-export default TagStorage;
+function tagStorageFactory($http){
+    return new TagStorage($http);
+}
+
+tagStorageFactory.$inject = ['$http'];
+export default tagStorageFactory;

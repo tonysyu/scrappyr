@@ -2,7 +2,7 @@ import 'angular'
 import {createMappedArray} from '../scrappyrUtils';
 
 /**
- * Services that persists and retrieves scraps from the backend API.
+ * Service that persists and retrieves scraps from the backend API.
  */
 class ScrapStorage {
     constructor($http) {
@@ -52,10 +52,11 @@ class ScrapStorage {
         return this._http.put(url, scrap).then(success, failure);
     }
 
-    static scrapStorageFactory($http) {
-        return new ScrapStorage($http);
-    }
 }
 
-ScrapStorage.scrapStorageFactory.$inject = ['$http'];
-export default ScrapStorage;
+function scrapStorageFactory($http) {
+    return new ScrapStorage($http);
+}
+
+scrapStorageFactory.$inject = ['$http'];
+export default scrapStorageFactory;

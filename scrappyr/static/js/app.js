@@ -15,8 +15,8 @@ import ScrappyrController from './controllers/scrappyrCtrl';
 import ScrapsPageController from './controllers/scrapsPageCtrl';
 import mathjax from './directives/mathjax';
 import scrapEscape from './directives/scrapEscape';
-import TagStorage from './services/tagStorage';
-import ScrapStorage from './services/scrapStorage';
+import tagStorageFactory from './services/tagStorage';
+import scrapStorageFactory from './services/scrapStorage';
 
 
 angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
@@ -24,8 +24,8 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
     .controller('scrapsPageCtrl', ScrapsPageController)
     .directive('mathjax', mathjax)
     .directive('scrapEscape', scrapEscape)
-    .factory('scrapStorage', ScrapStorage.scrapStorageFactory)
-    .factory('tagStorage', TagStorage.tagStorageFactory)
+    .factory('scrapStorage', scrapStorageFactory)
+    .factory('tagStorage', tagStorageFactory)
     .config(function ($routeProvider) {
         'use strict';
 
