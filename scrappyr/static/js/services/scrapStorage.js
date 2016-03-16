@@ -1,64 +1,61 @@
-/*global angular */
-/*jslint nomen:true*/
-
+import 'angular'
 import {createMappedArray} from '../scrappyrUtils';
 
 /**
  * Services that persists and retrieves scraps from the backend API.
  */
-angular.module('scrappyr')
-    .factory('scrapStorage', function ($http) {
-        'use strict';
+class ScrapStorage {
+    constructor($http) {
+        this._http = $http;
+        this.scraps = createMappedArray();
+    }
 
-        var store = {
-            scraps: createMappedArray(),
+    remove(scrap) {
+        var originalScraps = this.scraps.copy();
 
-            remove: function (scrap) {
-                var originalScraps = store.scraps.copy();
+        this.scraps.remove(scrap.id);
 
-                store.scraps.remove(scrap.id);
-
-                return $http.delete('/api/scraps/' + scrap.id)
-                    .then(function success() {
-                        return store.scraps;
-                    }, function error() {
-                        store.scraps.update(originalScraps);
-                        return store.scraps;
-                    });
-            },
-
-            get: function () {
-                $http.get('/api/scraps')
-                    .then(function (resp) {
-                        store.scraps.update(resp.data.scraps);
-                    });
-            },
-
-            insert: function (scrap) {
-                var originalScraps = store.scraps.copy();
-
-                return $http.post('/api/scraps', scrap)
-                    .then(function success(resp) {
-
-                        store.scraps.set(resp.data.id, resp.data);
-                        return store.scraps;
-                    }, function error() {
-                        store.scraps.update(originalScraps);
-                        return store.scraps;
-                    });
-            },
-
-            put: function (scrap) {
-                var originalScrap = angular.copy(scrap);
-
-                return $http.put('/api/scraps/' + scrap.id, scrap)
-                    .then(function success(resp) {
-                        angular.extend(scrap, resp.data);
-                    }, function error() {
-                        angular.extend(scrap, originalScrap);
-                    });
-            }
+        var url = '/api/scraps/' + scrap.id;
+        var success = () => this.scraps;
+        var failure = () => {
+            this.scraps.update(originalScraps);
+            return this.scraps;
         };
+        return this._http.delete(url).then(success, failure);
+    }
 
-        return store;
-    });
+    get() {
+        this._http.get('/api/scraps')
+            .then((resp) => { this.scraps.update(resp.data.scraps); });
+    }
+
+    insert(scrap) {
+        var originalScraps = this.scraps.copy();
+
+        var success = (resp) => {
+            this.scraps.set(resp.data.id, resp.data);
+            return this.scraps;
+        };
+        var failure = () => {
+            this.scraps.update(originalScraps);
+            return this.scraps;
+        };
+        return this._http.post('/api/scraps', scrap).then(success, failure);
+    }
+
+    put(scrap) {
+        var originalScrap = angular.copy(scrap);
+
+        var url = '/api/scraps/' + scrap.id;
+        var success = (resp) => angular.extend(scrap, resp.data);
+        var failure = () => angular.extend(scrap, originalScrap);
+        return this._http.put(url, scrap).then(success, failure);
+    }
+
+    static scrapStorageFactory($http) {
+        return new ScrapStorage($http);
+    }
+}
+
+ScrapStorage.scrapStorageFactory.$inject = ['$http'];
+export default ScrapStorage;

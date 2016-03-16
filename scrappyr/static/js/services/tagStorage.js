@@ -16,7 +16,7 @@ class TagStorage {
         var originalTags = this.tags.copy();
         this.tags.remove(tag.id);
 
-        var success = () => { return this.tags; };
+        var success = () => this.tags;
         var failure = () => {                       // failure
             this.tags.update(originalTags);
             return this.tags;
@@ -27,13 +27,13 @@ class TagStorage {
 
     get() {
         return this._http.get('/api/tags')
-            .then((resp) => { this.tags.update(resp.data.tags); });
+            .then((resp) => this.tags.update(resp.data.tags));
     }
 
-    static TagStorageFactory($http){
+    static tagStorageFactory($http){
         return new TagStorage($http);
     }
 }
 
-TagStorage.TagStorageFactory.$inject = ['$http'];
+TagStorage.tagStorageFactory.$inject = ['$http'];
 export default TagStorage;
