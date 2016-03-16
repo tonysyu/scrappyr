@@ -1,5 +1,3 @@
-/*jslint nomen:true*/
-
 import {createMappedArray} from '../scrappyrUtils';
 
 /**

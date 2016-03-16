@@ -18,12 +18,16 @@ import scrapEscape from './directives/scrapEscape';
 import tagStorageFactory from './services/tagStorage';
 import scrapStorageFactory from './services/scrapStorage';
 
+import {scrapBasicViewFactory, scrapBasicViewControllerFactory}
+    from './directives/scrapBasicView';
 
 angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
     .controller('ScrappyrCtrl', ScrappyrController)
     .controller('scrapsPageCtrl', ScrapsPageController)
+    .controller('scrapBasicViewCtrl', scrapBasicViewControllerFactory)
     .directive('mathjax', mathjax)
     .directive('scrapEscape', scrapEscape)
+    .directive('scrapBasicView', scrapBasicViewFactory)
     .factory('scrapStorage', scrapStorageFactory)
     .factory('tagStorage', tagStorageFactory)
     .config(function ($routeProvider) {
@@ -71,7 +75,6 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
 
 
 require('./controllers/tagsPageCtrl');
-require('./directives/scrapBasicView');
 require('./directives/scrapDetailView');
 require('./directives/scrapFocus');
 require('./services/scrapStorage');

@@ -1,30 +1,31 @@
-/*global angular*/
+class ScrapBasicViewController {
+    constructor(scrapStorage) {
+        this._scrapStorage = scrapStorage;
+    }
 
-angular.module('scrappyr')
-    .controller('scrapBasicViewCtrl', function (scrapStorage) {
-        "use strict";
+    removeScrap(scrap) {
+        this._scrapStorage.remove(scrap);
+    }
+}
 
-        function getEmptyScrap() {
-            return {
-                title: '',
-                tags: []
-            };
-        }
+export function scrapBasicViewControllerFactory(scrapStorage) {
+    return new ScrapBasicViewController(scrapStorage);
+}
 
-        this.removeScrap = function (scrap) {
-            scrapStorage.remove(scrap);
+scrapBasicViewControllerFactory.$inject = ['scrapStorage'];
+
+
+class ScrapBasicView {
+    constructor() {
+        this.controller = 'scrapBasicViewCtrl',
+        this.controllerAs = 'ctrl',
+        this.templateUrl = '/static/templates/scrap-basic-view.html',
+        this.scope = {
+            scrap: '='
         };
+    }
+}
 
-    })
-    .directive('scrapBasicView', function () {
-        "use strict";
-
-        return {
-            controller: 'scrapBasicViewCtrl',
-            controllerAs: 'ctrl',
-            templateUrl: '/static/templates/scrap-basic-view.html',
-            scope: {
-                scrap: '='
-            }
-        };
-    });
+export function scrapBasicViewFactory() {
+    return new ScrapBasicView();
+}
