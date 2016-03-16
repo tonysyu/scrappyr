@@ -1,10 +1,6 @@
-/*global angular */
-
 /**
  * The controller for main scraps page.
  */
-
-
 class ScrapsPageController {
     constructor($scope, $routeParams, store) {
 

@@ -1,5 +1,4 @@
-/*global angular */
-
+import 'angular';
 
 // createMappedArray
 //

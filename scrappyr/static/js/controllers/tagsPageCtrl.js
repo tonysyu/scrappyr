@@ -1,5 +1,5 @@
 /*jslint nomen: true*/
-/*global _, angular*/
+/*global angular*/
 
 import _ from 'underscore';
 

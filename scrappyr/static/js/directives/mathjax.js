@@ -1,4 +1,4 @@
-/*global angular, MathJax*/
+/*global MathJax*/
 
 export default function mathjax() {
     return {

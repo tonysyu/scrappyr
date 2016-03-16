@@ -1,9 +1,6 @@
-/*global angular */
-
 /**
  * The main controller for the app.
  */
-
 class ScrappyrController {
     constructor($scope, $location) {
         $scope.isActive = function (viewLocation) {
