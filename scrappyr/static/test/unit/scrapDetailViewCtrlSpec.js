@@ -44,19 +44,19 @@
 
             it('should remove scraps w/o title on saving', function () {
                 scope.scrap.title = '';
-                scope.saveEdits(scope.scrap);
+                ctrl.saveEdits(scope.scrap);
                 expect(store.scraps.length).toBe(0);
             });
 
             it('should trim scraps on saving', function () {
                 scope.scrap.title = ' buy moar unicorns  ';
-                scope.saveEdits(scope.scrap);
+                ctrl.saveEdits(scope.scrap);
                 expect(store.scraps.get(1).title).toBe('buy moar unicorns');
             });
 
             it('revertScrap() get a scrap to its previous state', function () {
                 scope.scrap.title = 'Unicorn sparkly skypuffles.';
-                scope.revertEdits(scope.scrap);
+                ctrl.revertEdits(scope.scrap);
                 expect(store.scraps.get(1).title).toBe('Item 1');
             });
 

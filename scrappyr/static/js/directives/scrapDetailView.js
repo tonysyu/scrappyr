@@ -19,43 +19,40 @@ angular.module('scrappyr')
             updateOriginalScrap($scope.scrap);
         });
 
-        // TODO: Pass just the ID and tag list and have the backend update just
-        // the tags.
-        $scope.onTagChanged = function (scrap) {
-            scrapStorage.put(scrap);
-        };
+        return {
+            isEditing: false,
+            // TODO: Pass just the ID and tag list and have the backend update
+            // just the tags.
+            onTagChanged: function (scrap) {
+                scrapStorage.put(scrap);
+            },
 
-        $scope.editScrap = function (scrap) {
-            $scope.isEditing = true;
-        };
+            editScrap: function (scrap) {
+                this.isEditing = true;
+            },
 
-        $scope.saveEdits = function (scrap) {
-            scrap.title = scrap.title.trim();
-            if (scrap.title === $scope.originalScrap.title) {
-                $scope.isEditing = false;
-                return;
-            }
+            saveEdits: function (scrap) {
+                scrap.title = scrap.title.trim();
+                if (scrap.title === $scope.originalScrap.title) {
+                    this.isEditing = false;
+                    return;
+                }
 
-            scrapStorage[scrap.title ? 'put' : 'remove'](scrap)
-                .then(
-                    function success() {
-                        updateOriginalScrap(scrap);
-                    },
-                    function error() {
-                        revertToOriginalScrap(scrap);
-                    }
-                )
-                .finally(function () {
-                    $scope.isEditing = false;
-                });
-        };
+                scrapStorage[scrap.title ? 'put' : 'remove'](scrap)
+                    .then(
+                        () => updateOriginalScrap(scrap),
+                        () => revertToOriginalScrap(scrap)
+                    )
+                    .finally(() => { this.isEditing = false; });
+            },
 
-        $scope.revertEdits = function (scrap) {
-            if (angular.isUndefined(scrap)) {
-                return;
-            }
-            revertToOriginalScrap(scrap);
-            $scope.isEditing = false;
+            revertEdits: function (scrap) {
+                if (angular.isUndefined(scrap)) {
+                    return;
+                }
+                revertToOriginalScrap(scrap);
+                this.isEditing = false;
+            },
         };
     })
     .directive('scrapDetailView', function () {
@@ -63,6 +60,7 @@ angular.module('scrappyr')
 
         return {
             controller: 'scrapDetailViewCtrl',
+            controllerAs: 'ctrl',
             templateUrl: '/static/templates/scrap-detail-view.html',
             scope: {
                 scrap: '='

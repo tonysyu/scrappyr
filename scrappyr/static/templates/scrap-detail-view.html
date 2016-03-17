@@ -3,19 +3,19 @@
   <div
     class="scrap-title"
     data-mathjax
-    ng-if="!isEditing"
-    ng-click="editScrap(scrap)"
+    ng-if="!ctrl.isEditing"
+    ng-click="ctrl.editScrap(scrap)"
     ng-bind-html="scrap.html_title">
   </div>
 
-  <form ng-class="{editing: isEditing}">
+  <form ng-class="{editing: ctrl.isEditing}">
     <textarea
       class="edit scrap-title vertical-resize"
-      ng-if="isEditing"
+      ng-if="ctrl.isEditing"
       ng-model="scrap.title"
-      scrap-escape="revertEdits(scrap)"
-      ng-blur="saveEdits(scrap)"
-      scrap-focus="isEditing">
+      scrap-escape="ctrl.revertEdits(scrap)"
+      ng-blur="ctrl.saveEdits(scrap)"
+      scrap-focus="ctrl.isEditing">
     </textarea>
 
   </form>
@@ -24,6 +24,6 @@
 
 <tags-input
   ng-model="scrap.tags"
-  on-tag-added="onTagChanged(scrap)"
-  on-tag-removed="onTagChanged(scrap)">
+  on-tag-added="ctrl.onTagChanged(scrap)"
+  on-tag-removed="ctrl.onTagChanged(scrap)">
 </tags-input>
