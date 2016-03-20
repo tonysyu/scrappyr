@@ -16,6 +16,7 @@ import scrapsPageControllerFactory from './controllers/scrapsPageCtrl';
 import tagsPageControllerFactory from './tagsPage/tagsPageCtrl';
 import mathjax from './directives/mathjax';
 import scrapEscape from './directives/scrapEscape';
+import scrapFocusFactory from './directives/scrapFocus';
 import {scrapBasicViewFactory} from './directives/scrapBasicView';
 import {scrapDetailViewFactory} from './directives/scrapDetailView';
 import tagStorageFactory from './services/tagStorage';
@@ -28,9 +29,10 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
     .controller('scrapsPageCtrl', scrapsPageControllerFactory)
     .controller('tagsPageCtrl', tagsPageControllerFactory)
     .directive('mathjax', mathjax)
-    .directive('scrapEscape', scrapEscape)
     .directive('scrapBasicView', scrapBasicViewFactory)
     .directive('scrapDetailView', scrapDetailViewFactory)
+    .directive('scrapEscape', scrapEscape)
+    .directive('scrapFocus', scrapFocusFactory)
     .factory('scrapStorage', scrapStorageFactory)
     .factory('tagStorage', tagStorageFactory)
     .filter('hasTagInList', scrapHasTagInListFilterFactory)
@@ -77,8 +79,6 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
             });
     });
 
-
-require('./directives/scrapFocus');
 
 // Export controller for testing.
 import {ScrapDetailViewController} from './directives/scrapDetailView';
