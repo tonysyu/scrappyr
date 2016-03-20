@@ -11,7 +11,7 @@ import 'ng-tags-input';
 
 import ScrappyrController from './controllers/scrappyrCtrl';
 import scrapsPageControllerFactory from './controllers/scrapsPageCtrl';
-import tagsPageControllerFactory from './tagsPage/tagsPageCtrl';
+import tagsPageControllerFactory from './tagsPage/controller';
 import mathjax from './directives/mathjax';
 import scrapEscape from './directives/scrapEscape';
 import scrapFocusFactory from './directives/scrapFocus';
@@ -33,7 +33,7 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
     .directive('scrapFocus', scrapFocusFactory)
     .factory('scrapStorage', scrapStorageFactory)
     .factory('tagStorage', tagStorageFactory)
-    .filter('hasTagInList', scrapHasTagInListFilterFactory)
+    .filter('scrapHasTagInList', scrapHasTagInListFilterFactory)
     .config(function ($routeProvider) {
         'use strict';
 

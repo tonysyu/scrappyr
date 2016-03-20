@@ -31,7 +31,7 @@
     <ul id="scrap-list">
 
       <li class="scrap"
-        ng-repeat="scrap in scraps | hasTagInList:selectedTags track by scrap.id">
+        ng-repeat="scrap in scraps | scrapHasTagInList:selectedTags track by scrap.id">
         <scrap-basic-view scrap=scrap></scrap-basic-view>
       </li>
 
