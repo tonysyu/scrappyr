@@ -13,7 +13,7 @@ import 'ng-tags-input';
 
 import ScrappyrController from './controllers/scrappyrCtrl';
 import scrapsPageControllerFactory from './controllers/scrapsPageCtrl';
-import tagsPageControllerFactory from './controllers/tagsPageCtrl';
+import tagsPageControllerFactory from './tagsPage/tagsPageCtrl';
 import mathjax from './directives/mathjax';
 import scrapEscape from './directives/scrapEscape';
 import {scrapBasicViewFactory} from './directives/scrapBasicView';
@@ -78,7 +78,6 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
     });
 
 
-require('./controllers/tagsPageCtrl');
 require('./directives/scrapFocus');
 
 // Export controller for testing.
