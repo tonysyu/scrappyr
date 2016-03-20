@@ -50,7 +50,8 @@ export class ScrapDetailViewController {
     }
 }
 
-function scrapDetailViewControllerFactory($scope, scrapStorage) {
+// Angular factory for ScrapDetailViewController.
+export function scrapDetailViewControllerFactory($scope, scrapStorage) {
     var ctrl = new ScrapDetailViewController(scrapStorage);
     // Watch changes in scrap *identity* and copy that as `originalScrap`.
     $scope.$watch('scrap', () => ctrl.updateOriginalScrap($scope.scrap));
@@ -58,20 +59,3 @@ function scrapDetailViewControllerFactory($scope, scrapStorage) {
 }
 
 scrapDetailViewControllerFactory.$inject = ['$scope', 'scrapStorage'];
-
-
-class ScrapDetailView {
-    constructor () {
-        this.controller = scrapDetailViewControllerFactory;
-        this.controllerAs = 'ctrl';
-        this.templateUrl = '/static/templates/scrap-detail-view.html';
-        this.scope = {
-            scrap: '='
-        };
-    }
-}
-
-
-export function scrapDetailViewFactory() {
-    return new ScrapDetailView();
-}

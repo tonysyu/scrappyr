@@ -1,9 +1,7 @@
-/*global angular, MathJax*/
+/*global MathJax*/
 
 /**
  * The main Scrappyr app module
- *
- * @type {angular.Module}
  */
 import 'angular';
 import 'angular-route';
@@ -18,7 +16,7 @@ import mathjax from './directives/mathjax';
 import scrapEscape from './directives/scrapEscape';
 import scrapFocusFactory from './directives/scrapFocus';
 import {scrapBasicViewFactory} from './directives/scrapBasicView';
-import {scrapDetailViewFactory} from './directives/scrapDetailView';
+import {scrapDetailViewFactory} from './scrapDetailView/directive';
 import tagStorageFactory from './services/tagStorage';
 import scrapStorageFactory from './services/scrapStorage';
 import scrapHasTagInListFilterFactory from './tagsPage/scrapHasTagInList';
@@ -81,5 +79,5 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
 
 
 // Export controller for testing.
-import {ScrapDetailViewController} from './directives/scrapDetailView';
+import {ScrapDetailViewController} from './scrapDetailView/controller';
 export {ScrapDetailViewController};

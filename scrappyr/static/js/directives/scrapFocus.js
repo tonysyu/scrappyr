@@ -6,8 +6,6 @@
  * clicking away from an element is enough to remove focus.
  */
 function scrapFocus($timeout) {
-    'use strict';
-
     return function (scope, elem, attrs) {
         scope.$watch(attrs.scrapFocus, function (newVal) {
             if (newVal) {
