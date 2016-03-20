@@ -3,9 +3,9 @@
 /**
  * The controller for tags page.
  */
-angular.module('scrappyr')
-    .controller('tagsPageCtrl', function ($scope, scrapStore, tagStore) {
-        'use strict';
+
+class TagsPageController {
+    constructor($scope, scrapStore, tagStore) {
         $scope.scraps = scrapStore.scraps;
         $scope.tags = tagStore.tags;
 
@@ -34,4 +34,12 @@ angular.module('scrappyr')
             $scope.selectedTags = tagList;
 
         });
-    });
+    }
+}
+
+
+function tagsPageControllerFactory($scope, scrapStore, tagStore) {
+    new TagsPageController($scope, scrapStore, tagStore);
+}
+tagsPageControllerFactory.$inject = ['$scope', 'scrapStore', 'tagStore']
+export default tagsPageControllerFactory;

@@ -12,7 +12,8 @@ import 'angular-ui-tree';
 import 'ng-tags-input';
 
 import ScrappyrController from './controllers/scrappyrCtrl';
-import ScrapsPageController from './controllers/scrapsPageCtrl';
+import scrapsPageControllerFactory from './controllers/scrapsPageCtrl';
+import tagsPageControllerFactory from './controllers/tagsPageCtrl';
 import mathjax from './directives/mathjax';
 import scrapEscape from './directives/scrapEscape';
 import {scrapBasicViewFactory} from './directives/scrapBasicView';
@@ -24,7 +25,8 @@ import scrapHasTagInListFilterFactory from './tagsPage/scrapHasTagInList';
 
 angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
     .controller('ScrappyrCtrl', ScrappyrController)
-    .controller('scrapsPageCtrl', ScrapsPageController)
+    .controller('scrapsPageCtrl', scrapsPageControllerFactory)
+    .controller('tagsPageCtrl', tagsPageControllerFactory)
     .directive('mathjax', mathjax)
     .directive('scrapEscape', scrapEscape)
     .directive('scrapBasicView', scrapBasicViewFactory)

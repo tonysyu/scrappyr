@@ -40,5 +40,8 @@ class ScrapsPageController {
 }
 
 
-ScrapsPageController.$inject = ['$scope', '$routeParams', 'store'];
-export default ScrapsPageController;
+function scrapsPageControllerFactory($scope, $routeParams, store) {
+    new ScrapsPageController($scope, $routeParams, store);
+}
+scrapsPageControllerFactory.$inject = ['$scope', '$routeParams', 'store'];
+export default scrapsPageControllerFactory;
