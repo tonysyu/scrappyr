@@ -10,5 +10,8 @@ class ScrappyrController {
     }
 }
 
-ScrappyrController.$inject = ['$scope', '$location'];
-export default ScrappyrController;
+
+export default function scrappyrControllerFactory($scope, $location) {
+    return new ScrappyrController($scope, $location);
+}
+scrappyrControllerFactory.$inject = ['$scope', '$location'];

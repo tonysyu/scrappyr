@@ -3,45 +3,39 @@
  */
 class ScrapsPageController {
     constructor($scope, $routeParams, store) {
+        this.scraps = store.scraps;
+        this.newScrap = this._getEmptyScrap();
+        this.selectedScrap = null;
+    }
 
-        function getEmptyScrap() {
-            return {
-                title: '',
-                tags: []
-            };
+    addScrap() {
+        this.newScrap.title =  this.newScrap.title.trim();
+
+        if (!this.newScrap.title) {
+            return;
         }
 
-        $scope.scraps = store.scraps;
+        this.saving = true;
+        store.insert(this.newScrap)
+            .then(() => { this.newScrap = this._getEmptyScrap(); })
+            .finally(() => { this.saving = false; });
+    };
 
-        $scope.newScrap = getEmptyScrap();
-        $scope.selectedScrap = null;
+    selectScrap(scrap) {
+        this.selectedScrap = scrap;
+    }
 
-        $scope.addScrap = function () {
-            $scope.newScrap.title =  $scope.newScrap.title.trim();
-
-            if (!$scope.newScrap.title) {
-                return;
-            }
-
-            $scope.saving = true;
-            store.insert($scope.newScrap)
-                .then(function success() {
-                    $scope.newScrap = getEmptyScrap();
-                })
-                .finally(function () {
-                    $scope.saving = false;
-                });
-        };
-
-        $scope.selectScrap = function (scrap) {
-            $scope.selectedScrap = scrap;
+    _getEmptyScrap() {
+        return {
+            title: '',
+            tags: []
         };
     }
 }
 
 
 function scrapsPageControllerFactory($scope, $routeParams, store) {
-    new ScrapsPageController($scope, $routeParams, store);
+    return new ScrapsPageController($scope, $routeParams, store);
 }
 scrapsPageControllerFactory.$inject = ['$scope', '$routeParams', 'store'];
 export default scrapsPageControllerFactory;

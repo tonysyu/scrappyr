@@ -1,6 +1,6 @@
 <div class="col-xs-6">
 
-<div id="main" ng-show="scraps.length" ng-cloak>
+<div id="main" ng-show="ctrl.scraps.length" ng-cloak>
 
   <div class="input-group">
     <span class="input-group-btn">
@@ -11,21 +11,21 @@
     <input
       type="text"
       class="form-control"
-      ng-model="scrapFilter"
+      ng-model="scrapTextFilter"
       placeholder="Filter by...">
   </div>
 
   <div ui-tree>
-    <ol ui-tree-nodes ng-model="scraps" id="scrap-list">
+    <ol ui-tree-nodes ng-model="ctrl.scraps" id="scrap-list">
 
       <li class="scrap" ui-tree-node
-        ng-repeat="scrap in scraps | filter:scrapFilter track by scrap.id">
+        ng-repeat="scrap in ctrl.scraps | filter:scrapTextFilter track by scrap.id">
 
         <div class="scrap-list-view">
 
           <div ui-tree-handle class="scrap-handle"></div>
 
-          <scrap-basic-view ng-click="selectScrap(scrap)" scrap=scrap>
+          <scrap-basic-view ng-click="ctrl.selectScrap(scrap)" scrap=scrap>
           </scrap-basic-view>
 
         </div>
@@ -43,16 +43,16 @@
 </div>
 
 <div class="col-xs-6">
-<form id="scrap-form" ng-submit="addScrap()">
+<form id="scrap-form" ng-submit="ctrl.addScrap()">
   <input id="new-scrap"
       placeholder="Enter a scrap of data"
-      ng-model="newScrap.title"
-      ng-disabled="saving"
+      ng-model="ctrl.newScrap.title"
+      ng-disabled="ctrl.saving"
       autofocus>
 </form>
 
-<div ng-if="selectedScrap" class="scrap">
-  <scrap-detail-view scrap="selectedScrap"></scrap-detail-view>
+<div ng-if="ctrl.selectedScrap" class="scrap">
+  <scrap-detail-view scrap="ctrl.selectedScrap"></scrap-detail-view>
 </div>
 
 </div>
