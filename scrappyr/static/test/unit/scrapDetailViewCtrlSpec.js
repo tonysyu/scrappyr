@@ -1,16 +1,17 @@
-/*global describe, it, beforeEach, inject, expect, module*/
+/*global bundle, describe, it, beforeEach, inject, expect*/
 /*jslint nomen: true*/
+
+//var view = require('../../js/directive/scrapDetailView.js');
 
 (function () {
     'use strict';
 
     describe('scrapDetailViewCtrl:', function () {
-        var ctrl, element, scope, store;
+        var ctrl, scrap, store;
 
-        beforeEach(inject(function ($rootScope, scrapStorage, $httpBackend, $compile) {
+        beforeEach(inject(function (scrapStorage, $httpBackend) {
             var count = 0;
 
-            scope = $rootScope.$new();
             store = scrapStorage;
 
             // Setup POST method to echo the input data.
@@ -30,33 +31,29 @@
         }));
 
         describe('Pre-populate store with a scrap', function () {
-            beforeEach(inject(function ($controller, $httpBackend) {
-                ctrl = $controller('scrapDetailViewCtrl', {
-                    $scope: scope,
-                    store: store
-                });
+            beforeEach(inject(function ($httpBackend) {
+                ctrl = new bundle.ScrapDetailViewController(store);
                 store.insert({ title: 'Item 1' });
                 $httpBackend.flush();
-
-                scope.scrap = store.scraps.get(1);
-                scope.$digest();
+                scrap = store.scraps.get(1);
+                ctrl.updateOriginalScrap(scrap);
             }));
 
             it('should remove scraps w/o title on saving', function () {
-                scope.scrap.title = '';
-                ctrl.saveEdits(scope.scrap);
+                scrap.title = '';
+                ctrl.saveEdits(scrap);
                 expect(store.scraps.length).toBe(0);
             });
 
             it('should trim scraps on saving', function () {
-                scope.scrap.title = ' buy moar unicorns  ';
-                ctrl.saveEdits(scope.scrap);
+                scrap.title = ' buy moar unicorns  ';
+                ctrl.saveEdits(scrap);
                 expect(store.scraps.get(1).title).toBe('buy moar unicorns');
             });
 
             it('revertScrap() get a scrap to its previous state', function () {
-                scope.scrap.title = 'Unicorn sparkly skypuffles.';
-                ctrl.revertEdits(scope.scrap);
+                scrap.title = 'Unicorn sparkly skypuffles.';
+                ctrl.revertEdits(scrap);
                 expect(store.scraps.get(1).title).toBe('Item 1');
             });
 

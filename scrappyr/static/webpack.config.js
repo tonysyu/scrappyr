@@ -2,6 +2,7 @@ module.exports = {
     entry: "./js/app.js",
     output: {
         path: __dirname,
+        library: 'bundle',
         filename: "bundle.js"
     },
     module: {

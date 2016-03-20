@@ -1,69 +1,77 @@
-/*global angular*/
+import 'angular';
 
-angular.module('scrappyr')
-    .controller('scrapDetailViewCtrl', function ($scope, scrapStorage) {
-        "use strict";
 
-        $scope.originalScrap = null;
+export class ScrapDetailViewController {
+    constructor(scrapStorage) {
+        this._scrapStorage = scrapStorage;
+        this._originalScrap = null;
+        this.isEditing = false;
+    }
 
-        function revertToOriginalScrap(scrap) {
-            angular.copy($scope.originalScrap, scrap);
+    revertToOriginalScrap(scrap) {
+        angular.copy(this._originalScrap, scrap);
+    }
+
+    updateOriginalScrap(scrap) {
+        this._originalScrap = angular.extend({}, scrap);
+    }
+
+    onTagChanged(scrap) {
+        // TODO: Pass just the ID and tag list and have the backend update
+        // just the tags.
+        this._scrapStorage.put(scrap);
+    }
+
+    editScrap(scrap) {
+        this.isEditing = true;
+    }
+
+    saveEdits(scrap) {
+        scrap.title = scrap.title.trim();
+        if (scrap.title === this._originalScrap.title) {
+            this.isEditing = false;
+            return;
         }
 
-        function updateOriginalScrap(scrap) {
-            $scope.originalScrap = angular.extend({}, scrap);
+        this._scrapStorage[scrap.title ? 'put' : 'remove'](scrap)
+            .then(
+                () => this.updateOriginalScrap(scrap),
+                () => this.revertToOriginalScrap(scrap)
+            )
+            .finally(() => { this.isEditing = false; });
+    }
+
+    revertEdits(scrap) {
+        if (angular.isUndefined(scrap)) {
+            return;
         }
+        this.revertToOriginalScrap(scrap);
+        this.isEditing = false;
+    }
+}
 
-        // Watch changes in scrap *identity* and copy that as `originalScrap`.
-        $scope.$watch('scrap', function () {
-            updateOriginalScrap($scope.scrap);
-        });
+function scrapDetailViewControllerFactory($scope, scrapStorage) {
+    var ctrl = new ScrapDetailViewController(scrapStorage);
+    // Watch changes in scrap *identity* and copy that as `originalScrap`.
+    $scope.$watch('scrap', () => ctrl.updateOriginalScrap($scope.scrap));
+    return ctrl;
+}
 
-        return {
-            isEditing: false,
-            // TODO: Pass just the ID and tag list and have the backend update
-            // just the tags.
-            onTagChanged: function (scrap) {
-                scrapStorage.put(scrap);
-            },
+scrapDetailViewControllerFactory.$inject = ['$scope', 'scrapStorage'];
 
-            editScrap: function (scrap) {
-                this.isEditing = true;
-            },
 
-            saveEdits: function (scrap) {
-                scrap.title = scrap.title.trim();
-                if (scrap.title === $scope.originalScrap.title) {
-                    this.isEditing = false;
-                    return;
-                }
-
-                scrapStorage[scrap.title ? 'put' : 'remove'](scrap)
-                    .then(
-                        () => updateOriginalScrap(scrap),
-                        () => revertToOriginalScrap(scrap)
-                    )
-                    .finally(() => { this.isEditing = false; });
-            },
-
-            revertEdits: function (scrap) {
-                if (angular.isUndefined(scrap)) {
-                    return;
-                }
-                revertToOriginalScrap(scrap);
-                this.isEditing = false;
-            },
+class ScrapDetailView {
+    constructor () {
+        this.controller = scrapDetailViewControllerFactory;
+        this.controllerAs = 'ctrl';
+        this.templateUrl = '/static/templates/scrap-detail-view.html';
+        this.scope = {
+            scrap: '='
         };
-    })
-    .directive('scrapDetailView', function () {
-        "use strict";
+    }
+}
 
-        return {
-            controller: 'scrapDetailViewCtrl',
-            controllerAs: 'ctrl',
-            templateUrl: '/static/templates/scrap-detail-view.html',
-            scope: {
-                scrap: '='
-            }
-        };
-    });
+
+export function scrapDetailViewFactory() {
+    return new ScrapDetailView();
+}
