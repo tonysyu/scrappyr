@@ -1,7 +1,4 @@
-/*jslint nomen: true*/
 /*global angular*/
-
-import _ from 'underscore';
 
 /**
  * The controller for tags page.
@@ -37,26 +34,4 @@ angular.module('scrappyr')
             $scope.selectedTags = tagList;
 
         });
-    })
-    .filter('hasTagInList', function () {
-        "use strict";
-
-        function tagObjectsToStrings(tagObjects) {
-            if (!tagObjects) {
-                return [];
-            }
-            return tagObjects.map(function (tag) { return tag.text; });
-        }
-
-        function createTagFilter(tagList) {
-            return function (scrap) {
-                var tags = tagObjectsToStrings(scrap.tags);
-                return _.intersection(tags, tagList).length > 0;
-            }
-        }
-
-        return function (scraps, tagList) {
-            var scrapHasTagInList = createTagFilter(tagList);
-            return scraps.filter(scrapHasTagInList);
-        };
     });
