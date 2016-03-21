@@ -14,7 +14,7 @@ import scrapEscape from './directives/scrapEscape';
 import scrapFocusFactory from './directives/scrapFocus';
 import tagStorageFactory from './services/tagStorage';
 import scrapStorageFactory from './services/scrapStorage';
-import {scrapBasicViewFactory} from './directives/scrapBasicView';
+import {scrapBasicViewFactory} from './scrapBasicView/directive';
 import {scrapDetailViewFactory} from './scrapDetailView/directive';
 
 import scrappyrControllerFactory from './controllers/scrappyrCtrl';
