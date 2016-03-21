@@ -18,7 +18,7 @@ import {scrapBasicViewFactory} from './directives/scrapBasicView';
 import {scrapDetailViewFactory} from './scrapDetailView/directive';
 
 import scrappyrControllerFactory from './controllers/scrappyrCtrl';
-import scrapsPageControllerFactory from './controllers/scrapsPageCtrl';
+import scrapsPageControllerFactory from './scrapsPage/controller';
 import tagsPageControllerFactory from './tagsPage/controller';
 import scrapHasTagInListFilterFactory from './tagsPage/scrapHasTagInList';
 
@@ -60,7 +60,7 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
             .when('/scraps', {
                 controller: 'scrapsPageCtrl',
                 controllerAs: 'ctrl',
-                templateUrl: 'static/views/scraps.html',
+                templateUrl: 'static/js/scrapsPage/index.html',
                 resolve: {store: resolveScrapStorage}
             })
             .when('/tags', {
@@ -81,5 +81,5 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
 // Export controllers for testing.
 import {ScrapDetailViewController} from './scrapDetailView/controller';
 export {ScrapDetailViewController};
-import {ScrapsPageController} from './controllers/scrapsPageCtrl';
+import {ScrapsPageController} from './scrapsPage/controller';
 export {ScrapsPageController};
