@@ -1,9 +1,6 @@
-/*global angular*/
-
 /**
  * The controller for tags page.
  */
-
 class TagsPageController {
     constructor(scrapStore, tagStore) {
         this._tagStore = tagStore;
@@ -14,7 +11,6 @@ class TagsPageController {
         this.tagSelections = {};
         // Array of tag text for ng-repeat.
         this.selectedTags = [];
-
     }
 
     removeTag(tag) {
@@ -33,7 +29,6 @@ class TagsPageController {
             }
         }
         this.selectedTags = tagList;
-
     };
 }
 
