@@ -60,13 +60,13 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
             .when('/scraps', {
                 controller: 'scrapsPageCtrl',
                 controllerAs: 'ctrl',
-                templateUrl: 'static/js/scrapsPage/index.html',
+                templateUrl: 'static/src/scrapsPage/index.html',
                 resolve: {store: resolveScrapStorage}
             })
             .when('/tags', {
                 controller: 'tagsPageCtrl',
                 controllerAs: 'ctrl',
-                templateUrl: 'static/js/tagsPage/index.html',
+                templateUrl: 'static/src/tagsPage/index.html',
                 resolve: {
                     scrapStore: resolveScrapStorage,
                     tagStore: resolveTagStorage

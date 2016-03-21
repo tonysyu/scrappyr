@@ -11,7 +11,7 @@ module.exports = function (config) {
             'bundle.js',
             'node_modules/mathjax/MathJax.js',
             'node_modules/angular-mocks/angular-mocks.js',
-            'js/**/*.html',
+            'src/**/*.html',
             'test/unit/**/*.js'
         ],
         autoWatch: true,
@@ -19,8 +19,8 @@ module.exports = function (config) {
         browsers: ['Firefox'],
         reporters: ['coverage', 'progress'],
         preprocessors: {
-            'js/**/*.js': ['coverage'],
-            'js/**/*.html': ['ng-html2js']
+            'src/**/*.js': ['coverage'],
+            'src/**/*.html': ['ng-html2js']
         },
         plugins: [
             require("karma-coverage"),
@@ -36,8 +36,8 @@ module.exports = function (config) {
             moduleName: 'my.templates',
             // Templates are loaded with relative paths (see *.html above),
             // but directives use "absolute" paths for URLs.
-            stripPrefix: 'js/',
-            prependPrefix: '/static/js/'
+            stripPrefix: 'src/',
+            prependPrefix: '/static/src/'
         }
     });
 };
