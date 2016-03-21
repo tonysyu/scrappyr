@@ -56,13 +56,14 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
             return tagStorage;
         }
 
-        var scrapsConfig = {
+        $routeProvider
+            .when('/scraps', {
                 controller: 'scrapsPageCtrl',
                 controllerAs: 'ctrl',
                 templateUrl: 'static/views/scraps.html',
                 resolve: {store: resolveScrapStorage}
-            },
-            tagsConfig = {
+            })
+            .when('/tags', {
                 controller: 'tagsPageCtrl',
                 controllerAs: 'ctrl',
                 templateUrl: 'static/views/tags.html',
@@ -70,11 +71,7 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
                     scrapStore: resolveScrapStorage,
                     tagStore: resolveTagStorage
                 }
-            };
-
-        $routeProvider
-            .when('/scraps', scrapsConfig)
-            .when('/tags', tagsConfig)
+            })
             .otherwise({
                 redirectTo: '/scraps'
             });
