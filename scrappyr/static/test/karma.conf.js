@@ -11,7 +11,7 @@ module.exports = function (config) {
             'bundle.js',
             'node_modules/mathjax/MathJax.js',
             'node_modules/angular-mocks/angular-mocks.js',
-            'templates/*.html',
+            'js/**/*.html',
             'test/unit/**/*.js'
         ],
         autoWatch: true,
@@ -20,7 +20,7 @@ module.exports = function (config) {
         reporters: ['coverage', 'progress'],
         preprocessors: {
             'js/**/*.js': ['coverage'],
-            'templates/*.html': ['ng-html2js']
+            'js/**/*.html': ['ng-html2js']
         },
         plugins: [
             require("karma-coverage"),
@@ -34,10 +34,10 @@ module.exports = function (config) {
         },
         ngHtml2JsPreprocessor: {
             moduleName: 'my.templates',
-            // Some users report full paths are appended to templates.
-            // Strip and add back the templates directory just in case.
-            stripPrefix: '.*templates/',
-            prependPrefix: '/static/templates/'
+            // Templates are loaded with relative paths (see *.html above),
+            // but directives use "absolute" paths for URLs.
+            stripPrefix: 'js/',
+            prependPrefix: '/static/js/'
         }
     });
 };
