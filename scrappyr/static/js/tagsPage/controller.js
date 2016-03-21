@@ -10,8 +10,6 @@ class TagsPageController {
         this.scraps = scrapStore.scraps;
         this.tags = tagStore.tags;
 
-        this.checkbox = {enabled: true};
-
         // Dict-like object which maps tag text to selection state.
         this.tagSelections = {};
         // Array of tag text for ng-repeat.
