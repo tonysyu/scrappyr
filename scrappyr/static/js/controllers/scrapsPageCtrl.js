@@ -1,8 +1,9 @@
 /**
  * The controller for main scraps page.
  */
-class ScrapsPageController {
-    constructor($scope, $routeParams, store) {
+export class ScrapsPageController {
+    constructor(store) {
+        this._store = store;
         this.scraps = store.scraps;
         this.newScrap = this._getEmptyScrap();
         this.selectedScrap = null;
@@ -16,7 +17,7 @@ class ScrapsPageController {
         }
 
         this.saving = true;
-        store.insert(this.newScrap)
+        this._store.insert(this.newScrap)
             .then(() => { this.newScrap = this._getEmptyScrap(); })
             .finally(() => { this.saving = false; });
     };
@@ -34,8 +35,8 @@ class ScrapsPageController {
 }
 
 
-function scrapsPageControllerFactory($scope, $routeParams, store) {
-    return new ScrapsPageController($scope, $routeParams, store);
+function scrapsPageControllerFactory(store) {
+    return new ScrapsPageController(store);
 }
-scrapsPageControllerFactory.$inject = ['$scope', '$routeParams', 'store'];
+scrapsPageControllerFactory.$inject = ['store'];
 export default scrapsPageControllerFactory;

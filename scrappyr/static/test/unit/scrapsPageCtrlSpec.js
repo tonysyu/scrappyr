@@ -1,17 +1,16 @@
-/*global describe, it, beforeEach, inject, expect, module*/
+/*global bundle, describe, it, beforeEach, inject, expect, module*/
 /*jslint nomen: true*/
 
 (function () {
     'use strict';
 
     describe('scrapsPageCtrl:', function () {
-        var ctrl, scope, store;
+        var ctrl, store;
 
         // Load the module containing the app, only 'ng' is loaded by default.
         beforeEach(module('scrappyr'));
 
         beforeEach(inject(function ($controller, $rootScope, scrapStorage, $httpBackend) {
-            scope = $rootScope.$new();
             store = scrapStorage;
 
             var count = 0;
@@ -30,44 +29,38 @@
                     return [200, data];
                 });
 
-            ctrl = $controller('scrapsPageCtrl', {
-                $scope: scope,
-                store: store
-            });
+            ctrl = new bundle.ScrapsPageController(store);
         }));
 
         it('No active scraps on start', function () {
-            expect(scope.scraps.length).toBe(0);
+            expect(ctrl.scraps.length).toBe(0);
         });
 
         it('No `selectedScrap` on start', function () {
-            expect(scope.selectedScrap).toBeNull();
+            expect(ctrl.selectedScrap).toBeNull();
         });
 
         describe('Empty scraps list', function () {
             it('should not add null title', function () {
-                scope.newScrap = {title: ''};
-                scope.addScrap();
-                scope.$digest();
-                expect(scope.scraps.length).toBe(0);
+                ctrl.newScrap = {title: ''};
+                ctrl.addScrap();
+                expect(ctrl.scraps.length).toBe(0);
             });
 
             it('should not add scrap with empty title', function () {
-                scope.newScrap = {title: '   '};
-                scope.addScrap();
-                scope.$digest();
-                expect(scope.scraps.length).toBe(0);
+                ctrl.newScrap = {title: '   '};
+                ctrl.addScrap();
+                expect(ctrl.scraps.length).toBe(0);
             });
 
             it('should trim whitespace in new scrap', inject(
                 function ($httpBackend) {
-                    scope.newScrap = {title: '  buy some unicorns  '};
-                    scope.addScrap();
+                    ctrl.newScrap = {title: '  buy some unicorns  '};
+                    ctrl.addScrap();
                     $httpBackend.flush();
 
-                    scope.$digest();
-                    expect(scope.scraps.length).toBe(1);
-                    expect(scope.scraps.get(1).title).toBe('buy some unicorns');
+                    expect(ctrl.scraps.length).toBe(1);
+                    expect(ctrl.scraps.get(1).title).toBe('buy some unicorns');
                 }
             ));
         });
