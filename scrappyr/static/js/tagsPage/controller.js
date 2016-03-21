@@ -5,41 +5,46 @@
  */
 
 class TagsPageController {
-    constructor($scope, scrapStore, tagStore) {
-        $scope.scraps = scrapStore.scraps;
-        $scope.tags = tagStore.tags;
+    constructor(scrapStore, tagStore) {
+        this._tagStore = tagStore;
+        this.scraps = scrapStore.scraps;
+        this.tags = tagStore.tags;
 
-        $scope.checkbox = {enabled: true};
+        this.checkbox = {enabled: true};
 
         // Dict-like object which maps tag text to selection state.
-        $scope.tagSelections = {};
+        this.tagSelections = {};
         // Array of tag text for ng-repeat.
-        $scope.selectedTags = [];
+        this.selectedTags = [];
 
-        $scope.removeTag = function (tag) {
-            tagStore.remove(tag);
-        };
+    }
 
-        $scope.$watchCollection('tagSelections', function () {
-            var name,
-                tagList = [];
+    removeTag(tag) {
+        this._tagStore.remove(tag);
+    };
 
-            for (name in $scope.tagSelections) {
-                if ($scope.tagSelections.hasOwnProperty(name)) {
-                    if ($scope.tagSelections[name] === true) {
-                        tagList.push(name);
-                    }
+    updateTagSelections() {
+        var name,
+            tagList = [];
+
+        for (name in this.tagSelections) {
+            if (this.tagSelections.hasOwnProperty(name)) {
+                if (this.tagSelections[name] === true) {
+                    tagList.push(name);
                 }
             }
-            $scope.selectedTags = tagList;
+        }
+        this.selectedTags = tagList;
 
-        });
-    }
+    };
 }
 
 
 function tagsPageControllerFactory($scope, scrapStore, tagStore) {
-    new TagsPageController($scope, scrapStore, tagStore);
+    var ctrl = new TagsPageController(scrapStore, tagStore);
+    $scope.$watchCollection(() => ctrl.tagSelections,
+                            ctrl.updateTagSelections.bind(ctrl));
+    return ctrl;
 }
 tagsPageControllerFactory.$inject = ['$scope', 'scrapStore', 'tagStore']
 export default tagsPageControllerFactory;

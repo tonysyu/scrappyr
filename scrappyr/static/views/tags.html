@@ -4,18 +4,18 @@
     <h3>Tags</h3>
 
     <ul class="tags-list">
-      <li class="tag" ng-repeat="tag in tags | orderBy:'text' track by tag.id">
+      <li class="tag" ng-repeat="tag in ctrl.tags | orderBy:'text' track by tag.id">
         <div class="btn-group">
 
           <label class="tag btn btn-default">
             <input type="checkbox"
-              ng-model="tagSelections[tag.text]"
+              ng-model="ctrl.tagSelections[tag.text]"
               autocomplete="off">
             {{tag.text}}
 
             <button
               class="remove-tag glyphicon glyphicon-remove"
-              ng-click="removeTag(tag)">
+              ng-click="ctrl.removeTag(tag)">
             </button>
 
           </label>
@@ -31,7 +31,7 @@
     <ul id="scrap-list">
 
       <li class="scrap"
-        ng-repeat="scrap in scraps | scrapHasTagInList:selectedTags track by scrap.id">
+        ng-repeat="scrap in ctrl.scraps | scrapHasTagInList:ctrl.selectedTags track by scrap.id">
         <scrap-basic-view scrap=scrap></scrap-basic-view>
       </li>
 
