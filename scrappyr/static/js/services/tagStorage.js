@@ -14,17 +14,16 @@ class TagStorage {
         this.tags.remove(tag.id);
 
         var success = () => this.tags;
-        var failure = () => {                       // failure
+        var failure = () => {
             this.tags.update(originalTags);
             return this.tags;
         }
-        return this._http.delete('/api/tags/' + tag.id)
-            .then(success, failure);
+        return this._http.delete('/api/tags/' + tag.id).then(success, failure);
     }
 
     get() {
         return this._http.get('/api/tags')
-            .then((resp) => this.tags.update(resp.data.tags));
+            .then((response) => this.tags.update(response.data.tags));
     }
 }
 
