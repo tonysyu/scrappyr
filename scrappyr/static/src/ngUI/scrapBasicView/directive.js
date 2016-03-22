@@ -19,7 +19,7 @@ class ScrapBasicView {
     constructor() {
         this.controller = scrapBasicViewControllerFactory,
         this.controllerAs = 'ctrl',
-        this.templateUrl = '/static/src/scrapBasicView/index.html',
+        this.templateUrl = '/static/src/ngUI/scrapBasicView/index.html',
         this.scope = {
             scrap: '='
         };

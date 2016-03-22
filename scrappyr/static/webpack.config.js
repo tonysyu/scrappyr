@@ -1,6 +1,6 @@
 module.exports = {
     entry: {
-        app: "./src/app.js",
+        app: "./src/ngUI/app.js",
     },
     output: {
         path: __dirname,
