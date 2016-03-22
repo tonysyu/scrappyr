@@ -50,6 +50,7 @@ env
 .python-version
 
 # Project specific
+demo/*
 migrations
 scrappyr/static/dist
 scrappyr/static/coverage
