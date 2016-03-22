@@ -1,4 +1,4 @@
-import TagStorage from '../../core/tagStorage';
+import TagStorage from '../../core/tag-storage';
 
 function tagStorageFactory($http){
     return new TagStorage($http);
