@@ -9,6 +9,7 @@ module.exports = function (config) {
         files: [
             // Include custom bundles first to ensure dependencies are included.
             'coreBundle.js',
+            'coreUIBundle.js',
             'appBundle.js',
             'node_modules/mathjax/MathJax.js',
             'node_modules/angular-mocks/angular-mocks.js',

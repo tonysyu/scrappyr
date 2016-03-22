@@ -1,4 +1,4 @@
-/*global coreBundle, describe, it, beforeEach, inject, expect, module*/
+/*global coreUIBundle, describe, it, beforeEach, inject, expect, module*/
 
 (function () {
     'use strict';
@@ -28,7 +28,7 @@
                     return [200, data];
                 });
 
-            ctrl = new coreBundle.ScrapsPageController(store);
+            ctrl = new coreUIBundle.ScrapsPageController(store);
         }));
 
         it('No active scraps on start', function () {

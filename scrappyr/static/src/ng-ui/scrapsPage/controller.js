@@ -1,4 +1,4 @@
-import ScrapsPageController from '../../core/scraps-page-controller';
+import ScrapsPageController from '../../core-ui/scraps-page-controller';
 
 
 function scrapsPageControllerFactory(store) {
