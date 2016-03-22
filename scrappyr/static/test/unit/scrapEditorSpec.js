@@ -1,12 +1,9 @@
-/*global appBundle, describe, it, beforeEach, inject, expect*/
-/*jslint nomen: true*/
-
-//var view = require('../../js/directive/scrapDetailView.js');
+/*global coreUIBundle, describe, it, beforeEach, inject, expect*/
 
 (function () {
     'use strict';
 
-    describe('scrapDetailController:', function () {
+    describe('scrapEditor:', function () {
         var ctrl, scrap, store;
 
         beforeEach(inject(function (scrapStorage, $httpBackend) {
@@ -32,7 +29,7 @@
 
         describe('Pre-populate store with a scrap', function () {
             beforeEach(inject(function ($httpBackend) {
-                ctrl = new coreUIBundle.ScrapDetailController(store);
+                ctrl = new coreUIBundle.ScrapEditor(store);
                 store.insert({ title: 'Item 1' });
                 $httpBackend.flush();
                 scrap = store.scraps.get(1);

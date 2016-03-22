@@ -1,6 +1,6 @@
-import ScrapDetailController from './scrap-detail-controller';
+import ScrapEditor from './scrap-editor';
 import ScrapsPageController from './scraps-page-controller';
 export {
-    ScrapDetailController,
+    ScrapEditor,
     ScrapsPageController
 };

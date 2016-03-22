@@ -1,10 +1,9 @@
 import 'angular';
-import ScrapDetailController from '../../core-ui/scrap-detail-controller';
+import ScrapEditor from '../../core-ui/scrap-editor';
 
 
-// Angular factory for ScrapDetailViewController.
 export function scrapDetailControllerFactory($scope, scrapStorage) {
-    var ctrl = new ScrapDetailController(scrapStorage);
+    var ctrl = new ScrapEditor(scrapStorage);
     // Watch changes in scrap *identity* and copy that as `originalScrap`.
     $scope.$watch('scrap', () => ctrl.updateOriginalScrap($scope.scrap));
     return ctrl;

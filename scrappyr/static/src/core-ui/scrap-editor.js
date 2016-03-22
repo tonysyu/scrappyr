@@ -2,7 +2,7 @@
 import 'angular';
 
 
-export default class ScrapDetailController {
+export default class ScrapEditor {
     constructor(scrapStorage) {
         this._scrapStorage = scrapStorage;
         this._originalScrap = null;
