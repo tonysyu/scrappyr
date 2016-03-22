@@ -1,4 +1,3 @@
-import 'angular';
 import ScrapEditor from '../../core-ui/scrap-editor';
 
 

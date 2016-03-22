@@ -1,4 +1,4 @@
-import 'angular';
+import _ from 'underscore';
 
 // createMappedArray
 //
@@ -42,7 +42,7 @@ export function createMappedArray() {
     }
 
     array.copy = function () {
-        return angular.copy(this);
+        return _.clone(this);
     };
 
     // Update with values from another array.

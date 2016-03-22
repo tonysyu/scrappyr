@@ -1,5 +1,4 @@
-// TODO: Replace angular dependency with common utility.
-import 'angular';
+import _ from 'underscore';
 
 
 export default class ScrapEditor {
@@ -10,11 +9,11 @@ export default class ScrapEditor {
     }
 
     revertToOriginalScrap(scrap) {
-        angular.copy(this._originalScrap, scrap);
+        _.extend(scrap, this._originalScrap);
     }
 
     updateOriginalScrap(scrap) {
-        this._originalScrap = angular.extend({}, scrap);
+        this._originalScrap = _.clone(scrap);
     }
 
     onTagChanged(scrap) {
@@ -43,7 +42,7 @@ export default class ScrapEditor {
     }
 
     revertEdits(scrap) {
-        if (angular.isUndefined(scrap)) {
+        if (_.isUndefined(scrap)) {
             return;
         }
         this.revertToOriginalScrap(scrap);
