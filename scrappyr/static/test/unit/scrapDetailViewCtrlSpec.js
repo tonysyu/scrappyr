@@ -6,7 +6,7 @@
 (function () {
     'use strict';
 
-    describe('scrapDetailViewCtrl:', function () {
+    describe('scrapDetailController:', function () {
         var ctrl, scrap, store;
 
         beforeEach(inject(function (scrapStorage, $httpBackend) {
@@ -32,7 +32,7 @@
 
         describe('Pre-populate store with a scrap', function () {
             beforeEach(inject(function ($httpBackend) {
-                ctrl = new appBundle.ScrapDetailViewController(store);
+                ctrl = new coreUIBundle.ScrapDetailController(store);
                 store.insert({ title: 'Item 1' });
                 $httpBackend.flush();
                 scrap = store.scraps.get(1);
