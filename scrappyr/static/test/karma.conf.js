@@ -36,7 +36,7 @@ module.exports = function (config) {
             moduleName: 'my.templates',
             // Templates are loaded with relative paths (see *.html above),
             // but directives use "absolute" paths for URLs.
-            stripPrefix: 'src/',
+            stripPrefix: '.*src/',
             prependPrefix: '/static/src/'
         }
     });
