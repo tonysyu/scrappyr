@@ -1,4 +1,4 @@
-import {createMappedArray} from '../scrappyrUtils';
+import {createMappedArray} from '../../core/utils';
 
 /**
  * Service that persists and retrieves tags from the backend API.

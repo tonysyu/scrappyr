@@ -1,5 +1,5 @@
 import 'angular'
-import {createMappedArray} from '../scrappyrUtils';
+import {createMappedArray} from '../../core/utils';
 
 /**
  * Service that persists and retrieves scraps from the backend API.
