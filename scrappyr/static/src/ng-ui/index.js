@@ -81,5 +81,3 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
 // Export controllers for testing.
 import {ScrapDetailViewController} from './scrapDetailView/controller';
 export {ScrapDetailViewController};
-import {ScrapsPageController} from './scrapsPage/controller';
-export {ScrapsPageController};

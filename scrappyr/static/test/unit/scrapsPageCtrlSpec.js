@@ -1,5 +1,4 @@
-/*global appBundle, describe, it, beforeEach, inject, expect, module*/
-/*jslint nomen: true*/
+/*global coreBundle, describe, it, beforeEach, inject, expect, module*/
 
 (function () {
     'use strict';
@@ -10,7 +9,7 @@
         // Load the module containing the app, only 'ng' is loaded by default.
         beforeEach(module('scrappyr'));
 
-        beforeEach(inject(function ($controller, $rootScope, scrapStorage, $httpBackend) {
+        beforeEach(inject(function (scrapStorage, $httpBackend) {
             store = scrapStorage;
 
             var count = 0;
@@ -29,7 +28,7 @@
                     return [200, data];
                 });
 
-            ctrl = new appBundle.ScrapsPageController(store);
+            ctrl = new coreBundle.ScrapsPageController(store);
         }));
 
         it('No active scraps on start', function () {
