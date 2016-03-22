@@ -1,4 +1,4 @@
-/*global bundle, describe, it, beforeEach, inject, expect*/
+/*global appBundle, describe, it, beforeEach, inject, expect*/
 /*jslint nomen: true*/
 
 //var view = require('../../js/directive/scrapDetailView.js');
@@ -32,7 +32,7 @@
 
         describe('Pre-populate store with a scrap', function () {
             beforeEach(inject(function ($httpBackend) {
-                ctrl = new bundle.ScrapDetailViewController(store);
+                ctrl = new appBundle.ScrapDetailViewController(store);
                 store.insert({ title: 'Item 1' });
                 $httpBackend.flush();
                 scrap = store.scraps.get(1);

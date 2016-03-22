@@ -1,4 +1,4 @@
-/*global bundle, describe, it, beforeEach, inject, expect, module*/
+/*global appBundle, describe, it, beforeEach, inject, expect, module*/
 /*jslint nomen: true*/
 
 (function () {
@@ -29,7 +29,7 @@
                     return [200, data];
                 });
 
-            ctrl = new bundle.ScrapsPageController(store);
+            ctrl = new appBundle.ScrapsPageController(store);
         }));
 
         it('No active scraps on start', function () {

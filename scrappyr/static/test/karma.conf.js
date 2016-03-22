@@ -7,8 +7,8 @@ module.exports = function (config) {
         basePath: '../',
         frameworks: ['jasmine'],
         files: [
-            // Include bundle.js first to ensure dependencies are included.
-            'bundle.js',
+            // Include appBundle.js first to ensure dependencies are included.
+            'appBundle.js',
             'node_modules/mathjax/MathJax.js',
             'node_modules/angular-mocks/angular-mocks.js',
             'src/**/*.html',
