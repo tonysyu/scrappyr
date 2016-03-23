@@ -17,7 +17,7 @@ import scrapStorageFactory from './services/scrapStorage';
 import {scrapBasicViewFactory} from './scrapBasicView/directive';
 import {scrapDetailViewFactory} from './scrapDetailView/directive';
 
-import scrappyrControllerFactory from './controllers/scrappyrCtrl';
+import scrappyrControllerFactory from './indexController';
 import scrapsPageControllerFactory from './scrapsPage/controller';
 import tagsPageControllerFactory from './tagsPage/controller';
 import scrapHasTagInListFilterFactory from './tagsPage/scrapHasTagInList';
