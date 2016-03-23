@@ -8,7 +8,7 @@
     "angular-ui-tree": "^2.10.0",
     "bootstrap": ">=3.0.0",
     "jquery": ">=2.1.0",
-    "mathjax": "^2.5.1",
+    "mathjax": "^2.6.1",
     "ng-tags-input": "3.0.0",
     "underscore": "^1.8.3"
   },
