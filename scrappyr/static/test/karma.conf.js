@@ -19,7 +19,7 @@ module.exports = function (config) {
         browsers: ['Firefox'],
         reporters: ['coverage', 'progress'],
         preprocessors: {
-            'src/**/*.js': ['coverage'],
+            'dist/*.js': ['coverage'],
             'src/**/*.html': ['ng-html2js']
         },
         plugins: [
