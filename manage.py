@@ -16,10 +16,9 @@ from scrappyr.common import db
 # Global constants
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'scrappyr', 'static')
-JS_TEST_ROOT = os.path.join(STATIC_ROOT, 'test')
 KARMA_EXEC = os.path.join(STATIC_ROOT, 'node_modules',
                           'karma-cli', 'bin', 'karma')
-KARMA_CONFIG = os.path.join(JS_TEST_ROOT, 'karma.conf.js')
+KARMA_CONFIG = os.path.join(STATIC_ROOT, 'karma.conf.js')
 
 
 manager = Manager(create_app)
@@ -83,7 +82,7 @@ def js_test_server():
     Unlike the backend tests, this runs a server that reruns tests when files
     are edited.
     """
-    with temp_working_directory(JS_TEST_ROOT):
+    with temp_working_directory(STATIC_ROOT):
         run_subprocess([KARMA_EXEC, 'start', KARMA_CONFIG],
                        exit_message="\nQuitting JS test server...")
 

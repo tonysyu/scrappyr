@@ -4,7 +4,7 @@ module.exports = function (config) {
     'use strict';
 
     config.set({
-        basePath: '../',
+        basePath: './',
         frameworks: ['jasmine'],
         files: [
             // Include custom bundles first to ensure dependencies are included.
@@ -22,12 +22,6 @@ module.exports = function (config) {
             'dist/*.js': ['coverage'],
             'src/**/*.html': ['ng-html2js']
         },
-        plugins: [
-            require("karma-coverage"),
-            require("karma-firefox-launcher"),
-            require("karma-jasmine"),
-            require("karma-ng-html2js-preprocessor"),
-        ],
         coverageReporter: {
             dir: 'coverage/',
             type: 'html'
