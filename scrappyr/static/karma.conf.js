@@ -20,17 +20,11 @@ module.exports = function (config) {
         reporters: ['coverage', 'progress'],
         preprocessors: {
             'dist/*.js': ['coverage'],
-            'src/**/*.html': ['ng-html2js'],
-            'test/unit/**/*.js': ['babel']
+            'src/**/*.html': ['ng-html2js']
         },
         coverageReporter: {
             dir: 'coverage/',
             type: 'html'
-        },
-        babelPreprocessor: {
-            options: {
-                presets: ['es2015']
-            }
         },
         ngHtml2JsPreprocessor: {
             moduleName: 'my.templates',
