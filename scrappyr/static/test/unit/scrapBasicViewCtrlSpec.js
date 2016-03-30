@@ -1,53 +1,46 @@
 /*global describe, it, beforeEach, inject, expect, module*/
-/*jslint nomen: true*/
+describe('scrapBasicViewCtrl:', () => {
+    var scope, store,
+        default_scrap = {title: 'Start with one scrap'};
 
-(function () {
-    'use strict';
+    // Load the module containing the app, only 'ng' is loaded by default.
+    beforeEach(module('scrappyr'));
+    beforeEach(module('my.templates'));
 
-    describe('scrapBasicViewCtrl:', function () {
-        var scope, store,
-            default_scrap = {title: 'Start with one scrap'};
+    beforeEach(inject(($rootScope, scrapStorage, $httpBackend) => {
+        var count = 0;
 
-        // Load the module containing the app, only 'ng' is loaded by default.
-        beforeEach(module('scrappyr'));
-        beforeEach(module('my.templates'));
+        scope = $rootScope.$new();
+        scope.scrap = default_scrap;
+        store = scrapStorage;
 
-        beforeEach(inject(function ($rootScope, scrapStorage, $httpBackend) {
-            var count = 0;
+        // Setup POST method to echo the input data.
+        $httpBackend
+            .when('POST', '/api/scraps')
+            .respond((method, url, data) => {
+                data = JSON.parse(data);
+                // The server adds an ID to new scraps.
+                if (typeof data.id !== 'number') {
+                    // Increment first: The server starts IDs at 1.
+                    count += 1;
+                    data.id = count;
+                }
+                return [200, data];
+            });
+    }));
 
-            scope = $rootScope.$new();
-            scope.scrap = default_scrap;
-            store = scrapStorage;
-
-            // Setup POST method to echo the input data.
-            $httpBackend
-                .when('POST', '/api/scraps')
-                .respond(function (method, url, data) {
-                    data = JSON.parse(data);
-                    // The server adds an ID to new scraps.
-                    if (typeof data.id !== 'number') {
-                        // Increment first: The server starts IDs at 1.
-                        count += 1;
-                        data.id = count;
-                    }
-                    return [200, data];
-                });
-
+    describe('Pre-populate 3 scraps', () => {
+        beforeEach(inject(($httpBackend) => {
+            store.insert({ title: 'Item 1' });
+            store.insert({ title: 'Item 2' });
+            store.insert({ title: 'Item 3' });
+            scope.$digest();
+            $httpBackend.flush();
         }));
 
-        describe('Pre-populate 3 scraps', function () {
-            beforeEach(inject(function ($httpBackend) {
-                store.insert({ title: 'Item 1' });
-                store.insert({ title: 'Item 2' });
-                store.insert({ title: 'Item 3' });
-                scope.$digest();
-                $httpBackend.flush();
-            }));
-
-            it('should save scraps to local storage', function () {
-                expect(store.scraps.length).toBe(3);
-            });
-
+        it('should save scraps to local storage', () => {
+            expect(store.scraps.length).toBe(3);
         });
+
     });
-}());
+});

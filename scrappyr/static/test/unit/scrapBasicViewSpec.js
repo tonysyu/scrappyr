@@ -1,33 +1,27 @@
 /*global describe, it, beforeEach, inject, expect, module*/
-/*jslint nomen: true*/
+describe('scrap-basic-view directive:', () => {
+    var ctrl, element, scope, store,
+        default_scrap = {title: 'Start with one scrap'};
 
-(function () {
-    'use strict';
+    // Load the module containing the app, only 'ng' is loaded by default.
+    beforeEach(module('scrappyr'));
+    beforeEach(module('my.templates'));
 
-    describe('scrap-basic-view directive:', function () {
-        var ctrl, element, scope, store,
-            default_scrap = {title: 'Start with one scrap'};
+    beforeEach(inject(($rootScope, scrapStorage, $httpBackend, $compile) => {
+        var count = 0;
 
-        // Load the module containing the app, only 'ng' is loaded by default.
-        beforeEach(module('scrappyr'));
-        beforeEach(module('my.templates'));
+        scope = $rootScope.$new();
+        scope.scrap = default_scrap;
+        store = scrapStorage;
 
-        beforeEach(inject(function ($rootScope, scrapStorage, $httpBackend, $compile) {
-            var count = 0;
+        element = '<scrap-basic-view scrap=scrap></scrap-basic-view>';
+        element = $compile(element)(scope);
+        scope.$digest();
+    }));
 
-            scope = $rootScope.$new();
-            scope.scrap = default_scrap;
-            store = scrapStorage;
-
-            element = '<scrap-basic-view scrap=scrap></scrap-basic-view>';
-            element = $compile(element)(scope);
-            scope.$digest();
-        }));
-
-        it('Scrap is properly initialized', function () {
-            var isolated = element.isolateScope();
-            expect(isolated.scrap).toBe(default_scrap);
-        });
-
+    it('Scrap is properly initialized', () => {
+        var isolated = element.isolateScope();
+        expect(isolated.scrap).toBe(default_scrap);
     });
-}());
+
+});

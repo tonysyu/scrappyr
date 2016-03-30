@@ -1,7 +1,7 @@
-import TagsPageController from '../../core-ui/tags-page-controller';
+import * as coreUI from '../../core-ui';
 
 function tagsPageControllerFactory($scope, scrapStore, tagStore) {
-    var ctrl = new TagsPageController(scrapStore, tagStore);
+    var ctrl = new coreUI.TagsPageController(scrapStore, tagStore);
     $scope.$watchCollection(() => ctrl.tagSelections,
                             ctrl.updateTagSelections.bind(ctrl));
     return ctrl;

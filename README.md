@@ -33,6 +33,11 @@ cd scrappyr/static
 npm install
 ```
 
+To figure out what commands are available, run:
+
+```
+python manage.py --help
+```
 
 Shell
 -----
