@@ -12,7 +12,7 @@ module.exports = function (config) {
             'node_modules/mathjax/MathJax.js',
             'node_modules/angular-mocks/angular-mocks.js',
             'src/**/*.html',
-            'test/unit/**/*.js'
+            'test/**/*.js'
         ],
         autoWatch: true,
         singleRun: false,
