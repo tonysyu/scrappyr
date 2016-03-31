@@ -1,7 +1,7 @@
-import TagStorage from '../../core/tag-storage';
+import * as core from '../../core';
 
 function tagStorageFactory($http){
-    return new TagStorage($http);
+    return new core.TagStorage($http);
 }
 
 tagStorageFactory.$inject = ['$http'];
