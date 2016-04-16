@@ -1,11 +1,13 @@
 /*global describe, it, beforeEach, inject, expect, module*/
+import 'angular-mocks';
+
 describe('scrap-basic-view directive:', () => {
     var ctrl, element, scope, store,
         default_scrap = {title: 'Start with one scrap'};
 
     // Load the module containing the app, only 'ng' is loaded by default.
-    beforeEach(module('scrappyr'));
-    beforeEach(module('my.templates'));
+    beforeEach(angular.mock.module('scrappyr'));
+    beforeEach(angular.mock.module('my.templates'));
 
     beforeEach(inject(($rootScope, scrapStorage, $httpBackend, $compile) => {
         var count = 0;

@@ -1,13 +1,11 @@
-/*global describe, it, beforeEach, inject, expect, angular, module*/
-
-// FIXME: Removing this breaks tests outside this file. Even if this whole
-//        thing is wrapped in an IIFE, it affects tests outside this file.
-beforeEach(module('scrappyr'));
+/*global describe, it, beforeEach, expect*/
+import 'angular-mocks';
 
 describe('scrapFocus directive', () => {
     var scope, compile, browser;
 
-    beforeEach(inject(($rootScope, $compile, $browser) => {
+    beforeEach(angular.mock.module('scrappyr'));
+    beforeEach(angular.mock.inject(($rootScope, $compile, $browser) => {
         scope = $rootScope.$new();
         compile = $compile;
         browser = $browser;

@@ -1,9 +1,10 @@
 /*global coreUIBundle, describe, it, beforeEach, inject, expect, module*/
+import 'angular-mocks';
 describe('scrapsPageCtrl:', () => {
     var ctrl, store;
 
     // Load the module containing the app, only 'ng' is loaded by default.
-    beforeEach(module('scrappyr'));
+    beforeEach(angular.mock.module('scrappyr'));
 
     beforeEach(inject((scrapStorage, $httpBackend) => {
         store = scrapStorage;

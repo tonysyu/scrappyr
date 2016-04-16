@@ -1,4 +1,7 @@
-/*global describe, it, beforeEach, inject, expect, module*/
+/*global describe, it, beforeEach, inject, expect*/
+
+import * as core from '../src/core';
+
 describe('scrapStorage:', () => {
     var store,
         defaultScrap = {id: 1, title: 'Start with one scrap'};
@@ -7,20 +10,17 @@ describe('scrapStorage:', () => {
         return "`" + methodName + "` not implemented";
     }
 
-    // Load the module containing the app, only 'ng' is loaded by default.
-    beforeEach(module('scrappyr'));
-
-    beforeEach(inject((scrapStorage) => {
-        store = scrapStorage;
-    }));
+    beforeEach(() => {
+        store = new core.ScrapStorage();
+    });
 
     describe('Inserted scrap', () => {
 
-        beforeEach(inject((scrapStorage) => {
+        beforeEach(() => {
             store.scraps.update([{id: 'a', title: 'a'},
                                  {id: 'b', title: 'b'}]);
             store.scraps.splice(1, 0, {id: 'x', title: 'inserted'});
-        }));
+        });
 
         it('gives expected title order', () => {
             var titles = store.scraps.map((s) => { return s.title; });
@@ -48,10 +48,10 @@ describe('scrapStorage:', () => {
 
     describe('When two scraps exist', () => {
 
-        beforeEach(inject(() => {
+        beforeEach(() => {
             store.scraps.update([{id: 1, title: 'a'},
                                  {id: 2, title: 'b'}]);
-        }));
+        });
 
         it('deleting id 1 and adding it back works as expected', () => {
             // Regression test for bad index-mapping in scrap store.

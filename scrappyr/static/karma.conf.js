@@ -10,9 +10,8 @@ module.exports = function (config) {
             // Include custom bundles first to ensure dependencies are included.
             'dist/*.js',
             'node_modules/mathjax/MathJax.js',
-            'node_modules/angular-mocks/angular-mocks.js',
             'src/**/*.html',
-            'test/**/*.js'
+            'test-context.js'
         ],
         autoWatch: true,
         singleRun: false,
@@ -20,7 +19,8 @@ module.exports = function (config) {
         reporters: ['coverage', 'progress'],
         preprocessors: {
             'dist/*.js': ['coverage'],
-            'src/**/*.html': ['ng-html2js']
+            'src/**/*.html': ['ng-html2js'],
+            'test-context.js': ['webpack']
         },
         coverageReporter: {
             dir: 'coverage/',
@@ -32,6 +32,19 @@ module.exports = function (config) {
             // but directives use "absolute" paths for URLs.
             stripPrefix: '.*src/',
             prependPrefix: '/static/src/'
+        },
+        webpack: {
+            module: {
+                loaders: [{
+                    test: /\.js/,
+                    exclude: /node_modules/,
+                    loader: 'babel-loader',
+                    query: {
+                        presets: ['es2015']
+                    }
+                }]
+            },
+            watch: true
         }
     });
 };
