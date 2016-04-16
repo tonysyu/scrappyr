@@ -1,4 +1,4 @@
-/*global describe, it, beforeEach, inject, expect, module*/
+/*global describe, it, beforeEach, inject, expect*/
 import 'angular-mocks';
 
 describe('scrap-basic-view directive:', () => {

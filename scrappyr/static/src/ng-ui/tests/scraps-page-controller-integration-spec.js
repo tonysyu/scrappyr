@@ -1,5 +1,7 @@
-/*global coreUIBundle, describe, it, beforeEach, inject, expect, module*/
+/*global describe, it, beforeEach, inject, expect*/
 import 'angular-mocks';
+import * as coreUI from '../../core-ui';
+
 describe('scrapsPageCtrl:', () => {
     var ctrl, store;
 
@@ -25,7 +27,7 @@ describe('scrapsPageCtrl:', () => {
                 return [200, data];
             });
 
-        ctrl = new coreUIBundle.ScrapsPageController(store);
+        ctrl = new coreUI.ScrapsPageController(store);
     }));
 
     it('No active scraps on start', () => {

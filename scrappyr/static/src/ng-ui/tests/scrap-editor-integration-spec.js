@@ -1,5 +1,6 @@
-/*global coreUIBundle, describe, it, beforeEach, inject, expect*/
+/*global describe, it, beforeEach, inject, expect*/
 import 'angular-mocks';
+import * as coreUI from '../../core-ui';
 
 describe('scrapEditor:', () => {
     var ctrl, scrap, store;
@@ -29,7 +30,7 @@ describe('scrapEditor:', () => {
 
     describe('Pre-populate store with a scrap', () => {
         beforeEach(angular.mock.inject(($httpBackend) => {
-            ctrl = new coreUIBundle.ScrapEditor(store);
+            ctrl = new coreUI.ScrapEditor(store);
             store.insert({ title: 'Item 1' });
             $httpBackend.flush();
             scrap = store.scraps.get(1);

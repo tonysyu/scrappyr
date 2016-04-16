@@ -1,6 +1,5 @@
 /*global describe, it, beforeEach, inject, expect*/
-
-import * as core from '../src/core';
+import * as core from '../';
 
 describe('scrapStorage:', () => {
     var store,
