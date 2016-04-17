@@ -9,11 +9,8 @@ import 'angular-sanitize';
 import 'angular-ui-tree';
 import 'ng-tags-input';
 
-import mathjax from './directives/mathjax';
-import scrapEscape from './directives/scrapEscape';
-import scrapFocusFactory from './directives/scrapFocus';
-import tagStorageFactory from './services/tagStorage';
-import scrapStorageFactory from './services/scrapStorage';
+import * as directives from './directives';
+import * as services from './services';
 import {scrapBasicViewFactory} from './scrapBasicView/directive';
 import {scrapDetailViewFactory} from './scrapDetailView/directive';
 
@@ -27,13 +24,13 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
     .controller('ScrappyrCtrl', scrappyrControllerFactory)
     .controller('scrapsPageCtrl', scrapsPageControllerFactory)
     .controller('tagsPageCtrl', tagsPageControllerFactory)
-    .directive('mathjax', mathjax)
+    .directive('mathjax', directives.mathjax)
     .directive('scrapBasicView', scrapBasicViewFactory)
     .directive('scrapDetailView', scrapDetailViewFactory)
-    .directive('scrapEscape', scrapEscape)
-    .directive('scrapFocus', scrapFocusFactory)
-    .factory('scrapStorage', scrapStorageFactory)
-    .factory('tagStorage', tagStorageFactory)
+    .directive('scrapEscape', directives.scrapEscape)
+    .directive('scrapFocus', directives.scrapFocusFactory)
+    .factory('scrapStorage', services.scrapStorageFactory)
+    .factory('tagStorage', services.tagStorageFactory)
     .filter('scrapHasTagInList', scrapHasTagInListFilterFactory)
     .config(function ($routeProvider) {
         'use strict';
