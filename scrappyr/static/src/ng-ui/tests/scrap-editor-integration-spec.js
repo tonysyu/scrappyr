@@ -1,20 +1,17 @@
 /*global describe, it, beforeEach, inject, expect*/
-import 'angular-mocks';
+import * as core from '../../core';
 import * as coreUI from '../../core-ui';
+import * as coreTesting from '../../core/testing';
 
 describe('scrapEditor:', () => {
     var ctrl, scrap, store;
 
-    beforeEach(angular.mock.module('scrappyr'));
-
-    beforeEach(angular.mock.inject(function(scrapStorage, $httpBackend) {
+    beforeEach(() => {
         var count = 0;
 
-        store = scrapStorage;
-
+        var http = new coreTesting.MockAjax();
         // Setup POST method to echo the input data.
-        $httpBackend
-            .when('POST', '/api/scraps')
+        http.when('POST', '/api/scraps')
             .respond((method, url, data) => {
                 data = JSON.parse(data);
                 // The server adds an ID to new scraps.
@@ -26,16 +23,16 @@ describe('scrapEditor:', () => {
                 return [200, data];
             });
 
-    }));
+        store = new core.ScrapStorage(http);
+    });
 
     describe('Pre-populate store with a scrap', () => {
-        beforeEach(angular.mock.inject(($httpBackend) => {
+        beforeEach(() => {
             ctrl = new coreUI.ScrapEditor(store);
             store.insert({ title: 'Item 1' });
-            $httpBackend.flush();
             scrap = store.scraps.get(1);
             ctrl.updateOriginalScrap(scrap);
-        }));
+        });
 
         it('should remove scraps w/o title on saving', () => {
             scrap.title = '';

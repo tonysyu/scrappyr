@@ -1,21 +1,17 @@
 /*global describe, it, beforeEach, inject, expect*/
-import 'angular-mocks';
+import * as core from '../../core';
 import * as coreUI from '../../core-ui';
+import * as coreTesting from '../../core/testing';
 
 describe('scrapsPageCtrl:', () => {
     var ctrl, store;
 
-    // Load the module containing the app, only 'ng' is loaded by default.
-    beforeEach(angular.mock.module('scrappyr'));
-
-    beforeEach(inject((scrapStorage, $httpBackend) => {
-        store = scrapStorage;
-
+    beforeEach(() => {
         var count = 0;
 
+        var http = new coreTesting.MockAjax();
         // Setup POST method to echo the input data.
-        $httpBackend
-            .when('POST', '/api/scraps')
+        http.when('POST', '/api/scraps')
             .respond((method, url, data) => {
                 data = JSON.parse(data);
                 // The server adds an ID to new scraps.
@@ -27,8 +23,9 @@ describe('scrapsPageCtrl:', () => {
                 return [200, data];
             });
 
+        store = new core.ScrapStorage(http);
         ctrl = new coreUI.ScrapsPageController(store);
-    }));
+    });
 
     it('No active scraps on start', () => {
         expect(ctrl.scraps.length).toBe(0);
@@ -51,13 +48,11 @@ describe('scrapsPageCtrl:', () => {
             expect(ctrl.scraps.length).toBe(0);
         });
 
-        it('should trim whitespace in new scrap', inject(($httpBackend) => {
+        it('should trim whitespace in new scrap', () => {
             ctrl.newScrap = {title: '  buy some unicorns  '};
             ctrl.addScrap();
-            $httpBackend.flush();
-
             expect(ctrl.scraps.length).toBe(1);
             expect(ctrl.scraps.get(1).title).toBe('buy some unicorns');
-        }));
+        });
     });
 });
