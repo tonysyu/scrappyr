@@ -1,7 +1,7 @@
 /*global describe, it, beforeEach, inject, expect*/
 import * as core from '../../core';
-import * as coreUI from '../../core-ui';
 import * as coreTesting from '../../core/testing';
+import ScrapEditor from '../scrap-editor';
 
 describe('scrapEditor:', () => {
     var ctrl, scrap, store;
@@ -28,7 +28,7 @@ describe('scrapEditor:', () => {
 
     describe('Pre-populate store with a scrap', () => {
         beforeEach(() => {
-            ctrl = new coreUI.ScrapEditor(store);
+            ctrl = new ScrapEditor(store);
             store.insert({ title: 'Item 1' });
             scrap = store.scraps.get(1);
             ctrl.updateOriginalScrap(scrap);

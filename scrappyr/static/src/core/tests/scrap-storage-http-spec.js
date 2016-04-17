@@ -1,5 +1,5 @@
-import * as core from '../../core';
-import * as coreTesting from '../../core/testing';
+import * as testing from '../testing';
+import ScrapStorage from '../scrap-storage';
 
 describe('ScrapStorage:', () => {
     var store;
@@ -7,7 +7,7 @@ describe('ScrapStorage:', () => {
     beforeEach(() => {
         var count = 0;
 
-        var http = new coreTesting.MockAjax();
+        var http = new testing.MockAjax();
         // Create mock response that simply returns the input data.
         http.when('POST', '/api/scraps')
             .respond((method, url, data) => {
@@ -21,7 +21,7 @@ describe('ScrapStorage:', () => {
                 return [200, data];
             });
 
-        store = new core.ScrapStorage(http);
+        store = new ScrapStorage(http);
     });
 
     it('insert adds to scraps array', () => {

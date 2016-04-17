@@ -1,7 +1,7 @@
 /*global describe, it, beforeEach, inject, expect*/
 import * as core from '../../core';
-import * as coreUI from '../../core-ui';
 import * as coreTesting from '../../core/testing';
+import ScrapsPageController from '../scraps-page-controller';
 
 describe('scrapsPageCtrl:', () => {
     var ctrl, store;
@@ -24,7 +24,7 @@ describe('scrapsPageCtrl:', () => {
             });
 
         store = new core.ScrapStorage(http);
-        ctrl = new coreUI.ScrapsPageController(store);
+        ctrl = new ScrapsPageController(store);
     });
 
     it('No active scraps on start', () => {
