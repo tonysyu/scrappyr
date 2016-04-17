@@ -9,7 +9,7 @@ describe('scrap-basic-view directive:', () => {
 
     beforeEach(() => {
         angular.mock.module('scrappyr');
-        angular.mock.module('my.templates');
+        angular.mock.module('scrappyr.ng.templates');
         angular.mock.inject(($rootScope, $compile) => {
             scope = $rootScope.$new();
             scope.scrap = default_scrap;

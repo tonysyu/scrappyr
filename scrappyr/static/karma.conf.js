@@ -10,7 +10,7 @@ module.exports = function (config) {
             // Include angular here because ng-html2js needs it.
             'node_modules/angular/angular.js',
             'node_modules/mathjax/MathJax.js',
-            'src/**/*.html',
+            'src/ng-ui/**/*.html',
             'test-context.js'
         ],
         autoWatch: true,
@@ -18,7 +18,7 @@ module.exports = function (config) {
         browsers: ['Firefox'],
         reporters: ['coverage', 'progress'],
         preprocessors: {
-            'src/**/*.html': ['ng-html2js'],
+            'src/ng-ui/**/*.html': ['ng-html2js'],
             'test-context.js': ['webpack']
         },
         coverageReporter: {
@@ -26,7 +26,7 @@ module.exports = function (config) {
             type: 'html'
         },
         ngHtml2JsPreprocessor: {
-            moduleName: 'my.templates',
+            moduleName: 'scrappyr.ng.templates',
             // Templates are loaded with relative paths (see *.html above),
             // but directives use "absolute" paths for URLs.
             stripPrefix: '.*src/',
