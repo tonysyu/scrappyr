@@ -2,7 +2,7 @@ module.exports = {
     entry: {
         core: ["./src/core/index.js"],
         coreUI: ["./src/core-ui/index.js"],
-        app: ["./src/ng-ui/index.js"],
+        app: ["./src/ng-app/index.js"],
     },
     output: {
         path: __dirname,

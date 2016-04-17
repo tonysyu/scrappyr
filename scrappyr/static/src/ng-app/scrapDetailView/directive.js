@@ -4,7 +4,7 @@ class ScrapDetailView {
     constructor () {
         this.controller = scrapDetailControllerFactory;
         this.controllerAs = 'ctrl';
-        this.templateUrl = '/static/src/ng-ui/scrapDetailView/index.html';
+        this.templateUrl = '/static/src/ng-app/scrapDetailView/index.html';
         this.scope = {
             scrap: '='
         };

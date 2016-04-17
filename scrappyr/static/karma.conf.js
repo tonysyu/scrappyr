@@ -10,7 +10,7 @@ module.exports = function (config) {
             // Include angular here because ng-html2js needs it.
             'node_modules/angular/angular.js',
             'node_modules/mathjax/MathJax.js',
-            'src/ng-ui/**/*.html',
+            'src/ng-app/**/*.html',
             'test-context.js'
         ],
         autoWatch: true,
@@ -18,7 +18,7 @@ module.exports = function (config) {
         browsers: ['Firefox'],
         reporters: ['coverage', 'progress'],
         preprocessors: {
-            'src/ng-ui/**/*.html': ['ng-html2js'],
+            'src/ng-app/**/*.html': ['ng-html2js'],
             'test-context.js': ['webpack']
         },
         coverageReporter: {
