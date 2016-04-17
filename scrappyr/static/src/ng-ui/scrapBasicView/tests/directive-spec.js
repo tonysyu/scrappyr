@@ -1,25 +1,24 @@
 /*global describe, it, beforeEach, inject, expect*/
+// Import angular from index (not global), which defines appropriate providers.
+import angular from '../../index';
 import 'angular-mocks';
 
 describe('scrap-basic-view directive:', () => {
-    var ctrl, element, scope, store,
+    var element, scope,
         default_scrap = {title: 'Start with one scrap'};
 
-    // Load the module containing the app, only 'ng' is loaded by default.
-    beforeEach(angular.mock.module('scrappyr'));
-    beforeEach(angular.mock.module('my.templates'));
+    beforeEach(() => {
+        angular.mock.module('scrappyr');
+        angular.mock.module('my.templates');
+        angular.mock.inject(($rootScope, $compile) => {
+            scope = $rootScope.$new();
+            scope.scrap = default_scrap;
 
-    beforeEach(inject(($rootScope, scrapStorage, $httpBackend, $compile) => {
-        var count = 0;
-
-        scope = $rootScope.$new();
-        scope.scrap = default_scrap;
-        store = scrapStorage;
-
-        element = '<scrap-basic-view scrap=scrap></scrap-basic-view>';
-        element = $compile(element)(scope);
-        scope.$digest();
-    }));
+            var html = '<scrap-basic-view scrap=scrap></scrap-basic-view>';
+            element = $compile(html)(scope);
+            scope.$digest();
+        })
+    });
 
     it('Scrap is properly initialized', () => {
         var isolated = element.isolateScope();

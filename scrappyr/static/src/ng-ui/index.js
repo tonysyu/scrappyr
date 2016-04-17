@@ -73,4 +73,4 @@ angular.module('scrappyr', ['ngRoute', 'ngSanitize', 'ngTagsInput', 'ui.tree'])
                 redirectTo: '/scraps'
             });
     });
-
+export default angular;

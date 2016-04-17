@@ -19,7 +19,8 @@ class ScrapBasicView {
     constructor() {
         this.controller = scrapBasicViewControllerFactory,
         this.controllerAs = 'ctrl',
-        this.templateUrl = '/static/src/ng-ui/scrapBasicView/index.html',
+        //this.templateUrl = '/static/src/ng-ui/scrapBasicView/index.html',
+        this.template = '<div class="scrap-title" data-mathjax ng-bind-html="scrap.html_title"> </div> <button class="remove-scrap top-right glyphicon glyphicon-remove" ng-click="ctrl.removeScrap(scrap)"> </button>',
         this.scope = {
             scrap: '='
         };

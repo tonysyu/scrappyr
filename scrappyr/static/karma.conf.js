@@ -7,8 +7,8 @@ module.exports = function (config) {
         basePath: './',
         frameworks: ['jasmine'],
         files: [
-            // Include custom bundles first to ensure dependencies are included.
-            'dist/*.js',
+            // Include angular here because ng-html2js needs it.
+            'node_modules/angular/angular.js',
             'node_modules/mathjax/MathJax.js',
             'src/**/*.html',
             'test-context.js'
@@ -18,7 +18,6 @@ module.exports = function (config) {
         browsers: ['Firefox'],
         reporters: ['coverage', 'progress'],
         preprocessors: {
-            'dist/*.js': ['coverage'],
             'src/**/*.html': ['ng-html2js'],
             'test-context.js': ['webpack']
         },
