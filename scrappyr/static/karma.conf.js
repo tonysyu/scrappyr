@@ -41,6 +41,11 @@ module.exports = function (config) {
                     query: {
                         presets: ['es2015']
                     }
+                }],
+                postLoaders: [{
+                    test: /\.js/,
+                    exclude: /node_modules/,
+                    loader: 'istanbul-instrumenter',
                 }]
             },
             watch: true
