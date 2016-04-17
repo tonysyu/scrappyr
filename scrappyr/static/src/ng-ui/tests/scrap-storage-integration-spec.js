@@ -1,24 +1,15 @@
-/*global describe, it, beforeEach, inject, expect, module*/
-import 'angular-mocks';
+import * as core from '../../core';
+import * as coreTesting from '../../core/testing';
 
-describe('scrapBasicViewCtrl:', () => {
-    var scope, store,
-        default_scrap = {title: 'Start with one scrap'};
+describe('ScrapStorage:', () => {
+    var store;
 
-    // Load the module containing the app, only 'ng' is loaded by default.
-    beforeEach(angular.mock.module('scrappyr'));
-    beforeEach(angular.mock.module('my.templates'));
-
-    beforeEach(inject(($rootScope, scrapStorage, $httpBackend) => {
+    beforeEach(() => {
         var count = 0;
 
-        scope = $rootScope.$new();
-        scope.scrap = default_scrap;
-        store = scrapStorage;
-
-        // Setup POST method to echo the input data.
-        $httpBackend
-            .when('POST', '/api/scraps')
+        var http = new coreTesting.MockAjax();
+        // Create mock response that simply returns the input data.
+        http.when('POST', '/api/scraps')
             .respond((method, url, data) => {
                 data = JSON.parse(data);
                 // The server adds an ID to new scraps.
@@ -29,20 +20,15 @@ describe('scrapBasicViewCtrl:', () => {
                 }
                 return [200, data];
             });
-    }));
 
-    describe('Pre-populate 3 scraps', () => {
-        beforeEach(inject(($httpBackend) => {
-            store.insert({ title: 'Item 1' });
-            store.insert({ title: 'Item 2' });
-            store.insert({ title: 'Item 3' });
-            scope.$digest();
-            $httpBackend.flush();
-        }));
+        store = new core.ScrapStorage(http);
+    });
 
-        it('should save scraps to local storage', () => {
-            expect(store.scraps.length).toBe(3);
-        });
-
+    it('insert adds to scraps array', () => {
+        expect(store.scraps.length).toBe(0);
+        store.insert({ title: 'Item 1' });
+        expect(store.scraps.length).toBe(1);
+        store.insert({ title: 'Item 2' });
+        expect(store.scraps.length).toBe(2);
     });
 });
