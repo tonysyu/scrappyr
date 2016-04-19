@@ -7,6 +7,7 @@ module.exports = {
     output: {
         path: __dirname,
         library: '[name]Bundle',
+        publicPath: '/static/',
         filename: "dist/[name]Bundle.js"
     },
     module: {

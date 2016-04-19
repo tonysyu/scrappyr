@@ -19,15 +19,20 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'scrappyr', 'static')
 KARMA_EXEC = os.path.join(STATIC_ROOT, 'node_modules',
                           'karma-cli', 'bin', 'karma')
 KARMA_CONFIG = os.path.join(STATIC_ROOT, 'karma.conf.js')
+WEBPACK_DEV_SERVER_EXEC = os.path.join(STATIC_ROOT, 'node_modules',
+                                       '.bin', 'webpack-dev-server')
 
 
 manager = Manager(create_app)
 
 # Options passed to `create_app`.
-manager.add_option('-c', '--config-file', dest='config_file', required=False,
+manager.add_option('-c', '--config-file',
                    help="Configuration file (*.py or *.json) for Flask app.")
-manager.add_option('-d', '--db-uri', dest='db_uri', required=False,
+manager.add_option('-d', '--db-uri',
                    help="SQLAlchemy database URI.")
+manager.add_option('-w', '--with-webpack-dev-server', action='store_true',
+                   help="Configure Flask app to run with webpack dev server")
+
 
 manager.add_command('server', Server())
 manager.add_command('db', MigrateCommand)
@@ -85,6 +90,14 @@ def js_test_server():
     with temp_working_directory(STATIC_ROOT):
         run_subprocess([KARMA_EXEC, 'start', KARMA_CONFIG],
                        exit_message="\nQuitting JS test server...")
+
+
+@manager.command
+def webpack_dev_server():
+    """Run webpack dev server to sync app bundle."""
+    with temp_working_directory(STATIC_ROOT):
+        run_subprocess([WEBPACK_DEV_SERVER_EXEC, '--hot', '--inline'],
+                       exit_message="\nQuitting webpack dev server...")
 
 
 def run_command(args_list):

@@ -12,7 +12,8 @@ SECRET_KEY = 'development-key'
 SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/scrappyr.db'
 
 
-def create_app(config_obj=None, config_file=None, db_uri=None):
+def create_app(config_obj=None, config_file=None, db_uri=None,
+               with_webpack_dev_server=False):
     """Return Flask app for scrappyr.
 
     Parameters
@@ -42,7 +43,18 @@ def create_app(config_obj=None, config_file=None, db_uri=None):
 
     _update_config_from_file(app, config_file)
 
+    if with_webpack_dev_server:
+        webpack_dev_server_url = 'http://localhost:8080'
+        print('')
+        print('`--with-webpack-dev-server` was set so you should run:')
+        print('    `python manage.py webpack_dev_server`')
+        print('')
+    else:
+        webpack_dev_server_url = ''
+    app.config['WEBPACK_DEV_SERVER_URI'] = webpack_dev_server_url
+
     if db_uri is not None:
+
         app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
 
     app.register_blueprint(scrappyr)

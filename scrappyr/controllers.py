@@ -4,7 +4,7 @@
 
 import markdown
 
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, current_app, jsonify, render_template, request
 from schematics.exceptions import ModelConversionError
 
 from .common import db
@@ -24,7 +24,9 @@ def handle_scrappyr_error(error):
 
 @scrappyr.route('/')
 def index():
-    return scrappyr.send_static_file('index.html')
+    root_uri = current_app.config.get('WEBPACK_DEV_SERVER_URI')
+    app_bundle_uri = root_uri + '/static/dist/ngAppBundle.js'
+    return render_template('index.html', app_bundle=app_bundle_uri)
 
 
 @scrappyr.route('/api')
