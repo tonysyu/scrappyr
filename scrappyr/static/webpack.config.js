@@ -3,6 +3,7 @@ module.exports = {
         core: ["./src/core/index.js"],
         coreUI: ["./src/core-ui/index.js"],
         ngApp: ["./src/ng-app/index.js"],
+        reactApp: ["./src/react-app/index.js"],
     },
     output: {
         path: __dirname,

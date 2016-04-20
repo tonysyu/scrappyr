@@ -14,6 +14,16 @@ from .validation import BaseScrappyrError, ScrapForm
 
 scrappyr = Blueprint('scrappyr', __name__, static_folder='./static')
 
+INDEX_FILE = {
+    'angular': 'ng-index.html',
+    'react': 'react-index.html',
+}
+
+JS_BUNDLE = {
+    'angular': '/static/dist/ngAppBundle.js',
+    'react': '/static/dist/reactAppBundle.js',
+}
+
 
 @scrappyr.errorhandler(BaseScrappyrError)
 def handle_scrappyr_error(error):
@@ -25,8 +35,12 @@ def handle_scrappyr_error(error):
 @scrappyr.route('/')
 def index():
     root_uri = current_app.config.get('WEBPACK_DEV_SERVER_URI')
-    app_bundle_uri = root_uri + '/static/dist/ngAppBundle.js'
-    return render_template('index.html', app_bundle=app_bundle_uri)
+    frontend_code = current_app.config.get('FRONTEND_CODE', 'angular')
+
+    app_bundle_uri = root_uri + JS_BUNDLE[frontend_code]
+    index_file = INDEX_FILE[frontend_code]
+
+    return render_template(index_file, app_bundle=app_bundle_uri)
 
 
 @scrappyr.route('/api')
