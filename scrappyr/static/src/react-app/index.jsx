@@ -3,5 +3,5 @@
 'use strict';
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Hello = require('./Hello');
-ReactDOM.render(<Hello />, document.getElementById('content'));
+var ScrapsPage = require('./scraps-page');
+ReactDOM.render(<ScrapsPage />, document.getElementById('content'));
