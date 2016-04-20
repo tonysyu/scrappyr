@@ -3,7 +3,7 @@ module.exports = {
         core: ["./src/core/index.js"],
         coreUI: ["./src/core-ui/index.js"],
         ngApp: ["./src/ng-app/index.js"],
-        reactApp: ["./src/react-app/index.js"],
+        reactApp: ["./src/react-app/index.jsx"],
     },
     output: {
         path: __dirname,
@@ -19,7 +19,14 @@ module.exports = {
                 query: {
                     presets: ['es2015']
                 }
+            },
+            {
+                test: /\.jsx$/,
+                loader: 'jsx-loader?insertPragma=React.DOM&harmony'
             }
         ]
+    },
+    resolve: {
+        extensions: ['', '.js', '.jsx']
     }
 }
