@@ -46,7 +46,9 @@ server using:
 python manage.py -c demo/config_react.py --with-webpack-dev-server server
 ```
 
-*and* a separate webpack-dev-server:
+The `--with-webpack-dev-server` flag tells the webserver to look at the webpack
+server for static resources. You also have to start a _separate_ webpack dev
+server to publish those resources:
 
 ```
 python manage.py -c demo/config_react.py webpack-dev-server
