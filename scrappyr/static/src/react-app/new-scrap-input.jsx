@@ -1,10 +1,9 @@
 import React from 'react';
 
-module.exports = React.createClass({
-    displayName: 'NewScrapInput',
-    render: () => {
-
-        return <div className="col-xs-6">
+class NewScrapInput extends React.Component {
+    render() {
+        return (
+            <div className="col-xs-6">
                 <form id="scrap-form">
                     <input id="new-scrap"
                       placeholder="Enter a scrap of data"
@@ -12,6 +11,9 @@ module.exports = React.createClass({
                 </form>
 
                 <div className="scrap"></div>
-            </div>;
-    },
-})
+            </div>
+        );
+    }
+}
+
+export default NewScrapInput;

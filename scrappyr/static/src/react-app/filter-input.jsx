@@ -1,8 +1,10 @@
-var React = require('react');
-module.exports = React.createClass({
-    displayName: 'FilterInput',
-    render: () => {
-        return <div className="input-group">
+import React from 'react';
+
+class FilterInput extends React.Component {
+
+    render() {
+        return (
+            <div className="input-group">
 
                 <span className="input-group-btn">
                     <button className="btn btn-default" type="button">
@@ -16,6 +18,9 @@ module.exports = React.createClass({
                   className="form-control"
                   placeholder="Filter by..." />
 
-            </div>;
-    },
-})
+            </div>
+        );
+    }
+}
+
+export default FilterInput;

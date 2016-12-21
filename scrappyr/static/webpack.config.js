@@ -9,7 +9,9 @@ module.exports = {
         path: __dirname,
         library: '[name]Bundle',
         publicPath: '/static/',
-        filename: "dist/[name]Bundle.js"
+        filename: "dist/[name]Bundle.js",
+        hotUpdateChunkFilename: 'hot/hot-update.js',
+        hotUpdateMainFilename: 'hot/hot-update.json'
     },
     module: {
         loaders: [

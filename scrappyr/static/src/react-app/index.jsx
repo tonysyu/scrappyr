@@ -1,5 +1,6 @@
 'use strict';
-var React = require('react');
-var ReactDOM = require('react-dom');
-var ScrapsPage = require('./scraps-page');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import ScrapsPage from './scraps-page';
+
 ReactDOM.render(<ScrapsPage />, document.getElementById('content'));
