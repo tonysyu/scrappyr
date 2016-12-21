@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require('react');
 var NewScrapInput = require('./new-scrap-input');
 var FilterInput = require('./filter-input');
