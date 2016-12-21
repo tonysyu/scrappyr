@@ -41,6 +41,7 @@ def create_app(config_obj=None, config_file=None, db_uri=None,
     app = Flask(__name__)
     app.config.from_object(config_obj)
 
+    config_file = os.path.abspath(config_file)
     _update_config_from_file(app, config_file)
 
     if with_webpack_dev_server:

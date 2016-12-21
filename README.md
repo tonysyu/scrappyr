@@ -33,6 +33,26 @@ cd scrappyr/static
 npm install
 ```
 
+To start the react version of the app, you'll need to use the react config
+file:
+
+```
+python manage.py -c demo/config_react.py server
+```
+
+Since static resources are transpiled using webpack, you'll want to run the web
+server using:
+```
+python manage.py -c demo/config_react.py --with-webpack-dev-server server
+```
+
+*and* a separate webpack-dev-server:
+
+```
+python manage.py -c demo/config_react.py webpack-dev-server
+```
+
+
 To figure out what commands are available, run:
 
 ```
