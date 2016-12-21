@@ -1,38 +1,18 @@
 /** @jsx React.DOM */
 
-var React = require('react')
+var React = require('react');
+var NewScrapInput = require('./new-scrap-input');
+var FilterInput = require('./filter-input');
+var ScrapsList = require('./scraps-list');
+
 module.exports = React.createClass({
     displayName: 'ScrapsPage',
     render: () => {
         return <div>
             <div className="col-xs-6">
                 <div id="main">
-                    <div className="input-group">
-
-                        <span className="input-group-btn">
-                            <button className="btn btn-default" type="button">
-                                <span className="glyphicon glyphicon-search">
-                                </span>
-                            </button>
-                        </span>
-
-                        <input
-                          type="text"
-                          className="form-control"
-                          placeholder="Filter by..." />
-
-                    </div>
-
-                    <div>
-                        <ol id="scrap-list">
-                            <li className="scrap">
-                                <div className="scrap-list-view">
-                                    <div className="scrap-handle"></div>
-                                </div>
-                            </li>
-                        </ol>
-                    </div>
-
+                    <FilterInput />
+                    <ScrapsList />
                 </div>
 
                 <footer id="info">
@@ -41,15 +21,7 @@ module.exports = React.createClass({
 
             </div>
 
-            <div className="col-xs-6">
-                <form id="scrap-form">
-                    <input id="new-scrap"
-                      placeholder="Enter a scrap of data"
-                      autofocus/>
-                </form>
-
-                <div className="scrap"></div>
-            </div>
+            <NewScrapInput />
         </div>;
     },
 })
