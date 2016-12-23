@@ -1,21 +1,22 @@
 /*jshint esnext: true*/
 
-'use strict';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
+import ScrapRepository from '../core/scrap-repository';
 
-const REQUEST_SCRAPS = 'REQUEST_SCRAPS'
-const RECEIVE_SCRAPS = 'RECEIVE_SCRAPS'
+const REQUEST_SCRAPS = 'REQUEST_SCRAPS';
+const RECEIVE_SCRAPS = 'RECEIVE_SCRAPS';
 
 const initialState = {
     scraps: [],
 };
 
+const repo = new ScrapRepository();
+
 export function fetchScraps() {
     return dispatch => {
-        return fetch('/api/scraps')
-                .then(blob => blob.json())
-                .then(json => dispatch(receiveScraps(json.scraps)));
+        return repo.get()
+            .then(scraps => dispatch(receiveScraps(scraps)));
     };
 }
 
