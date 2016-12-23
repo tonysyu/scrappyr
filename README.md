@@ -51,7 +51,7 @@ server for static resources. You also have to start a _separate_ webpack dev
 server to publish those resources:
 
 ```
-python manage.py -c demo/config_react.py webpack-dev-server
+python manage.py -c demo/config_react.py webpack_dev_server
 ```
 
 
