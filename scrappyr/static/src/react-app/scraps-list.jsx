@@ -1,8 +1,15 @@
+/*jshint esnext: true*/
+
 import React from 'react';
 import {connect} from 'react-redux';
+import {renderHandle, renderTitle} from './scrap-renderers';
 
 class ScrapsList extends React.Component {
     render() {
+        const renderScrap = createListItemRenderer([
+            renderHandle,
+            renderTitle,
+        ]);
         return (
             <div>
                 <ol id="scrap-list">
@@ -13,20 +20,16 @@ class ScrapsList extends React.Component {
     }
 }
 
-function renderScrap(item) {
-    return (
-        <li key={item.id} className="scrap">
-            <div className="scrap-list-view">
-                <div className="scrap-handle"></div>
-
-                <div className="scrap-title"
-                    data-mathjax="true"
-                    dangerouslySetInnerHTML={ {__html: item.html_title} }>
+function createListItemRenderer(renderers) {
+    return function renderScrap(scrap) {
+        return (
+            <li key={scrap.id} className="scrap">
+                <div className="scrap-list-view">
+                    { renderers.map(render => render(scrap)) }
                 </div>
-
-            </div>
-        </li>
-    );
+            </li>
+        );
+    }
 }
 
 function selectProps (state){
